@@ -1,4 +1,4 @@
-﻿using GenesisScoreboard.ViewModel;
+﻿using Tchoukball_Scoreboard_MJ.ViewModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GenesisScoreboard
+namespace Tchoukball_Scoreboard_MJ
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

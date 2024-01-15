@@ -1,4 +1,4 @@
-﻿using GenesisScoreboard.Model;
+﻿using Tchoukball_Scoreboard_MJ.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace GenesisScoreboard.ViewModel
+namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ScoreboardItemViewModel : ValidationViewModelBase
     {

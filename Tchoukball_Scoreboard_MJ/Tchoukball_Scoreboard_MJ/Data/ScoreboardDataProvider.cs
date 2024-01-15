@@ -1,11 +1,11 @@
-﻿using GenesisScoreboard.Model;
+﻿using Tchoukball_Scoreboard_MJ.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenesisScoreboard.Data
+namespace Tchoukball_Scoreboard_MJ.Data
 {
     public interface IScoreboardDataProvider
     {

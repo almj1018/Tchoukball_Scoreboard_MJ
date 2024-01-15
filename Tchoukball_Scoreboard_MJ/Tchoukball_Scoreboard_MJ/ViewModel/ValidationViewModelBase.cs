@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
-namespace GenesisScoreboard.ViewModel
+namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ValidationViewModelBase : ViewModelBase, INotifyDataErrorInfo
     {

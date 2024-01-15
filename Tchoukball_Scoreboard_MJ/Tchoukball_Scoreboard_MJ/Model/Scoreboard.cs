@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace GenesisScoreboard.Model
+namespace Tchoukball_Scoreboard_MJ.Model
 {
     public class Scoreboard
     {

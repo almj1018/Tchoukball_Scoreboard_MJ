@@ -1,6 +1,6 @@
-﻿using GenesisScoreboard.Command;
-using GenesisScoreboard.Data;
-using GenesisScoreboard.View;
+﻿using Tchoukball_Scoreboard_MJ.Command;
+using Tchoukball_Scoreboard_MJ.Data;
+using Tchoukball_Scoreboard_MJ.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace GenesisScoreboard.ViewModel
+namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ControlsViewModel : ViewModelBase
     {
