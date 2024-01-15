@@ -7,6 +7,9 @@
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         mc:Ignorable="d"
         Title="ScoreboardWindowView" Height="450" Width="800">
+    <Window.Resources>
+        <BitmapImage x:Key="DefaultImage" UriSource="genesislogo.png"/>
+    </Window.Resources>
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -16,48 +19,80 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4.5*"/>
-            <RowDefinition Height="4.5*"/>
+            <RowDefinition Height="3.75*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4.25*"/>
         </Grid.RowDefinitions>
 
-        <!--<Border Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Column="2" Grid.Row="0" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Column="3" Grid.ColumnSpan="2" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Column="2" Grid.Row="1" BorderBrush="SteelBlue" BorderThickness="2"></Border>
-        <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" BorderThickness="2"></Border>-->
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0">
-            <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" BorderBrush="Transparent"/>
-        </Viewbox>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="10, 0, 0 ,0">
+                <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+            </Viewbox>
+            <Viewbox Grid.Column="0">
+                <Image Source="{Binding GuestLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="20,0,0,0"/>
+            </Viewbox>
+        </Grid>
 
-        <Viewbox Grid.Column="2" Grid.Row="0">
-            <Label Content="Period" Background="Transparent" Foreground="Transparent" FontFamily="DigitalPlay.ttf #Digital Play St" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" BorderBrush="Transparent"/>
-        </Viewbox>
+        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <Viewbox Grid.Column="3" Grid.ColumnSpan="2">
-            <Label Content="{Binding Scoreboard.GuestName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0" BorderBrush="Transparent"/>
-        </Viewbox>
+            <Viewbox Grid.Column="0" HorizontalAlignment="Right" Margin="0, 0, 10 ,0">
+                <Label Content="{Binding Scoreboard.GuestName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+            </Viewbox>
 
-        <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" >
+            <Viewbox Grid.Column="1">
+                <Image Source="{Binding GuestLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="0,0,20,0"/>
+            </Viewbox>
+        </Grid>
+
+        <Viewbox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
                 <Label Content="{Binding Scoreboard.HomePoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"/>
             </StackPanel>
         </Viewbox>
 
-        <Viewbox Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2" >
+        <Viewbox Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" >
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
                 <Label Content="{Binding Scoreboard.GuestPoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
             </StackPanel>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Grid.Row="1">
-            <Label Content="{Binding Scoreboard.Period, Mode=OneWay}" Background="Transparent" Foreground="Red" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
-        </Viewbox>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Viewbox Grid.Column="1">
+                <Label Content="{Binding Scoreboard.Period, Mode=OneWay}" Background="Transparent" Foreground="Red" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
+            </Viewbox>
 
-        <Viewbox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <Viewbox Grid.Column="2" Margin="0, 0, 10, 0">
+                <Polygon Points="0,0 15,5 0,10">
+                    <Polygon.Fill>
+                        <SolidColorBrush Color="Red"/>
+                    </Polygon.Fill>
+                </Polygon>
+            </Viewbox>
+            <Viewbox Grid.Column="0" Margin="10, 0, 0, 0">
+                <Polygon Points="15,0 15,10 0,5">
+                    <Polygon.Fill>
+                        <SolidColorBrush Color="Red"/>
+                    </Polygon.Fill>
+                </Polygon>
+            </Viewbox>
+        </Grid>
+        
+        <Viewbox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
             <Label Content="{Binding Scoreboard.Timer, Mode=OneWay}" ContentStringFormat="{}{0:mm':'ss}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
         </Viewbox>
 
