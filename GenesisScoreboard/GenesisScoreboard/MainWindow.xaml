@@ -1,0 +1,39 @@
+﻿<Window x:Class="GenesisScoreboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GenesisScoreboard"
+        xmlns:view="clr-namespace:GenesisScoreboard.View"
+        xmlns:viewModel="clr-namespace:GenesisScoreboard.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:ControlsViewModel}">
+            <view:ControlsView/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Menu FontSize="20">
+            <MenuItem Header="_Controls"
+                Command="{Binding OpenControlsWindowCommand}"/>
+            <!--<MenuItem Header="_Info"
+            Command="{Binding InfoViewModelCommand}"
+            CommandParameter="{Binding InfoViewModel}"/>-->
+        </Menu>
+
+        <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
+
+        <StatusBar Grid.Row="2">
+            <StatusBarItem FontSize="20" Content=" (c) Genesis Tchoukball" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </StatusBar>
+    </Grid>
+
+
+</Window>

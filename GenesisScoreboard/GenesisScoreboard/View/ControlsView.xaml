@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="GenesisScoreboard.View.ControlsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GenesisScoreboard.View"
+             xmlns:viewModel="clr-namespace:GenesisScoreboard.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:ScoreboardWindowViewModel}">
+            <local:ScoreboardWindowView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="5">
+            <TextBox Text="{Binding Scoreboard.HomeName, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Scoreboard.HomePoints, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <Button Content="Add Point" Command="{Binding AddCommand}" CommandParameter="home"/>
+            <Button Content="Minus Point" Command="{Binding MinusCommand}" CommandParameter="home"/>
+
+            <TextBox Text="{Binding Scoreboard.GuestName, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Scoreboard.GuestPoints, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <Button Content="Add Point" Command="{Binding AddCommand}" CommandParameter="guest"/>
+            <Button Content="Minus Point" Command="{Binding MinusCommand}" CommandParameter="guest"/>
+
+            <Label Content="Period" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Scoreboard.Period, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <Button Content="+" Command="{Binding AddCommand}" CommandParameter="period"/>
+            <Button Content="-" Command="{Binding MinusCommand}" CommandParameter="period"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1">
+            <Label Content="Timer" HorizontalAlignment="Center"/>
+            <TextBox Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+            <Button Content="Start" Command="{Binding StartTimerCommand}"/>
+            <Button Content="Stop" Command="{Binding StopTimerCommand}"/>
+            <Button Content="Reset" Command="{Binding ResetTimerCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
