@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenesisScoreboard.ViewModel
+namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ScoreboardWindowViewModel : ViewModelBase
     {

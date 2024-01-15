@@ -1,12 +1,12 @@
-﻿using GenesisScoreboard.Command;
-using GenesisScoreboard.View;
+﻿using Tchoukball_Scoreboard_MJ.Command;
+using Tchoukball_Scoreboard_MJ.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenesisScoreboard.ViewModel;
+namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
 public class MainViewModel :ViewModelBase
 {

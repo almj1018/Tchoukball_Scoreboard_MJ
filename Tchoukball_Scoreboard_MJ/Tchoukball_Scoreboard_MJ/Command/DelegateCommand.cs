@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace GenesisScoreboard.Command;
+namespace Tchoukball_Scoreboard_MJ.Command;
 
 public class DelegateCommand : ICommand
 {

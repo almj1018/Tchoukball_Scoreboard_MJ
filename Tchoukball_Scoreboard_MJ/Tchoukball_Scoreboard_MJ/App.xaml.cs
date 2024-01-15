@@ -1,12 +1,12 @@
-﻿using GenesisScoreboard.Data;
-using GenesisScoreboard.View;
-using GenesisScoreboard.ViewModel;
+﻿using Tchoukball_Scoreboard_MJ.Data;
+using Tchoukball_Scoreboard_MJ.View;
+using Tchoukball_Scoreboard_MJ.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace GenesisScoreboard
+namespace Tchoukball_Scoreboard_MJ
 {
     /// <summary>
     /// Interaction logic for App.xaml

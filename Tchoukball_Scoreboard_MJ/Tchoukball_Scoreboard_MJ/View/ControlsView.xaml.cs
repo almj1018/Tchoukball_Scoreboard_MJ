@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GenesisScoreboard.View
+namespace Tchoukball_Scoreboard_MJ.View
 {
     /// <summary>
     /// Interaction logic for ControlsView.xaml
