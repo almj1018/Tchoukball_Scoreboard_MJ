@@ -14,32 +14,125 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0" Margin="5">
-            <TextBox Text="{Binding Scoreboard.HomeName, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Scoreboard.HomePoints, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <Button Content="Add Point" Command="{Binding AddCommand}" CommandParameter="home"/>
-            <Button Content="Minus Point" Command="{Binding MinusCommand}" CommandParameter="home"/>
 
-            <TextBox Text="{Binding Scoreboard.GuestName, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Scoreboard.GuestPoints, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <Button Content="Add Point" Command="{Binding AddCommand}" CommandParameter="guest"/>
-            <Button Content="Minus Point" Command="{Binding MinusCommand}" CommandParameter="guest"/>
+        <!--Keyboard Shortcuts-->
+        <Grid Grid.Column="0">
 
-            <Label Content="Period" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Scoreboard.Period, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <Button Content="+" Command="{Binding AddCommand}" CommandParameter="period"/>
-            <Button Content="-" Command="{Binding MinusCommand}" CommandParameter="period"/>
-        </StackPanel>
-        
-        <StackPanel Grid.Column="1">
-            <Label Content="Timer" HorizontalAlignment="Center"/>
-            <TextBox Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-            <Button Content="Start" Command="{Binding StartTimerCommand}"/>
-            <Button Content="Stop" Command="{Binding StopTimerCommand}"/>
-            <Button Content="Reset" Command="{Binding ResetTimerCommand}"/>
-        </StackPanel>
+        </Grid>
+
+        <!--Scoreboard Control-->
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+
+            <!--Timer Controls-->
+            <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
+                <Label Content="Timer" HorizontalAlignment="Center"/>
+                <TextBox Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+                <Button Content="Start" Command="{Binding StartTimerCommand}"/>
+                <Button Content="Stop" Command="{Binding StopTimerCommand}"/>
+                <Button Content="Reset" Command="{Binding ResetTimerCommand}"/>
+            </StackPanel>
+
+            <!--Home Controls-->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0">
+                    <Label Content="{Binding Scoreboard.HomePoints}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1">
+                    <TextBox Text="{Binding Scoreboard.HomeName}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="2">
+                    <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home"/>
+                </Viewbox>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="home"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="home"/>
+                </Grid>
+            </Grid>
+
+            <!--Guest Controls-->
+            <Grid Grid.Row="1" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="0">
+                    <Label Content="{Binding Scoreboard.GuestPoints}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1">
+                    <TextBox Text="{Binding Scoreboard.GuestName}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="2">
+                    <Button Content="Upload Guest Logo" Command="{Binding UploadLogoCommand}" CommandParameter="guest"/>
+                </Viewbox>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="guest"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="guest"/>
+                </Grid>
+            </Grid>
+
+            <!--Period Controls-->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="1">
+                    <Label Content="Period"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="2">
+                    <Label Content="{Binding Scoreboard.Period}"/>
+                </Viewbox>
+
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="period"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="period"/>
+                </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>
