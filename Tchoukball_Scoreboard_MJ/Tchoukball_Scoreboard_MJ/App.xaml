@@ -1,7 +1,9 @@
 ﻿<Application x:Class="Tchoukball_Scoreboard_MJ.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ">
+             xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ"
+            xmlns:view="clr-namespace:Tchoukball_Scoreboard_MJ.View"
+            xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel">
     <Application.Resources>
         <!--<Style x:Key="testfont" TargetType="Label">
             <Setter Property="FontFamily" Value="Fonts/DigitalDismay.ttf #Digital Dismay"/>

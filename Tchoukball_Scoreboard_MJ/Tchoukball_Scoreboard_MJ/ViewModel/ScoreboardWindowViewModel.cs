@@ -4,39 +4,49 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tchoukball_Scoreboard_MJ.Command;
+using Tchoukball_Scoreboard_MJ.Data;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ScoreboardWindowViewModel : ViewModelBase
     {
-        private ScoreboardItemViewModel? _scoreboardItemViewModel;
-        private ControlsViewModel _controlsViewModel;
         private ViewModelBase? _selectedViewModel;
 
         public ScoreboardWindowViewModel(ControlsViewModel controlsViewModel)
         {
-            _controlsViewModel = controlsViewModel;
-            _scoreboardItemViewModel = controlsViewModel.Scoreboard;
+            ScoreboardViewModel = new ScoreboardViewModel(controlsViewModel);
+            BreakTimerViewModel = new BreakTimerViewModel(controlsViewModel);
+            SelectedViewModel = ScoreboardViewModel;
+            SelectViewModelCommand = new DelegateCommand(SelectViewModel);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
+        public ViewModelBase? SelectedViewModel
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public ScoreboardItemViewModel? Scoreboard
-        {
-            get
-            {
-                return _scoreboardItemViewModel;
-            }
+            get => _selectedViewModel;
             set
             {
-                _scoreboardItemViewModel = value;
+                _selectedViewModel = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public ScoreboardViewModel ScoreboardViewModel { get; }
+        public BreakTimerViewModel BreakTimerViewModel { get; }
+        public DelegateCommand SelectViewModelCommand { get; }
+
+        public async override Task LoadAsync()
+        {
+            if (SelectedViewModel is not null)
+            {
+                await SelectedViewModel.LoadAsync();
+            }
+        }
+
+        private async void SelectViewModel(object? parameter)
+        {
+            SelectedViewModel = parameter as ViewModelBase;
+            await LoadAsync();
         }
     }
 }

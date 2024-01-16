@@ -30,6 +30,8 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddTransient<MainViewModel>();
             services.AddSingleton<ControlsViewModel>();
             services.AddSingleton<ScoreboardWindowViewModel>();
+            services.AddSingleton<ScoreboardViewModel>();
+            services.AddTransient<BreakTimerViewModel>();
 
             services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
         }
@@ -39,9 +41,6 @@ namespace Tchoukball_Scoreboard_MJ
             base.OnStartup(e);
 
             var mainWindow = _serviceProvider.GetService<MainWindow>();
-
-            //// To ensure all the other Views of a type Window get closed properly.
-            //ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             mainWindow?.Show();
         }
