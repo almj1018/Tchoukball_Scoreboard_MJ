@@ -18,10 +18,15 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
+        <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="1" Grid.Column="0"/>
+
         <!--Keyboard Shortcuts-->
         <Grid Grid.Column="0">
             <StackPanel>
-                <Label Content="Keyboard Shortcuts" FontWeight="ExtraBold"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Keyboard Shortcuts" FontWeight="ExtraBold"/>
+                    <Button Content="switch" Command="{Binding SwitchShortcutsDisplaySideCommand}" Margin="30, 0, 0, 0"/>
+                </StackPanel>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -110,10 +115,22 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <Label Grid.Row="0" Content="Timer" HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="1" Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-                <Button Grid.Row="2" Content="Start/Stop" Command="{Binding StartStopTimerCommand}" Margin="100,0,100,2"/>
-                <Button Grid.Row="3" Content="Reset" Command="{Binding ResetTimerCommand}" Margin="150,2,150,0"/>
+                <Viewbox Grid.Row="0">
+                    <Label Content="Timer" HorizontalAlignment="Center" Padding="0"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1">
+                    <TextBox Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="2">
+                    <Button Content="Start/Stop" Command="{Binding StartStopTimerCommand}"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="3">
+                    <Button Content="Reset" Command="{Binding ResetTimerCommand}"/>
+                </Viewbox>
+                
             </Grid>
             
             <!--Home Controls-->
