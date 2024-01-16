@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
-    public class ScoreboardWindowViewModel : ViewModelBase
+    public class BreakTimerViewModel : ViewModelBase
     {
-        private ScoreboardItemViewModel? _scoreboardItemViewModel;
         private ControlsViewModel _controlsViewModel;
-        private ViewModelBase? _selectedViewModel;
+        private ScoreboardItemViewModel? _scoreboardItemViewModel;
 
-        public ScoreboardWindowViewModel(ControlsViewModel controlsViewModel)
+        public BreakTimerViewModel(ControlsViewModel controlsViewModel)
         {
             _controlsViewModel = controlsViewModel;
             _scoreboardItemViewModel = controlsViewModel.Scoreboard;
