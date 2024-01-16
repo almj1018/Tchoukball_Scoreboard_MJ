@@ -23,8 +23,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             _scoreboardDataProvider = scoreboardDataProvider;
             AddCommand = new DelegateCommand(Add);
             MinusCommand = new DelegateCommand(Minus);
-            StartTimerCommand = new DelegateCommand(Start);
-            StopTimerCommand = new DelegateCommand(Stop);
+            StartStopTimerCommand = new DelegateCommand(StartStop);
+            //StopTimerCommand = new DelegateCommand(Stop);
             ResetTimerCommand = new DelegateCommand(Reset);
 
             var a = Application.Current.Windows;
@@ -63,8 +63,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public DelegateCommand AddCommand { get; }
         public DelegateCommand MinusCommand { get; }
-        public DelegateCommand StartTimerCommand { get; }
-        public DelegateCommand StopTimerCommand { get; }
+        public DelegateCommand StartStopTimerCommand { get; }
+        //public DelegateCommand StopTimerCommand { get; }
         public DelegateCommand ResetTimerCommand { get; }
 
         private void Add(object? team)
@@ -101,19 +101,26 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        private void Start(object? o)
+        private void StartStop(object? o)
         {
-            Scoreboard!.StartTimer();
+            if (Scoreboard!.IsTimerStarted)
+            {
+                Scoreboard!.StopTimer();
+            }
+            else
+            {
+                Scoreboard!.StartTimer();
+            }
         }
 
-        private void Stop(object? o)
-        {
-            Scoreboard!.StopTimer();
-        }
+        //private void Stop(object? o)
+        //{
+        //    Scoreboard!.StopTimer();
+        //}
 
         private void Reset(object? o)
         {
-            Stop(o);
+            Scoreboard!.StopTimer();
             Scoreboard!.Timer = new TimeSpan(0, 15, 0);
         }
     }

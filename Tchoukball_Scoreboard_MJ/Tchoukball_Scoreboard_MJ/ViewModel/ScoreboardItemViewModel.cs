@@ -33,6 +33,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
+        public bool IsTimerStarted { get { return dispatcherTimer.IsEnabled; } }
+
         public void StartTimer()
         {
             dispatcherTimer.Start();

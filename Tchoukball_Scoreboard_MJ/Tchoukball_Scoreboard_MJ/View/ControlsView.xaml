@@ -20,7 +20,73 @@
 
         <!--Keyboard Shortcuts-->
         <Grid Grid.Column="0">
+            <StackPanel>
+                <Label Content="Keyboard Shortcuts" FontWeight="ExtraBold"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"/>
+                    
+                    <Label Grid.Row="1" Content="Timer" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label Grid.Row="2" Grid.Column="0" Content="Start/Stop"/>
+                    <Label Grid.Row="2" Grid.Column="1" Content="{Binding StartStopKey}"/>
 
+                    <Label Grid.Row="3"/>
+                        
+                    <Label Grid.Row="4" Content="Home" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label Grid.Row="5" Grid.Column="0" Content="Add Point"/>
+                    <Label Grid.Row="5" Grid.Column="1" Content="{Binding AddHomePoint}"/>
+                    <Label Grid.Row="6" Grid.Column="0" Content="Minus Point"/>
+                    <Label Grid.Row="6" Grid.Column="1" Content="{Binding MinusHomePoint}"/>
+
+                    <Label Grid.Row="7"/>
+                        
+                    <Label Grid.Row="8" Content="Away" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label Grid.Row="9" Grid.Column="0" Content="Add Point"/>
+                    <Label Grid.Row="9" Grid.Column="1" Content="{Binding AddAwayPoint}"/>
+                    <Label Grid.Row="10" Grid.Column="0" Content="Minus Point"/>
+                    <Label Grid.Row="10" Grid.Column="1" Content="{Binding MinusAwayPoint}"/>
+
+                    <Label Grid.Row="11"/>
+                        
+                    <Label Grid.Row="12" Content="Period" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label Grid.Row="13" Grid.Column="0" Content="Add Period"/>
+                    <Label Grid.Row="13" Grid.Column="1" Content="{Binding AddPeriod}"/>
+                    <Label Grid.Row="14" Grid.Column="0" Content="Minus Period"/>
+                    <Label Grid.Row="14" Grid.Column="1" Content="{Binding MinusPeriod}"/>
+
+                    <Label Grid.Row="15"/>
+                        
+                    <Label Grid.Row="16" Content="Possesion" HorizontalAlignment="Left" FontWeight="Bold"/>
+                    <Label Grid.Row="17" Grid.Column="0" Content="Home (left)"/>
+                    <Label Grid.Row="17" Grid.Column="1" Content="{Binding HomePossesion}"/>
+                    <Label Grid.Row="18" Grid.Column="0" Content="Away (right)"/>
+                    <Label Grid.Row="18" Grid.Column="1" Content="{Binding AwayPossesion}"/>
+                </Grid>
+            </StackPanel>
         </Grid>
 
         <!--Scoreboard Control-->
@@ -36,14 +102,20 @@
             </Grid.RowDefinitions>
 
             <!--Timer Controls-->
-            <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
-                <Label Content="Timer" HorizontalAlignment="Center"/>
-                <TextBox Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
-                <Button Content="Start" Command="{Binding StartTimerCommand}"/>
-                <Button Content="Stop" Command="{Binding StopTimerCommand}"/>
-                <Button Content="Reset" Command="{Binding ResetTimerCommand}"/>
-            </StackPanel>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
 
+                <Label Grid.Row="0" Content="Timer" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="1" Text="{Binding Scoreboard.Timer, Mode=TwoWay}" Background="Transparent" HorizontalAlignment="Center"/>
+                <Button Grid.Row="2" Content="Start/Stop" Command="{Binding StartStopTimerCommand}" Margin="100,0,100,2"/>
+                <Button Grid.Row="3" Content="Reset" Command="{Binding ResetTimerCommand}" Margin="150,2,150,0"/>
+            </Grid>
+            
             <!--Home Controls-->
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -62,7 +134,7 @@
                 </Viewbox>
 
                 <Viewbox Grid.Row="2">
-                    <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home"/>
+                    <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home" Margin="5,5" Padding="5,5"/>
                 </Viewbox>
 
                 <Grid Grid.Row="3">
@@ -70,8 +142,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="home"/>
-                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="home"/>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="home" Margin="5,5"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="home" Margin="5,5"/>
                 </Grid>
             </Grid>
 
@@ -93,7 +165,7 @@
                 </Viewbox>
 
                 <Viewbox Grid.Row="2">
-                    <Button Content="Upload Guest Logo" Command="{Binding UploadLogoCommand}" CommandParameter="guest"/>
+                    <Button Content="Upload Guest Logo" Command="{Binding UploadLogoCommand}" CommandParameter="guest" Margin="5,5" Padding="5,5"/>
                 </Viewbox>
 
                 <Grid Grid.Row="3">
@@ -101,8 +173,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="guest"/>
-                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="guest"/>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="guest" Margin="5,5"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="guest" Margin="5,5"/>
                 </Grid>
             </Grid>
 
@@ -129,8 +201,8 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="period"/>
-                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="period"/>
+                    <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="period" Margin="5,5"/>
+                    <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="period" Margin="5,5"/>
                 </Grid>
             </Grid>
         </Grid>
