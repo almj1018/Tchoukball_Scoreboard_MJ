@@ -7,11 +7,11 @@
              xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
+    <!--<UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:ScoreboardWindowViewModel}">
             <local:ScoreboardWindowView/>
         </DataTemplate>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>

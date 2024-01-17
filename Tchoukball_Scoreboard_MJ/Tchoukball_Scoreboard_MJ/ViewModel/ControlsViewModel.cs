@@ -18,17 +18,18 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private ScoreboardItemViewModel? _scoreboardItemViewModel;
         private ViewModelBase? _selectedViewModel;
 
-        public ControlsViewModel(IScoreboardDataProvider scoreboardDataProvider)
+        public ControlsViewModel(ScoreboardItemViewModel scoreboardItemViewModel)
         {
-            _scoreboardDataProvider = scoreboardDataProvider;
+            //_scoreboardDataProvider = scoreboardDataProvider;
+            Scoreboard = scoreboardItemViewModel;
             AddCommand = new DelegateCommand(Add);
             MinusCommand = new DelegateCommand(Minus);
             StartStopTimerCommand = new DelegateCommand(StartStop);
             ResetTimerCommand = new DelegateCommand(Reset);
 
-            ScoreboardWindowView scoreboard = new ScoreboardWindowView();
-            scoreboard.DataContext = this;
-            scoreboard.Show();
+            var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
+            //scoreboardWindowView.DataContext = this;
+            scoreboardWindowView.Show();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -53,8 +54,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public async override Task LoadAsync()
         {
-            var scoreboardData = await _scoreboardDataProvider.GetAsync();
-            Scoreboard = new ScoreboardItemViewModel(scoreboardData!);
+            //var scoreboardData = await _scoreboardDataProvider.GetAsync();
+            //Scoreboard = new ScoreboardItemViewModel(scoreboardData!);
         }
 
         public DelegateCommand AddCommand { get; }

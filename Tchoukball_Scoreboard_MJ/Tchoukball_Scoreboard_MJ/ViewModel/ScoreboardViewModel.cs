@@ -13,10 +13,10 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private ControlsViewModel _controlsViewModel;
         private ViewModelBase? _selectedViewModel;
 
-        public ScoreboardViewModel(ControlsViewModel controlsViewModel)
+        public ScoreboardViewModel(ScoreboardItemViewModel controlsViewModel)
         {
-            _controlsViewModel = controlsViewModel;
-            _scoreboardItemViewModel = controlsViewModel.Scoreboard;
+            //_controlsViewModel = controlsViewModel;
+            _scoreboardItemViewModel = controlsViewModel;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

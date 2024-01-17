@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
@@ -12,10 +7,9 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private ControlsViewModel _controlsViewModel;
         private ScoreboardItemViewModel? _scoreboardItemViewModel;
 
-        public BreakTimerViewModel(ControlsViewModel controlsViewModel)
+        public BreakTimerViewModel()
         {
-            _controlsViewModel = controlsViewModel;
-            _scoreboardItemViewModel = controlsViewModel.Scoreboard;
+            //_scoreboardItemViewModel = controlsViewModel.Scoreboard;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

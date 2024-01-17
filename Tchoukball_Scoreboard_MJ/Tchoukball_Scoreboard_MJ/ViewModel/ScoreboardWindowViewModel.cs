@@ -13,12 +13,13 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     {
         private ViewModelBase? _selectedViewModel;
 
-        public ScoreboardWindowViewModel(ControlsViewModel controlsViewModel)
+        public ScoreboardWindowViewModel(ScoreboardItemViewModel model)
         {
-            ScoreboardViewModel = new ScoreboardViewModel(controlsViewModel);
-            BreakTimerViewModel = new BreakTimerViewModel(controlsViewModel);
+            ScoreboardViewModel = new ScoreboardViewModel(model);
+            BreakTimerViewModel = new BreakTimerViewModel();
             SelectedViewModel = ScoreboardViewModel;
             SelectViewModelCommand = new DelegateCommand(SelectViewModel);
+            
         }
 
         public ViewModelBase? SelectedViewModel
