@@ -1,15 +1,22 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
-    public class BreakTimerViewModel : ViewModelBase
+    public class ScoreboardViewModel : ViewModelBase
     {
-        private ControlsViewModel _controlsViewModel;
         private ScoreboardItemViewModel? _scoreboardItemViewModel;
+        private ControlsViewModel _controlsViewModel;
+        private ViewModelBase? _selectedViewModel;
 
-        public BreakTimerViewModel()
+        public ScoreboardViewModel(ScoreboardItemViewModel controlsViewModel)
         {
-            //_scoreboardItemViewModel = controlsViewModel.Scoreboard;
+            //_controlsViewModel = controlsViewModel;
+            _scoreboardItemViewModel = controlsViewModel;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

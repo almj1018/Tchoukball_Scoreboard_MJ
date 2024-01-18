@@ -13,9 +13,18 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private readonly Scoreboard _model;
         private DispatcherTimer dispatcherTimer;
 
-        public ScoreboardItemViewModel(Scoreboard model)
+        public ScoreboardItemViewModel()
         {
-            _model = model;
+            _model = new Scoreboard
+            {
+                Period = 0,
+                Timer = new TimeSpan(0, 15, 0),
+                HomeName = "Home",
+                GuestName = "Guest",
+                HomePoints = 0,
+                GuestPoints = 0
+            };
+
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += Timer_Tick;

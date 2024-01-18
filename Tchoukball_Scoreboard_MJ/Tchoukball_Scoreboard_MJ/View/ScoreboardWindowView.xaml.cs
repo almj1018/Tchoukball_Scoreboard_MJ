@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 namespace Tchoukball_Scoreboard_MJ.View
 {
     /// <summary>
@@ -20,9 +14,18 @@ namespace Tchoukball_Scoreboard_MJ.View
     /// </summary>
     public partial class ScoreboardWindowView : Window
     {
-        public ScoreboardWindowView()
+        private ViewModelBase? _viewModel;
+        public ScoreboardWindowView(ScoreboardWindowViewModel viewModel)
         {
             InitializeComponent();
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+            Loaded += ScoreboardWindow_Loaded;
+        }
+
+        private async void ScoreboardWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.LoadAsync();
         }
     }
 }

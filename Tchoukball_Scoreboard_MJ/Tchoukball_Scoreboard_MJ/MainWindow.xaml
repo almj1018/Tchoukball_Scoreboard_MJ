@@ -30,6 +30,7 @@
 
         <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
 
+
         <StatusBar Grid.Row="2">
             <StatusBarItem FontSize="20" Content=" (c) MJ" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         </StatusBar>
