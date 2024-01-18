@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using System.Windows.Input;
+using Tchoukball_Scoreboard_MJ.CustomEventArgs;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
@@ -12,13 +14,14 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     {
         private readonly Scoreboard _model;
         private DispatcherTimer dispatcherTimer;
+        public event EventHandler<TimerEndEventArgs>? TimerEnd;
 
         public ScoreboardItemViewModel()
         {
             _model = new Scoreboard
             {
-                Period = 0,
-                Timer = new TimeSpan(0, 15, 0),
+                Period = 1,
+                Timer = new TimeSpan(0, 0, 10),
                 HomeName = "Home",
                 GuestName = "Guest",
                 HomePoints = 0,
@@ -30,6 +33,12 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             dispatcherTimer.Tick += Timer_Tick;
         }
 
+        protected virtual void OnTimerEnded(TimerEndEventArgs e)
+        {
+            TimerEnd?.Invoke(this, e);
+            Timer = new TimeSpan(0, 0, 20);
+        }
+
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (Timer.TotalSeconds > 0)
@@ -39,6 +48,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             else
             {
                 StopTimer();
+                OnTimerEnded(new TimerEndEventArgs { TimerEnded = true });
             }
         }
 
@@ -112,6 +122,5 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 RaisePropertyChanged();
             }
         }
-
     }
 }

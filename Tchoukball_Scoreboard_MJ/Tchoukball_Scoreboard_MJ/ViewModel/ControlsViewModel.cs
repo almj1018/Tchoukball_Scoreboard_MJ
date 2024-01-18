@@ -14,9 +14,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ControlsViewModel : ViewModelBase
     {
-        private readonly IScoreboardDataProvider _scoreboardDataProvider;
         private ScoreboardItemViewModel? _scoreboardItemViewModel;
-        private ViewModelBase? _selectedViewModel;
 
         public ControlsViewModel(ScoreboardItemViewModel scoreboardItemViewModel)
         {
@@ -28,11 +26,10 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             ResetTimerCommand = new DelegateCommand(Reset);
 
             var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
-            //scoreboardWindowView.DataContext = this;
             scoreboardWindowView.Show();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -54,8 +51,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public async override Task LoadAsync()
         {
-            //var scoreboardData = await _scoreboardDataProvider.GetAsync();
-            //Scoreboard = new ScoreboardItemViewModel(scoreboardData!);
+            await Task.Delay(0);
         }
 
         public DelegateCommand AddCommand { get; }

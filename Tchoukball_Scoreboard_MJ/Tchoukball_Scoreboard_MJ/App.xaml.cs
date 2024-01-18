@@ -34,7 +34,7 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddSingleton<ScoreboardViewModel>();
             services.AddTransient<BreakTimerViewModel>();
 
-            //services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
+            services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
             services.AddSingleton<ScoreboardItemViewModel>();
         }
 

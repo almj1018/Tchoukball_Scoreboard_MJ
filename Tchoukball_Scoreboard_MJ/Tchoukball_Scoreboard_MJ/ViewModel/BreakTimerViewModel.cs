@@ -1,33 +1,34 @@
 ﻿using System.ComponentModel;
+using Tchoukball_Scoreboard_MJ.CustomEventArgs;
+using Tchoukball_Scoreboard_MJ.Model;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class BreakTimerViewModel : ViewModelBase
     {
-        private ControlsViewModel _controlsViewModel;
-        private ScoreboardItemViewModel? _scoreboardItemViewModel;
+        private ScoreboardItemViewModel? _scoreboard;
 
-        public BreakTimerViewModel()
+        public BreakTimerViewModel(ScoreboardItemViewModel timerModel)
         {
-            //_scoreboardItemViewModel = controlsViewModel.Scoreboard;
+            _scoreboard = timerModel;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ScoreboardItemViewModel? Scoreboard
+        public ScoreboardItemViewModel Scoreboard
         {
             get
             {
-                return _scoreboardItemViewModel;
+                return _scoreboard!;
             }
             set
             {
-                _scoreboardItemViewModel = value;
+                _scoreboard = value;
                 RaisePropertyChanged();
             }
         }

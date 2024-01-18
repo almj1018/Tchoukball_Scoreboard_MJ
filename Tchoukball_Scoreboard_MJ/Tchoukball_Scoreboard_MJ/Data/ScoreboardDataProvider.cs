@@ -11,12 +11,12 @@ namespace Tchoukball_Scoreboard_MJ.Data
     {
         Task<Scoreboard?> GetAsync();
     }
+
     public class ScoreboardDataProvider : IScoreboardDataProvider
     {
         public async Task<Scoreboard?> GetAsync()
         {
-            await Task.Delay(100);
-
+            await Task.Delay(10);
             return new Scoreboard
             {
                 Period = 0,

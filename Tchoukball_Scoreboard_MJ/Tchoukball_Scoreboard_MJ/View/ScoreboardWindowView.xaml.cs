@@ -25,7 +25,7 @@ namespace Tchoukball_Scoreboard_MJ.View
 
         private async void ScoreboardWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            await _viewModel.LoadAsync();
+            await _viewModel!.LoadAsync();
         }
     }
 }
