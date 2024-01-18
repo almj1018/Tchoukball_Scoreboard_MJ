@@ -36,7 +36,6 @@ namespace Tchoukball_Scoreboard_MJ
         {
             var result = MessageBox.Show("Do you want to close the scoreboard?", "Confirm Exit?", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
-                _viewModel.
                 Application.Current.Shutdown();
             else
                 e.Cancel = true;
