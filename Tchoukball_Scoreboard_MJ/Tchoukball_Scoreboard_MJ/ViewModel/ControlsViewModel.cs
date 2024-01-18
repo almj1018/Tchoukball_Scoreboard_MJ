@@ -18,7 +18,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public ControlsViewModel(ScoreboardItemViewModel scoreboardItemViewModel)
         {
-            //_scoreboardDataProvider = scoreboardDataProvider;
             Scoreboard = scoreboardItemViewModel;
             AddCommand = new DelegateCommand(Add);
             MinusCommand = new DelegateCommand(Minus);

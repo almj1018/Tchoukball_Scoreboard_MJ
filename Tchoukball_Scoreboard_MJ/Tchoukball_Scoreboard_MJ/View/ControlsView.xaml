@@ -12,6 +12,10 @@
             <local:ScoreboardWindowView/>
         </DataTemplate>
     </UserControl.Resources>-->
+    <UserControl.InputBindings>
+        <KeyBinding Key="o"
+                    Command="{Binding StartStopTimerCommand}"/>
+    </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
