@@ -17,14 +17,5 @@ namespace Tchoukball_Scoreboard_MJ.Model
         public Key AddPeriodKey;
         public Key MinusPeriodKey;
         public Key SwitchPossesionKey;
-
-        public string? TimerStartStop;
-        public string? HomeAddPoint;
-        public string? HomeMinusPoint;
-        public string? AwayAddPoint;
-        public string? AwayMinusPoint;
-        public string? AddPeriod;
-        public string? MinusPeriod;
-        public string? SwitchPossesion;
     }
 }

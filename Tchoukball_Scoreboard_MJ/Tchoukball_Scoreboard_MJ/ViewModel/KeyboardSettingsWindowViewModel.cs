@@ -13,8 +13,8 @@ public class KeyboardSettingsWindowViewModel : ViewModelBase
     public KeyboardSettingsWindowViewModel(KeyboardSettingsItemViewModel keyboardSettingsItemViewModel)
     {
         _model = keyboardSettingsItemViewModel;
-        //OnKeyPressHandlerCommand = new DelegateCommand(OnKeyPressHandler);
-
+        SaveCommand = new DelegateCommand(Save);
+        ResetCommand = new DelegateCommand(Reset);
     }
 
     public async override Task LoadAsync()
@@ -30,40 +30,54 @@ public class KeyboardSettingsWindowViewModel : ViewModelBase
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    //public DelegateCommand OnKeyPressHandlerCommand { get; }
+    public DelegateCommand SaveCommand { get; }
+    public DelegateCommand ResetCommand { get; }
+
+    private void Save(object? parameter)
+    {
+        _model.Save();
+    }
+
+    private void Reset(object? parameter)
+    {
+        _model.Reset();
+    }
 
     public void OnKeyPressHandler(string parameter, Key key)
     {
-        if (KeyboardSettings.CanUpdateKey(key))
-        {
-            switch (parameter)
-            {
-                case "StartStopTimer":
-                    KeyboardSettings.TimerStartStopKey = key;
-                    break;
-                case "HomeAddPoint":
-                    KeyboardSettings.HomeAddPointKey = key;
-                    break;
-                case "HomeMinusPoint":
-                    KeyboardSettings.HomeMinusPointKey = key;
-                    break;
-                case "AwayAddPoint":
-                    KeyboardSettings.AwayAddPointKey = key;
-                    break;
-                case "AwayMinusPoint":
-                    KeyboardSettings.AwayMinusPointKey = key;
-                    break;
-                case "AddPeriod":
-                    KeyboardSettings.AddPeriodKey = key;
-                    break;
-                case "MinusPeriod":
-                    KeyboardSettings.MinusPeriodKey = key;
-                    break;
-                case "SwitchPossesion":
-                    KeyboardSettings.SwitchPossesionKey = key;
-                    break;
-            } 
-        }
+        KeyboardSettings.UpdateKey(parameter, key);
+        //if (KeyboardSettings.CanUpdateKey(key))
+        //{
+        //    KeyboardSettings.hasUnsavedChanges = true;
+
+        //    switch (parameter)
+        //    {
+        //        case "StartStopTimer":
+        //            KeyboardSettings.TimerStartStopKey = key;
+        //            break;
+        //        case "HomeAddPoint":
+        //            KeyboardSettings.HomeAddPointKey = key;
+        //            break;
+        //        case "HomeMinusPoint":
+        //            KeyboardSettings.HomeMinusPointKey = key;
+        //            break;
+        //        case "AwayAddPoint":
+        //            KeyboardSettings.AwayAddPointKey = key;
+        //            break;
+        //        case "AwayMinusPoint":
+        //            KeyboardSettings.AwayMinusPointKey = key;
+        //            break;
+        //        case "AddPeriod":
+        //            KeyboardSettings.AddPeriodKey = key;
+        //            break;
+        //        case "MinusPeriod":
+        //            KeyboardSettings.MinusPeriodKey = key;
+        //            break;
+        //        case "SwitchPossesion":
+        //            KeyboardSettings.SwitchPossesionKey = key;
+        //            break;
+        //    } 
+        //}
     }
 
     public KeyboardSettingsItemViewModel KeyboardSettings

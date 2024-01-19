@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
         xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         mc:Ignorable="d"
-        Title="KeyboardSettingsWindowView" Height="450" Width="400" ResizeMode="NoResize">
+        Title="KeyboardSettingsWindowView" Height="450" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

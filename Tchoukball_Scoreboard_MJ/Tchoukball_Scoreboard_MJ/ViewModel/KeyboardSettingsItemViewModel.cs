@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Runtime;
@@ -8,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tchoukball_Scoreboard_MJ.CustomEnum;
+using Tchoukball_Scoreboard_MJ.Helper;
 using Tchoukball_Scoreboard_MJ.Model;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
@@ -16,49 +20,69 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     {
         private readonly KeyboardSettings _model;
         private readonly IConfigurationSection _settings;
+        public bool hasUnsavedChanges = false;
+
+        private Key previousTimerStartStopKey;
+        private Key previousHomeAddPointKey;
+        private Key previousHomeMinusPointKey;
+        private Key previousAwayAddPointKey;
+        private Key previousAwayMinusPointKey;
+        private Key previousAddPeriodKey;
+        private Key previousMinusPeriodKey;
+        private Key previousSwitchPossesionKey;
 
         public KeyboardSettingsItemViewModel()
         {
-            _settings = new ConfigurationBuilder().AddJsonFile("D:\\Git Repository\\Tchoukball_Scoreboard_MJ\\Tchoukball_Scoreboard_MJ\\appsettings.json").Build().GetSection("KeyboardSettings");
+            _settings = new ConfigurationBuilder().AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json").Build().GetSection("KeyboardSettings");
+
             _model = new KeyboardSettings
             {
-                TimerStartStopKey = ConvertSettingToKey("TimerStartStop"),
-                HomeAddPointKey = ConvertSettingToKey("HomeAddPoint"),
-                HomeMinusPointKey = ConvertSettingToKey("HomeMinusPoint"),
-                AwayAddPointKey = ConvertSettingToKey("AwayAddPoint"),
-                AwayMinusPointKey = ConvertSettingToKey("AwayMinusPoint"),
-                AddPeriodKey = ConvertSettingToKey("AddPeriod"),
-                MinusPeriodKey = ConvertSettingToKey("MinusPeriod"),
-                SwitchPossesionKey = ConvertSettingToKey("ChangePossession"),
+                TimerStartStopKey = ConvertSettingToKey("TimerStartStopKey"),
+                HomeAddPointKey = ConvertSettingToKey("HomeAddPointKey"),
+                HomeMinusPointKey = ConvertSettingToKey("HomeMinusPointKey"),
+                AwayAddPointKey = ConvertSettingToKey("AwayAddPointKey"),
+                AwayMinusPointKey = ConvertSettingToKey("AwayMinusPointKey"),
+                AddPeriodKey = ConvertSettingToKey("AddPeriodKey"),
+                MinusPeriodKey = ConvertSettingToKey("MinusPeriodKey"),
+                SwitchPossesionKey = ConvertSettingToKey("SwitchPossesionKey"),
             };
 
-            _model.TimerStartStop = GetStrFromKey(TimerStartStopKey);
-            _model.HomeAddPoint = GetStrFromKey(HomeAddPointKey);
-            _model.HomeMinusPoint = GetStrFromKey(HomeMinusPointKey);
-            _model.AwayAddPoint = GetStrFromKey(AwayAddPointKey);
-            _model.AwayMinusPoint = GetStrFromKey(AwayMinusPointKey);
-            _model.AddPeriod = GetStrFromKey(AddPeriodKey);
-            _model.MinusPeriod = GetStrFromKey(MinusPeriodKey);
-            _model.SwitchPossesion = GetStrFromKey(SwitchPossesionKey);
+            previousTimerStartStopKey = _model.TimerStartStopKey;
+            previousHomeAddPointKey = _model.HomeAddPointKey;
+            previousHomeMinusPointKey = _model.HomeMinusPointKey;
+            previousAwayAddPointKey = _model.AwayAddPointKey;
+            previousAwayMinusPointKey = _model.AwayMinusPointKey;
+            previousAddPeriodKey = _model.AddPeriodKey;
+            previousMinusPeriodKey = _model.MinusPeriodKey;
+            previousSwitchPossesionKey = _model.SwitchPossesionKey;
+
+            TimerStartStop = GetStrFromKey(TimerStartStopKey);
+            HomeAddPoint = GetStrFromKey(HomeAddPointKey);
+            HomeMinusPoint = GetStrFromKey(HomeMinusPointKey);
+            AwayAddPoint = GetStrFromKey(AwayAddPointKey);
+            AwayMinusPoint = GetStrFromKey(AwayMinusPointKey);
+            AddPeriod = GetStrFromKey(AddPeriodKey);
+            MinusPeriod = GetStrFromKey(MinusPeriodKey);
+            SwitchPossesion = GetStrFromKey(SwitchPossesionKey);
         }
 
-        public bool CanUpdateKey(Key key)
+        private bool CanUpdateKey(Key key)
         {
             if (TimerStartStopKey == key)
                 return false;
-            else if(HomeAddPointKey == key)
+            else if (HomeAddPointKey == key)
                 return false;
-            else if(HomeMinusPointKey == key)
+            else if (HomeMinusPointKey == key)
                 return false;
-            else if(AwayAddPointKey == key)
+            else if (AwayAddPointKey == key)
                 return false;
-            else if(AwayMinusPointKey == key)
+            else if (AwayMinusPointKey == key)
                 return false;
-            else if(AddPeriodKey == key)
+            else if (AddPeriodKey == key)
                 return false;
-            else if(MinusPeriodKey == key)
+            else if (MinusPeriodKey == key)
                 return false;
-            else if(SwitchPossesionKey == key)
+            else if (SwitchPossesionKey == key)
                 return false;
             else
                 return true;
@@ -101,6 +125,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
+        #region Key Properties
         public Key TimerStartStopKey
         {
             get => _model.TimerStartStopKey;
@@ -188,110 +213,121 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 RaisePropertyChanged();
             }
         }
+        #endregion
 
+        #region Key Name Properties
+        private string _timerStartStop;
         public String TimerStartStop
         {
             get
             {
-                return _model.TimerStartStop;
+                return _timerStartStop;
             }
             set
             {
-                _model.TimerStartStop = value;
+                _timerStartStop = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _homeAddPoint;
         public String HomeAddPoint
         {
             get
             {
-                return _model.HomeAddPoint;
+                return _homeAddPoint;
             }
             set
             {
-                _model.HomeAddPoint = value;
+                _homeAddPoint = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _homeMinusPoint;
         public String HomeMinusPoint
         {
             get
             {
-                return _model.HomeMinusPoint;
+                return _homeMinusPoint;
             }
             set
             {
-                _model.HomeMinusPoint = value;
+                _homeMinusPoint = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _awayAddPoint;
         public String AwayAddPoint
         {
             get
             {
-                return _model.AwayAddPoint;
+                return _awayAddPoint;
             }
             set
             {
-                _model.AwayAddPoint = value;
+                _awayAddPoint = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _awayMinusPoint;
         public String AwayMinusPoint
         {
             get
             {
-                return _model.AwayMinusPoint;
+                return _awayMinusPoint;
             }
             set
             {
-                _model.AwayMinusPoint = value;
+                _awayMinusPoint = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _addPeriod;
         public String AddPeriod
         {
             get
             {
-                return _model.AddPeriod;
+                return _addPeriod;
             }
             set
             {
-                _model.AddPeriod = value;
+                _addPeriod = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _minusPeriod;
         public String MinusPeriod
         {
             get
             {
-                return _model.MinusPeriod;
+                return _minusPeriod;
             }
             set
             {
-                _model.MinusPeriod = value;
+                _minusPeriod = value;
                 RaisePropertyChanged();
             }
         }
 
+        private string _switchPossesion;
         public String SwitchPossesion
         {
             get
             {
-                return _model.SwitchPossesion;
+                return _switchPossesion;
             }
             set
             {
-                _model.SwitchPossesion = value;
+                _switchPossesion = value;
                 RaisePropertyChanged();
             }
         }
+        #endregion
 
         private string GetStrFromKey(Key key)
         {
@@ -307,6 +343,95 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             {
                 return (key.ToString().Replace("Oem", ""));
             }
+        }
+
+        public void UpdateKey(string parameter, Key key)
+        {
+            if (CanUpdateKey(key))
+            {
+                hasUnsavedChanges = true;
+
+                switch (parameter)
+                {
+                    case "StartStopTimer":
+                        //_previousModelState.TimerStartStopKey = TimerStartStopKey;
+                        TimerStartStopKey = key;
+                        break;
+                    case "HomeAddPoint":
+                        //_previousModelState.HomeAddPointKey = HomeAddPointKey;
+                        HomeAddPointKey = key;
+                        break;
+                    case "HomeMinusPoint":
+                        //_previousModelState.HomeMinusPointKey = HomeMinusPointKey;
+                        HomeMinusPointKey = key;
+                        break;
+                    case "AwayAddPoint":
+                        //_previousModelState.AwayAddPointKey = AwayAddPointKey;
+                        AwayAddPointKey = key;
+                        break;
+                    case "AwayMinusPoint":
+                        //_previousModelState.AwayMinusPointKey = AwayMinusPointKey;
+                        AwayMinusPointKey = key;
+                        break;
+                    case "AddPeriod":
+                        //_previousModelState.AddPeriodKey = AddPeriodKey;
+                        AddPeriodKey = key;
+                        break;
+                    case "MinusPeriod":
+                        //_previousModelState.MinusPeriodKey = MinusPeriodKey;
+                        MinusPeriodKey = key;
+                        break;
+                    case "SwitchPossesion":
+                        //_previousModelState.SwitchPossesionKey = SwitchPossesionKey;
+                        SwitchPossesionKey = key;
+                        break;
+                }
+            }
+        }
+
+        public void Save()
+        {
+            previousTimerStartStopKey = _model.TimerStartStopKey;
+            previousHomeAddPointKey = _model.HomeAddPointKey;
+            previousHomeMinusPointKey = _model.HomeMinusPointKey;
+            previousAwayMinusPointKey = _model.AwayMinusPointKey;
+            previousAwayAddPointKey = _model.AwayAddPointKey;
+            previousAddPeriodKey = _model.AddPeriodKey;
+            previousMinusPeriodKey = _model.MinusPeriodKey;
+            previousSwitchPossesionKey = _model.SwitchPossesionKey;
+
+            var a = new Configuration { KeyboardSettings = _model };
+            var b = JsonConvert.SerializeObject(a, Formatting.Indented, new JsonHelper());
+            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", b);
+            hasUnsavedChanges = false;
+        }
+
+        public void Reset()
+        {
+            TimerStartStopKey = DefaultSettings.TimerStartStopKey;
+            HomeAddPointKey = DefaultSettings.HomeAddPointKey;
+            HomeMinusPointKey = DefaultSettings.HomeMinusPointKey;
+            AwayMinusPointKey = DefaultSettings.AwayMinusPointKey;
+            AwayAddPointKey = DefaultSettings.AwayAddPointKey;
+            AddPeriodKey = DefaultSettings.PeriodAddKey;
+            MinusPeriodKey = DefaultSettings.PeriodMinusKey;
+            SwitchPossesionKey = DefaultSettings.SwitchPossesionKey;
+
+            Save();
+        }
+
+        public void UndoToLastSetting()
+        {
+            TimerStartStopKey = previousTimerStartStopKey;
+            HomeAddPointKey = previousHomeAddPointKey;
+            HomeMinusPointKey = previousHomeMinusPointKey;
+            AwayMinusPointKey = previousAwayMinusPointKey;
+            AwayAddPointKey = previousAwayAddPointKey;
+            AddPeriodKey = previousAddPeriodKey;
+            MinusPeriodKey = previousMinusPeriodKey;
+            SwitchPossesionKey = previousSwitchPossesionKey;
+
+            hasUnsavedChanges = false;
         }
     }
 }

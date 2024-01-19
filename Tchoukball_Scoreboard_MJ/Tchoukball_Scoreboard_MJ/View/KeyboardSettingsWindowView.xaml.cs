@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,29 @@ namespace Tchoukball_Scoreboard_MJ.View
                 var a = (System.Windows.Controls.TextBox)sender;
                 _viewModel.OnKeyPressHandler(a.Name, e.Key);
             }
+        }
+
+        private void OnClosingHandler(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+
+            if (_viewModel.KeyboardSettings.hasUnsavedChanges)
+            {
+                var result = MessageBox.Show("Do want to save changes to Keyboard Settings?", "Confirm Close?", MessageBoxButton.YesNoCancel);
+                if (result == MessageBoxResult.Yes)
+                {
+                    _viewModel.SaveCommand.Execute("");
+                    this.Hide();
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    _viewModel.KeyboardSettings.UndoToLastSetting();
+                    this.Hide();
+                }
+                else if (result == MessageBoxResult.Cancel)
+                    return;
+            }
+            this.Hide();
         }
     }
 }
