@@ -1,0 +1,150 @@
+﻿<Window x:Class="Tchoukball_Scoreboard_MJ.View.KeyboardSettingsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
+        xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
+        mc:Ignorable="d"
+        Title="KeyboardSettingsWindowView" Height="450" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <Label Content="Keyboard HotKeys" FontWeight="Bold"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" >
+            <Label Content="Timer Start/Stop"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" >
+            <Label Content="Home Add Point"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" >
+            <Label Content="Home Minus Point"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="4" Grid.Column="0" HorizontalAlignment="Left">
+            <Label Content="Away Add Point"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="5" Grid.Column="0" HorizontalAlignment="Left">
+            <Label Content="Away Minus Point"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="6" Grid.Column="0" HorizontalAlignment="Left">
+            <Label Content="Add Period"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="7" Grid.Column="0" HorizontalAlignment="Left">
+            <Label Content="Minus Period"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="8" HorizontalAlignment="Center">
+            <Label Content="Switch Possesion" Visibility="Hidden"/>
+        </Viewbox>
+
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,10,0"
+                 x:Name="StartStopTimer" 
+                 Text="{Binding KeyboardSettings.TimerStartStop}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="HomeAddPoint" 
+                 Text="{Binding KeyboardSettings.HomeAddPoint}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="3" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="HomeMinusPoint" 
+                 Text="{Binding KeyboardSettings.HomeMinusPoint}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="AwayAddPoint" 
+                 Text="{Binding KeyboardSettings.AwayAddPoint}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="5" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="AwayMinusPoint" 
+                 Text="{Binding KeyboardSettings.AwayMinusPoint}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="6" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="AddPeriod" 
+                 Text="{Binding KeyboardSettings.AddPeriod}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="7" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="MinusPeriod" 
+                 Text="{Binding KeyboardSettings.MinusPeriod}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+        <TextBox Grid.Row="8" Grid.Column="2" Margin="0,0,10,0"
+                 x:Name="SwitchPossesion" 
+                 Text="{Binding KeyboardSettings.SwitchPossesion}" 
+                 KeyDown="OnKeyPressHandler" 
+                 PreviewTextInput="OnTextInput" 
+                 PreviewKeyDown="PreviewKeyPressHandler" 
+                 Visibility="Hidden"
+                 FontSize="20"
+                 HorizontalContentAlignment="Right"
+                 VerticalAlignment="Center"/>
+
+        <Grid Grid.Row="9" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" Margin="205,0,0,0">
+                <Button Content="Reset" Margin="0,5,5,10" Width="80"
+                        Command="{Binding ResetCommand}"
+                        CommandParameter="KeyboardSettings"/>
+                <Button Content="Save" Margin="5,5,0,10" Width="80"
+                        Command="{Binding SaveCommand}"
+                        CommandParameter="KeyboardSettings"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+
+</Window>

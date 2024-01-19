@@ -5,18 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
 public class MainViewModel :ViewModelBase
 {
     private ViewModelBase? _selectedViewModel;
+    private KeyboardSettingsWindowView _keyboardSettingsView;
+    private KeyboardSettingsItemViewModel? _keyboardSettingsItemViewModel;
 
-    public MainViewModel(ControlsViewModel controlsViewModel)
+    public MainViewModel(ScoreboardItemViewModel scoreboardItemViewModel, KeyboardSettingsItemViewModel keyboardSettingsItemViewModel, KeyboardSettingsWindowView keyboardSettingsWindowView)
     {
-        ControlsViewModel = controlsViewModel;
-        SelectedViewModel = ControlsViewModel;
+        _keyboardSettingsView = keyboardSettingsWindowView;
+        _keyboardSettingsItemViewModel = keyboardSettingsItemViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel);
+        OpenKeyboardSettingsCommand = new DelegateCommand(OpenKeyboardSettings);
+
+        Scoreboard = scoreboardItemViewModel;
+        AddCommand = new DelegateCommand(Add);
+        MinusCommand = new DelegateCommand(Minus);
+        StartStopTimerCommand = new DelegateCommand(StartStop);
+        ResetTimerCommand = new DelegateCommand(Reset);
+
+        var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
+        scoreboardWindowView.Show();
     }
 
     public ViewModelBase? SelectedViewModel
@@ -31,6 +44,7 @@ public class MainViewModel :ViewModelBase
 
     public ControlsViewModel ControlsViewModel { get; }
     public DelegateCommand SelectViewModelCommand { get; }
+    public DelegateCommand OpenKeyboardSettingsCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -44,5 +58,101 @@ public class MainViewModel :ViewModelBase
     {
         SelectedViewModel = parameter as ViewModelBase;
         await LoadAsync();
+    }
+
+    private void OpenKeyboardSettings(object? parameter)
+    {
+        _keyboardSettingsView.Show();
+    }
+
+    private ScoreboardItemViewModel? _scoreboardItemViewModel;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected virtual void OnPropertyChanged(string propertyName)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public KeyboardSettingsItemViewModel? KeyboardSettings
+    {
+        get
+        {
+            return _keyboardSettingsItemViewModel;
+        }
+        set
+        {
+            _keyboardSettingsItemViewModel = value;
+        }
+    }
+
+    public ScoreboardItemViewModel? Scoreboard
+    {
+        get
+        {
+            return _scoreboardItemViewModel;
+        }
+        set
+        {
+            _scoreboardItemViewModel = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    public DelegateCommand AddCommand { get; }
+    public DelegateCommand MinusCommand { get; }
+    public DelegateCommand StartStopTimerCommand { get; }
+    public DelegateCommand ResetTimerCommand { get; }
+
+    private void Add(object? team)
+    {
+        var a = team!.ToString();
+        if (a == "home")
+        {
+            Scoreboard!.HomePoints++;
+        }
+        else if (a == "guest")
+        {
+            Scoreboard!.GuestPoints++;
+        }
+        else if (a == "period")
+        {
+            Scoreboard!.Period++;
+        }
+    }
+
+    private void Minus(object? team)
+    {
+        var a = team!.ToString();
+        if (a == "home")
+        {
+            Scoreboard!.HomePoints--;
+        }
+        else if (a == "guest")
+        {
+            Scoreboard!.GuestPoints--;
+        }
+        else if (a == "period")
+        {
+            Scoreboard!.Period--;
+        }
+    }
+
+    private void StartStop(object? o)
+    {
+        if (Scoreboard!.IsTimerStarted)
+        {
+            Scoreboard!.StopTimer();
+        }
+        else
+        {
+            Scoreboard!.StartTimer();
+        }
+    }
+
+    private void Reset(object? o)
+    {
+        Scoreboard!.StopTimer();
+        Scoreboard!.Timer = new TimeSpan(0, 15, 0);
     }
 }

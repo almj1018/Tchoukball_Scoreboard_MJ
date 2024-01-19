@@ -27,21 +27,24 @@ namespace Tchoukball_Scoreboard_MJ
         {
             services.AddTransient<MainWindow>();
             services.AddTransient<ScoreboardWindowView>();
+            services.AddTransient<KeyboardSettingsWindowView>();
 
             services.AddTransient<MainViewModel>();
             services.AddSingleton<ControlsViewModel>();
             services.AddSingleton<ScoreboardWindowViewModel>();
             services.AddSingleton<ScoreboardViewModel>();
             services.AddTransient<BreakTimerViewModel>();
+            services.AddSingleton<KeyboardSettingsWindowViewModel>();
 
             services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
             services.AddSingleton<ScoreboardItemViewModel>();
+            services.AddSingleton<KeyboardSettingsItemViewModel>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-
+            
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             mainWindow?.Show();
