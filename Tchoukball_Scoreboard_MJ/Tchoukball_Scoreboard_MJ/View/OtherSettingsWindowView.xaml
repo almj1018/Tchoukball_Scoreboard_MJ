@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
         xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
+        xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
         Title="Other Settings" Height="350" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
+    <Window.Resources>
+        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+    </Window.Resources>
     <Grid>
         <StackPanel>
             <CheckBox IsChecked="{Binding OtherSettings.EnableBreakTimerScreen,
@@ -28,11 +32,11 @@
             
             <DockPanel LastChildFill="false">
                 <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, StringFormat=m\\:ss}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, StringFormat=m\\:ss}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default home name" DockPanel.Dock="Left"/>
