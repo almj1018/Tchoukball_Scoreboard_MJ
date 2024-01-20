@@ -1,0 +1,62 @@
+﻿<Window x:Class="Tchoukball_Scoreboard_MJ.View.OtherSettingsWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
+        xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
+        xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
+        mc:Ignorable="d"
+        Title="Other Settings" Height="350" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
+    <Window.Resources>
+        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <CheckBox IsChecked="{Binding OtherSettings.EnableBreakTimerScreen,
+                            Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                            Margin="10 10 0 0">
+                Enable break timer screen
+            </CheckBox>
+            <CheckBox IsChecked="{Binding OtherSettings.DisableTimerResetButtonWhileTimerIsStarted,
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Margin="10 20 0 0">
+                Disable timer reset button while timer is started
+            </CheckBox>
+            <CheckBox IsChecked="{Binding OtherSettings.AutoIncrementPeriod,
+                        Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        Margin="10 20 0 0">
+                Auto increment period (after end of period)
+            </CheckBox>
+            <Label></Label>
+            
+            <DockPanel LastChildFill="false">
+                <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
+                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+            </DockPanel>
+            <DockPanel LastChildFill="false">
+                <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
+                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+            </DockPanel>
+            <DockPanel LastChildFill="false">
+                <Label Content="Default home name" DockPanel.Dock="Left"/>
+                <TextBox Text="{Binding OtherSettings.DefaultHomeName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+            </DockPanel>
+            <DockPanel LastChildFill="false">
+                <Label Content="Default away name" DockPanel.Dock="Left"/>
+                <TextBox Text="{Binding OtherSettings.DefaultAwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+            </DockPanel>
+            <Label></Label>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="1" Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="10,0,5,0">Reset</Button>
+                <Button Grid.Column="2"  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="5, 0, 10,0">Save</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

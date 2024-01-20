@@ -19,7 +19,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     public class KeyboardSettingsItemViewModel : ValidationViewModelBase
     {
         private readonly KeyboardSettings _model;
-        private readonly IConfigurationSection _settings;
+        private readonly SettingsHelper _settings;
         public bool hasUnsavedChanges = false;
 
         private Key previousTimerStartStopKey;
@@ -31,21 +31,10 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private Key previousMinusPeriodKey;
         private Key previousSwitchPossesionKey;
 
-        public KeyboardSettingsItemViewModel()
+        public KeyboardSettingsItemViewModel(SettingsHelper settings)
         {
-            _settings = new ConfigurationBuilder().AddJsonFile(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json").Build().GetSection("KeyboardSettings");
-
-            _model = new KeyboardSettings
-            {
-                TimerStartStopKey = ConvertSettingToKey("TimerStartStopKey"),
-                HomeAddPointKey = ConvertSettingToKey("HomeAddPointKey"),
-                HomeMinusPointKey = ConvertSettingToKey("HomeMinusPointKey"),
-                AwayAddPointKey = ConvertSettingToKey("AwayAddPointKey"),
-                AwayMinusPointKey = ConvertSettingToKey("AwayMinusPointKey"),
-                AddPeriodKey = ConvertSettingToKey("AddPeriodKey"),
-                MinusPeriodKey = ConvertSettingToKey("MinusPeriodKey"),
-                SwitchPossesionKey = ConvertSettingToKey("SwitchPossesionKey"),
-            };
+            _settings = settings;
+            _model = settings._keyboardSettings;
 
             previousTimerStartStopKey = _model.TimerStartStopKey;
             previousHomeAddPointKey = _model.HomeAddPointKey;
@@ -86,43 +75,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 return false;
             else
                 return true;
-        }
-
-        private Key ConvertSettingToKey(string settingName)
-        {
-            var b = _settings[settingName];
-            int d;
-
-            if (!int.TryParse(b, out d))
-            {
-                KeyboardEnum a = (KeyboardEnum)Enum.Parse(typeof(KeyboardEnum), settingName);
-                switch (a)
-                {
-                    case KeyboardEnum.TimerStartStop:
-                        return DefaultSettings.TimerStartStopKey;
-                    case KeyboardEnum.HomeAddPoint:
-                        return DefaultSettings.HomeAddPointKey;
-                    case KeyboardEnum.HomeMinusPoint:
-                        return DefaultSettings.HomeMinusPointKey;
-                    case KeyboardEnum.AwayAddPoint:
-                        return DefaultSettings.AwayAddPointKey;
-                    case KeyboardEnum.AwayMinusPoint:
-                        return DefaultSettings.AwayMinusPointKey;
-                    case KeyboardEnum.AddPeriod:
-                        return DefaultSettings.PeriodAddKey;
-                    case KeyboardEnum.MinusPeriod:
-                        return DefaultSettings.PeriodMinusKey;
-                    case KeyboardEnum.ChangePossession:
-                        return DefaultSettings.SwitchPossesionKey;
-                    default:
-                        return Key.None;
-                }
-            }
-            else
-            {
-                var c = (Key)d;
-                return c;
-            }
         }
 
         #region Key Properties
@@ -354,35 +306,27 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 switch (parameter)
                 {
                     case "StartStopTimer":
-                        //_previousModelState.TimerStartStopKey = TimerStartStopKey;
                         TimerStartStopKey = key;
                         break;
                     case "HomeAddPoint":
-                        //_previousModelState.HomeAddPointKey = HomeAddPointKey;
                         HomeAddPointKey = key;
                         break;
                     case "HomeMinusPoint":
-                        //_previousModelState.HomeMinusPointKey = HomeMinusPointKey;
                         HomeMinusPointKey = key;
                         break;
                     case "AwayAddPoint":
-                        //_previousModelState.AwayAddPointKey = AwayAddPointKey;
                         AwayAddPointKey = key;
                         break;
                     case "AwayMinusPoint":
-                        //_previousModelState.AwayMinusPointKey = AwayMinusPointKey;
                         AwayMinusPointKey = key;
                         break;
                     case "AddPeriod":
-                        //_previousModelState.AddPeriodKey = AddPeriodKey;
                         AddPeriodKey = key;
                         break;
                     case "MinusPeriod":
-                        //_previousModelState.MinusPeriodKey = MinusPeriodKey;
                         MinusPeriodKey = key;
                         break;
                     case "SwitchPossesion":
-                        //_previousModelState.SwitchPossesionKey = SwitchPossesionKey;
                         SwitchPossesionKey = key;
                         break;
                 }
@@ -400,9 +344,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             previousMinusPeriodKey = _model.MinusPeriodKey;
             previousSwitchPossesionKey = _model.SwitchPossesionKey;
 
-            var a = new Configuration { KeyboardSettings = _model };
-            var b = JsonConvert.SerializeObject(a, Formatting.Indented, new JsonHelper());
-            File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "\\appsettings.json", b);
+            _settings.SaveToFile(keyboardSettings: _model);
+
             hasUnsavedChanges = false;
         }
 

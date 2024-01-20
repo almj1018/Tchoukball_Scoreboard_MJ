@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using Tchoukball_Scoreboard_MJ.Model;
+using Tchoukball_Scoreboard_MJ.Helper;
 
 namespace Tchoukball_Scoreboard_MJ
 {
@@ -28,6 +29,7 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddTransient<MainWindow>();
             services.AddTransient<ScoreboardWindowView>();
             services.AddTransient<KeyboardSettingsWindowView>();
+            services.AddTransient<OtherSettingsWindowView>();
 
             services.AddTransient<MainViewModel>();
             services.AddSingleton<ControlsViewModel>();
@@ -35,10 +37,14 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddSingleton<ScoreboardViewModel>();
             services.AddTransient<BreakTimerViewModel>();
             services.AddSingleton<KeyboardSettingsWindowViewModel>();
+            services.AddSingleton<OtherSettingsWindowViewModel>();
 
             services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
             services.AddSingleton<ScoreboardItemViewModel>();
             services.AddSingleton<KeyboardSettingsItemViewModel>();
+            services.AddSingleton<OtherSettingsItemViewModel>();
+
+            services.AddSingleton<SettingsHelper>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
