@@ -21,4 +21,17 @@ namespace Tchoukball_Scoreboard_MJ.Helper
             writer.WriteValue((int)value);
         }
     }
+
+    public class JsonTimeSpanConverter : JsonConverter<TimeSpan>
+    {
+        public override TimeSpan ReadJson(JsonReader reader, Type objectType, TimeSpan existingValue, bool hasExistingValue, JsonSerializer serializer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void WriteJson(JsonWriter writer, TimeSpan value, JsonSerializer serializer)
+        {
+            writer.WriteValue(value.ToString("m\\:ss"));
+        }
+    }
 }

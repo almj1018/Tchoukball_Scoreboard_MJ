@@ -4,21 +4,22 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
+        xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         mc:Ignorable="d"
-        Title="Other Settings" Height="265" Width="400" ResizeMode="NoResize">
+        Title="Other Settings" Height="350" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
     <Grid>
         <StackPanel>
-            <CheckBox IsChecked="{Binding EnableBreakTimerScreen,
+            <CheckBox IsChecked="{Binding OtherSettings.EnableBreakTimerScreen,
                             Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                             Margin="10 10 0 0">
                 Enable break timer screen
             </CheckBox>
-            <CheckBox IsChecked="{Binding DisableResetButtonWhileTimerIsStarted,
+            <CheckBox IsChecked="{Binding OtherSettings.DisableTimerResetButtonWhileTimerIsStarted,
                 Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                 Margin="10 20 0 0">
                 Disable timer reset button while timer is started
             </CheckBox>
-            <CheckBox IsChecked="{Binding AutoincrementPeriod,
+            <CheckBox IsChecked="{Binding OtherSettings.AutoIncrementPeriod,
                         Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         Margin="10 20 0 0">
                 Auto increment period (after end of period)
@@ -27,19 +28,19 @@
             
             <DockPanel LastChildFill="false">
                 <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding PeriodTimer}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0"/>
+                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, StringFormat=m\\:ss}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding BreakTimer}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0"/>
+                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, StringFormat=m\\:ss}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default home name" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding HomeName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0"/>
+                <TextBox Text="{Binding OtherSettings.DefaultHomeName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default away name" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding AwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0"/>
+                <TextBox Text="{Binding OtherSettings.DefaultAwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
             </DockPanel>
             <Label></Label>
 

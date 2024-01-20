@@ -9,15 +9,7 @@ namespace Tchoukball_Scoreboard_MJ
 {
     public class DefaultSettings
     {
-        public const int TimerStartStop = 59;
-        public const int HomeAddPoint = 67;
-        public const int HomeMinusPoint = 69;
-        public const int AwayAddPoint = 144;
-        public const int AwayMinusPoint = 142;
-        public const int PeriodAdd = 24;
-        public const int PeriodMinus = 26;
-        public const int SwitchPossesion = 61;
-
+        //default keyboard settings
         public const Key TimerStartStopKey = Key.P;
         public const Key HomeAddPointKey = Key.X;
         public const Key HomeMinusPointKey = Key.Z;
@@ -26,5 +18,15 @@ namespace Tchoukball_Scoreboard_MJ
         public const Key PeriodAddKey = Key.Up;
         public const Key PeriodMinusKey = Key.Down;
         public const Key SwitchPossesionKey = Key.R;
+
+        //default other settings
+        public const bool EnableBreakTimerScreen = false;
+        public const bool DisableTimerResetButtonWhileTimerIsStarted = false;
+        public const bool AutoIncrementPeriod = true;
+
+        public static TimeSpan PeriodTime = new TimeSpan(0, 15, 0);
+        public static TimeSpan BreakTime = new TimeSpan(0, 2, 0);
+        public const string DefaultHomeName = "Home";
+        public const string DefaultAwayName = "Away";
     }
 }

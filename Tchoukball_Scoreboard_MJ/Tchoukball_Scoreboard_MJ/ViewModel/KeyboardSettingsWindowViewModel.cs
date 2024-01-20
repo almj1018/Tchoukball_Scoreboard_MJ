@@ -46,38 +46,6 @@ public class KeyboardSettingsWindowViewModel : ViewModelBase
     public void OnKeyPressHandler(string parameter, Key key)
     {
         KeyboardSettings.UpdateKey(parameter, key);
-        //if (KeyboardSettings.CanUpdateKey(key))
-        //{
-        //    KeyboardSettings.hasUnsavedChanges = true;
-
-        //    switch (parameter)
-        //    {
-        //        case "StartStopTimer":
-        //            KeyboardSettings.TimerStartStopKey = key;
-        //            break;
-        //        case "HomeAddPoint":
-        //            KeyboardSettings.HomeAddPointKey = key;
-        //            break;
-        //        case "HomeMinusPoint":
-        //            KeyboardSettings.HomeMinusPointKey = key;
-        //            break;
-        //        case "AwayAddPoint":
-        //            KeyboardSettings.AwayAddPointKey = key;
-        //            break;
-        //        case "AwayMinusPoint":
-        //            KeyboardSettings.AwayMinusPointKey = key;
-        //            break;
-        //        case "AddPeriod":
-        //            KeyboardSettings.AddPeriodKey = key;
-        //            break;
-        //        case "MinusPeriod":
-        //            KeyboardSettings.MinusPeriodKey = key;
-        //            break;
-        //        case "SwitchPossesion":
-        //            KeyboardSettings.SwitchPossesionKey = key;
-        //            break;
-        //    } 
-        //}
     }
 
     public KeyboardSettingsItemViewModel KeyboardSettings

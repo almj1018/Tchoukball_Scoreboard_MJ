@@ -46,8 +46,10 @@
 
         <Menu FontSize="20">
             <MenuItem Header="_Settings">
-                <MenuItem Header="_KeyboardSettings"
+                <MenuItem Header="_Keyboard Settings"
                             Command="{Binding OpenKeyboardSettingsCommand}"/>
+                <MenuItem Header="_Other Settings"
+            Command="{Binding OpenOtherSettingsCommand}"/>
             </MenuItem>
         </Menu>
 

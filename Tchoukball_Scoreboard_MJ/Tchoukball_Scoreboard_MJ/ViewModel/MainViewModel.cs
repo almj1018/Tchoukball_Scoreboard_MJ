@@ -15,12 +15,23 @@ public class MainViewModel :ViewModelBase
     private KeyboardSettingsWindowView _keyboardSettingsView;
     private KeyboardSettingsItemViewModel? _keyboardSettingsItemViewModel;
 
-    public MainViewModel(ScoreboardItemViewModel scoreboardItemViewModel, KeyboardSettingsItemViewModel keyboardSettingsItemViewModel, KeyboardSettingsWindowView keyboardSettingsWindowView)
+    private OtherSettingsWindowView _otherSettingsWindowView;
+    private OtherSettingsItemViewModel _otherSettingsItemViewModel;
+
+    public MainViewModel(ScoreboardItemViewModel scoreboardItemViewModel, 
+        KeyboardSettingsItemViewModel keyboardSettingsItemViewModel, 
+        KeyboardSettingsWindowView keyboardSettingsWindowView, 
+        OtherSettingsItemViewModel otherSettingsItemViewModel, 
+        OtherSettingsWindowView otherSettingsWindowView)
     {
         _keyboardSettingsView = keyboardSettingsWindowView;
         _keyboardSettingsItemViewModel = keyboardSettingsItemViewModel;
         SelectViewModelCommand = new DelegateCommand(SelectViewModel);
         OpenKeyboardSettingsCommand = new DelegateCommand(OpenKeyboardSettings);
+
+        _otherSettingsWindowView = otherSettingsWindowView;
+        _otherSettingsItemViewModel = otherSettingsItemViewModel;
+        OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
 
         Scoreboard = scoreboardItemViewModel;
         AddCommand = new DelegateCommand(Add);
@@ -45,6 +56,7 @@ public class MainViewModel :ViewModelBase
     public ControlsViewModel ControlsViewModel { get; }
     public DelegateCommand SelectViewModelCommand { get; }
     public DelegateCommand OpenKeyboardSettingsCommand { get; }
+    public DelegateCommand OpenOtherSettingsCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -63,6 +75,11 @@ public class MainViewModel :ViewModelBase
     private void OpenKeyboardSettings(object? parameter)
     {
         _keyboardSettingsView.Show();
+    }
+
+    private void OpenOtherSettings(object? parameter)
+    {
+        _otherSettingsWindowView.Show();
     }
 
     private ScoreboardItemViewModel? _scoreboardItemViewModel;
