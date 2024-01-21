@@ -27,5 +27,10 @@ namespace Tchoukball_Scoreboard_MJ.View
         {
             await _viewModel!.LoadAsync();
         }
+
+        private void OnClosingHandler(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }
