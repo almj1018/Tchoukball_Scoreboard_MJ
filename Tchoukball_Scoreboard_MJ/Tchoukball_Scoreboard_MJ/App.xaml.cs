@@ -32,7 +32,6 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddTransient<OtherSettingsWindowView>();
 
             services.AddTransient<MainViewModel>();
-            services.AddSingleton<ControlsViewModel>();
             services.AddSingleton<ScoreboardWindowViewModel>();
             services.AddSingleton<ScoreboardViewModel>();
             services.AddTransient<BreakTimerViewModel>();

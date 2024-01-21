@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
-public class MainViewModel :ViewModelBase
+public class MainViewModel : ViewModelBase
 {
     private ViewModelBase? _selectedViewModel;
     private KeyboardSettingsWindowView _keyboardSettingsView;
@@ -53,7 +53,6 @@ public class MainViewModel :ViewModelBase
         }
     }
 
-    public ControlsViewModel ControlsViewModel { get; }
     public DelegateCommand SelectViewModelCommand { get; }
     public DelegateCommand OpenKeyboardSettingsCommand { get; }
     public DelegateCommand OpenOtherSettingsCommand { get; }

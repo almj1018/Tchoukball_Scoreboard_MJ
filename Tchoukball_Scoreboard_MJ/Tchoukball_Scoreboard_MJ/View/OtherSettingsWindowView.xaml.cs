@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -56,6 +57,27 @@ namespace Tchoukball_Scoreboard_MJ.View
                     return;
             }
             this.Hide();
+        }
+
+        private void TimeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = (TextBox)sender;
+
+            // Remove any non-numeric characters
+            string cleanedInput = Regex.Replace(textBox.Text, @"[^0-9]", "");
+
+            // Ensure the input doesn't exceed 4 characters
+            cleanedInput = cleanedInput.Length > 4 ? cleanedInput.Substring(0, 4) : cleanedInput;
+
+            // Add colons to format as mm:ss
+            if (cleanedInput.Length >= 2)
+            {
+                cleanedInput = cleanedInput.Insert(2, ":");
+            }
+
+            // Update the TextBox text
+            textBox.Text = cleanedInput;
+            textBox.CaretIndex = textBox.Text.Length; // Set the caret position to the end
         }
     }
 }

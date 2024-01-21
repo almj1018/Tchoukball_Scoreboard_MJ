@@ -32,11 +32,21 @@
             
             <DockPanel LastChildFill="false">
                 <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
+                         DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
+                         HorizontalContentAlignment="Right" 
+                         VerticalContentAlignment="Center" 
+                         Padding="5, 0" 
+                         TextChanged="TimeTextBox_TextChanged"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
+                         DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
+                         HorizontalContentAlignment="Right" 
+                         VerticalContentAlignment="Center" 
+                         Padding="5, 0" 
+                         TextChanged="TimeTextBox_TextChanged"/>
             </DockPanel>
             <DockPanel LastChildFill="false">
                 <Label Content="Default home name" DockPanel.Dock="Left"/>
