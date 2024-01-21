@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
              xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
+             xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="genesislogo.png"/>
+        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </UserControl.Resources>
     <Grid Background="Black">
         <Grid.ColumnDefinitions>
@@ -93,7 +95,7 @@
         </Grid>
 
         <Viewbox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
-            <Label Content="{Binding Scoreboard.Timer, Mode=OneWay}" ContentStringFormat="{}{0:mm':'ss}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
+            <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
         </Viewbox>
 
     </Grid>

@@ -5,11 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
              xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
+             xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+    </UserControl.Resources>
     <Grid Background="Black">
         <Viewbox Margin="20">
-            <Label Content="{Binding Scoreboard.Timer}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Label Content="{Binding Scoreboard.Timer, Converter={StaticResource TimeSpanToTextConv}}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Viewbox>
     </Grid>
 </UserControl>
