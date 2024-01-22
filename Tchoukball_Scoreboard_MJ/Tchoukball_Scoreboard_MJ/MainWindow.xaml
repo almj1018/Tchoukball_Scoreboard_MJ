@@ -57,76 +57,77 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="170"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <Border BorderBrush="Black" BorderThickness="1" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="1" Grid.Column="0"/>
 
             <!--Keyboard Shortcuts-->
-            <Grid Grid.Column="0">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Keyboard Shortcuts" FontWeight="ExtraBold"/>
-                        <Button Content="switch" Command="{Binding SwitchShortcutsDisplaySideCommand}" Margin="30, 0, 0, 0" Visibility="Hidden"/>
-                    </StackPanel>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0"/>
+            <ScrollViewer>
+                <Grid Grid.Column="0">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Keyboard Shortcuts" FontWeight="ExtraBold"/>
+                            <Button Content="switch" Command="{Binding SwitchShortcutsDisplaySideCommand}" Margin="30, 0, 0, 0" Visibility="Hidden"/>
+                        </StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"/>
 
-                        <Label Grid.Row="1" Content="Timer" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="Start/Stop"/>
-                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding KeyboardSettings.TimerStartStop}"/>
+                            <Label Grid.Row="1" Content="Timer" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="Start/Stop"/>
+                            <Label Grid.Row="2" Grid.Column="1" Content="{Binding KeyboardSettings.TimerStartStop}"/>
 
-                        <Label Grid.Row="3"/>
+                            <Label Grid.Row="3"/>
 
-                        <Label Grid.Row="4" Content="Home" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="5" Grid.Column="0" Content="Add Point"/>
-                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding KeyboardSettings.HomeAddPoint}"/>
-                        <Label Grid.Row="6" Grid.Column="0" Content="Minus Point"/>
-                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding KeyboardSettings.HomeMinusPoint}"/>
+                            <Label Grid.Row="4" Content="Home" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="5" Grid.Column="0" Content="Add Point"/>
+                            <Label Grid.Row="5" Grid.Column="1" Content="{Binding KeyboardSettings.HomeAddPoint}"/>
+                            <Label Grid.Row="6" Grid.Column="0" Content="Minus Point"/>
+                            <Label Grid.Row="6" Grid.Column="1" Content="{Binding KeyboardSettings.HomeMinusPoint}"/>
 
-                        <Label Grid.Row="7"/>
+                            <Label Grid.Row="7"/>
 
-                        <Label Grid.Row="8" Content="Away" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="9" Grid.Column="0" Content="Add Point"/>
-                        <Label Grid.Row="9" Grid.Column="1" Content="{Binding KeyboardSettings.AwayAddPoint}"/>
-                        <Label Grid.Row="10" Grid.Column="0" Content="Minus Point"/>
-                        <Label Grid.Row="10" Grid.Column="1" Content="{Binding KeyboardSettings.AwayMinusPoint}"/>
+                            <Label Grid.Row="8" Content="Away" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="9" Grid.Column="0" Content="Add Point"/>
+                            <Label Grid.Row="9" Grid.Column="1" Content="{Binding KeyboardSettings.AwayAddPoint}"/>
+                            <Label Grid.Row="10" Grid.Column="0" Content="Minus Point"/>
+                            <Label Grid.Row="10" Grid.Column="1" Content="{Binding KeyboardSettings.AwayMinusPoint}"/>
 
-                        <Label Grid.Row="11"/>
+                            <Label Grid.Row="11"/>
 
-                        <Label Grid.Row="12" Content="Period" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="13" Grid.Column="0" Content="Add Period"/>
-                        <Label Grid.Row="13" Grid.Column="1" Content="{Binding KeyboardSettings.AddPeriod}"/>
-                        <Label Grid.Row="14" Grid.Column="0" Content="Minus Period"/>
-                        <Label Grid.Row="14" Grid.Column="1" Content="{Binding KeyboardSettings.MinusPeriod}"/>
+                            <Label Grid.Row="12" Content="Period" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="13" Grid.Column="0" Content="Add Period"/>
+                            <Label Grid.Row="13" Grid.Column="1" Content="{Binding KeyboardSettings.AddPeriod}"/>
+                            <Label Grid.Row="14" Grid.Column="0" Content="Minus Period"/>
+                            <Label Grid.Row="14" Grid.Column="1" Content="{Binding KeyboardSettings.MinusPeriod}"/>
 
-                        <Label Grid.Row="15"/>
+                            <Label Grid.Row="15"/>
 
                         <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
                         <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
