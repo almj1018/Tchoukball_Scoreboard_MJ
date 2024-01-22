@@ -69,8 +69,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             get => _model.Period;
             set
             {
-                _model.Period = value;
-                RaisePropertyChanged();
+                if (value >= 0)
+                {
+                    _model.Period = value;
+                    RaisePropertyChanged(); 
+                }
             }
         }
 
@@ -108,8 +111,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             get => _model.HomePoints;
             set
             {
-                _model.HomePoints = value;
-                RaisePropertyChanged();
+                if (value >= 0)
+                {
+                    _model.HomePoints = value;
+                    RaisePropertyChanged(); 
+                }
             }
         }
 
@@ -118,8 +124,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             get => _model.GuestPoints;
             set
             {
-                _model.GuestPoints = value;
-                RaisePropertyChanged();
+                if (value >= 0)
+                {
+                    _model.GuestPoints = value;
+                    RaisePropertyChanged(); 
+                }
             }
         }
     }
