@@ -127,9 +127,9 @@ public class MainViewModel : ViewModelBase
         {
             Scoreboard!.HomePoints++;
         }
-        else if (a == "guest")
+        else if (a == "away")
         {
-            Scoreboard!.GuestPoints++;
+            Scoreboard!.AwayPoints++;
         }
         else if (a == "period")
         {
@@ -144,9 +144,9 @@ public class MainViewModel : ViewModelBase
         {
             Scoreboard!.HomePoints--;
         }
-        else if (a == "guest")
+        else if (a == "away")
         {
-            Scoreboard!.GuestPoints--;
+            Scoreboard!.AwayPoints--;
         }
         else if (a == "period")
         {

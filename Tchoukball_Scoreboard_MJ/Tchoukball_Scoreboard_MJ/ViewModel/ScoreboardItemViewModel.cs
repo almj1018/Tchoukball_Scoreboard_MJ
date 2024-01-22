@@ -23,9 +23,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 Period = 1,
                 Timer = new TimeSpan(0, 0, 10),
                 HomeName = "Home",
-                GuestName = "Guest",
+                AwayName = "Away",
                 HomePoints = 0,
-                GuestPoints = 0
+                AwayPoints = 0,
+                HomeLogo = null,
+                AwayLogo = null
             };
 
             dispatcherTimer = new DispatcherTimer();
@@ -93,12 +95,12 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 RaisePropertyChanged();
             }
         }
-        public string? GuestName
+        public string? AwayName
         {
-            get => _model.GuestName;
+            get => _model.AwayName;
             set
             {
-                _model.GuestName = value;
+                _model.AwayName = value;
                 RaisePropertyChanged();
             }
         }
@@ -113,12 +115,32 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public int GuestPoints
+        public int AwayPoints
         {
-            get => _model.GuestPoints;
+            get => _model.AwayPoints;
             set
             {
-                _model.GuestPoints = value;
+                _model.AwayPoints = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string? HomeLogo
+        {
+            get => _model.HomeLogo;
+            set
+            {
+                _model.HomeLogo = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string? AwayLogo
+        {
+            get => _model.AwayLogo;
+            set
+            {
+                _model.AwayLogo = value;
                 RaisePropertyChanged();
             }
         }

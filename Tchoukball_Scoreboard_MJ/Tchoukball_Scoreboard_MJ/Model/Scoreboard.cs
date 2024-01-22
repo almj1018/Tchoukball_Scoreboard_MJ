@@ -7,8 +7,10 @@ namespace Tchoukball_Scoreboard_MJ.Model
         public int Period { get; set; }
         public TimeSpan Timer { get; set; }
         public string? HomeName { get; set; }
-        public string? GuestName { get; set; }
+        public string? AwayName { get; set; }
         public int HomePoints { get; set; }
-        public int GuestPoints { get; set; }
+        public int AwayPoints { get; set; }
+        public string? HomeLogo { get; set; }
+        public string? AwayLogo { get; set; }
     }
 }

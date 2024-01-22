@@ -11,20 +11,20 @@ namespace Tchoukball_Scoreboard_MJ.Data
     {
         Task<Scoreboard?> GetAsync();
     }
-
     public class ScoreboardDataProvider : IScoreboardDataProvider
     {
         public async Task<Scoreboard?> GetAsync()
         {
-            await Task.Delay(10);
+            await Task.Delay(100);
+
             return new Scoreboard
             {
                 Period = 0,
                 Timer = new TimeSpan(0, 15, 0),
                 HomeName = "Home",
-                GuestName = "Guest",
+                AwayName = "Away",
                 HomePoints = 0,
-                GuestPoints = 0
+                AwayPoints = 0
             };
         }
     }

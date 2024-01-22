@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Images\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
@@ -34,7 +35,7 @@
     <Resource Include="View\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="View\genesislogo.png">
+    <Resource Include="TeamLogos\genesislogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

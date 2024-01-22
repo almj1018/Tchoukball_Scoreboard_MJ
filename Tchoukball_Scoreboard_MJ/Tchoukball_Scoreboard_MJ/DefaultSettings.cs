@@ -10,7 +10,7 @@ namespace Tchoukball_Scoreboard_MJ
     public class DefaultSettings
     {
         //default keyboard settings
-        public const Key TimerStartStopKey = Key.P;
+        public const Key TimerStartStopKey = Key.Space;
         public const Key HomeAddPointKey = Key.X;
         public const Key HomeMinusPointKey = Key.Z;
         public const Key AwayAddPointKey = Key.OemPeriod;
