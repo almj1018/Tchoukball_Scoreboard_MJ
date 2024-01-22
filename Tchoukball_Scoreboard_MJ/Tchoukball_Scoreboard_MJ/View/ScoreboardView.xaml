@@ -34,11 +34,11 @@
             </Viewbox>
 
             <Viewbox Grid.Column="0">
-                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="20,0,0,0"/>
+                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="20,20"/>
             </Viewbox>
 
             <Viewbox Grid.Column="2">
-                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="0,0,20,0"/>
+                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="20,20"/>
             </Viewbox>
         </Grid>
 
@@ -60,15 +60,15 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Column="2" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
-                    <Polygon Points="0,0 15,5 0,10">
+                <Viewbox Grid.Column="2" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
+                    <Polygon Points="0,0 15,5 0,10" Margin="5, 0, 5, 0">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>
                         </Polygon.Fill>
                     </Polygon>
                 </Viewbox>
-                <Viewbox Grid.Column="0" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
-                    <Polygon Points="15,0 15,10 0,5">
+                <Viewbox Grid.Column="0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
+                    <Polygon Points="15,0 15,10 0,5" Margin="5, 0, 5, 0">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>
                         </Polygon.Fill>

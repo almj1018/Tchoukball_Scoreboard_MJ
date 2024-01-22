@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
+        Title="MainWindow" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
@@ -129,12 +129,13 @@
 
                             <Label Grid.Row="15"/>
 
-                        <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
-                        <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
-                    </Grid>
-                </StackPanel>
-            </Grid>
+                            <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
+                            <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
 
             <!--Scoreboard Control-->
             <Grid Grid.Column="1">
@@ -196,7 +197,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Row="2">
-                        <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home" Margin="5,5" Padding="5,5"/>
+                        <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home" Margin="10,10" Padding="10,10"/>
                     </Viewbox>
 
                     <Grid Grid.Row="3">
@@ -227,7 +228,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Row="2">
-                        <Button Content="Upload Away Logo" Command="{Binding UploadLogoCommand}" CommandParameter="away" Margin="5,5" Padding="5,5"/>
+                        <Button Content="Upload Away Logo" Command="{Binding UploadLogoCommand}" CommandParameter="away" Margin="10,10" Padding="10,10"/>
                     </Viewbox>
 
                     <Grid Grid.Row="3">
