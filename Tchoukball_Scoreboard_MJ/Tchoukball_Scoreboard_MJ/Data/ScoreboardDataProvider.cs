@@ -24,7 +24,11 @@ namespace Tchoukball_Scoreboard_MJ.Data
                 HomeName = "Home",
                 AwayName = "Away",
                 HomePoints = 0,
-                AwayPoints = 0
+                AwayPoints = 0,
+                HomeLogo=null,
+                AwayLogo=null,
+                HomePossession=true,
+                AwayPossession=false
             };
         }
     }

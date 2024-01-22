@@ -60,14 +60,14 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Column="2" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.HomePossesion, Converter={StaticResource BoolToVisibilityConv}}">
+                <Viewbox Grid.Column="2" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
                     <Polygon Points="0,0 15,5 0,10">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>
                         </Polygon.Fill>
                     </Polygon>
                 </Viewbox>
-                <Viewbox Grid.Column="0" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.AwayPossesion, Converter={StaticResource BoolToVisibilityConv}}">
+                <Viewbox Grid.Column="0" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
                     <Polygon Points="15,0 15,10 0,5">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>

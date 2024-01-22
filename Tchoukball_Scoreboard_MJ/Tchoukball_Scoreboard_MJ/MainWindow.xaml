@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
+        Title="MainWindow" Height="500" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
@@ -33,8 +33,8 @@
         <KeyBinding Key="{Binding KeyboardSettings.MinusPeriodKey}"
             Command="{Binding MinusCommand}"
                     CommandParameter="period"/>
-        <!--<KeyBinding Key="{Binding KeyboardSettings.SwitchPossesionKey}"
-            Command="{Binding SwitchPossesion}"/>-->
+        <KeyBinding Key="{Binding KeyboardSettings.SwitchPossesionKey}"
+            Command="{Binding SwitchPossesionCommand}"/>
     </Window.InputBindings>
     <Grid
         Background="WhiteSmoke"
@@ -128,11 +128,9 @@
 
                         <Label Grid.Row="15"/>
 
-                        <Label Grid.Row="16" Content="Possesion" HorizontalAlignment="Left" FontWeight="Bold"/>
-                        <Label Grid.Row="17" Grid.Column="0" Content="Home (left)"/>
-                        <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.HomePossesion}"/>
-                        <Label Grid.Row="18" Grid.Column="0" Content="Away (right)"/>
-                        <Label Grid.Row="18" Grid.Column="1" Content="{Binding KeyboardSettings.AwayPossesion}"/>
+                        <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
+                        <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
                     </Grid>
                 </StackPanel>
             </Grid>
