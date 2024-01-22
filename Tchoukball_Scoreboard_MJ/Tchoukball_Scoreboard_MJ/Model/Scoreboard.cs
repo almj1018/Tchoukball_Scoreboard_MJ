@@ -12,5 +12,7 @@ namespace Tchoukball_Scoreboard_MJ.Model
         public int AwayPoints { get; set; }
         public string? HomeLogo { get; set; }
         public string? AwayLogo { get; set; }
+        public bool HomePossession { get; set; }
+        public bool AwayPossession { get; set; }
     }
 }

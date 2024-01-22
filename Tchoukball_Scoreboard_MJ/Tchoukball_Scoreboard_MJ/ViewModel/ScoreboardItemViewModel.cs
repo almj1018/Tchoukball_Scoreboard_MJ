@@ -27,7 +27,9 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 HomePoints = 0,
                 AwayPoints = 0,
                 HomeLogo = null,
-                AwayLogo = null
+                AwayLogo = null,
+                HomePossession = true,
+                AwayPossession = false
             };
 
             dispatcherTimer = new DispatcherTimer();
@@ -141,6 +143,26 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             set
             {
                 _model.AwayLogo = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool HomePossession
+        {
+            get => _model.HomePossession;
+            set
+            {
+                _model.HomePossession = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool AwayPossession
+        {
+            get => _model.AwayPossession;
+            set
+            {
+                _model.AwayPossession = value;
                 RaisePropertyChanged();
             }
         }

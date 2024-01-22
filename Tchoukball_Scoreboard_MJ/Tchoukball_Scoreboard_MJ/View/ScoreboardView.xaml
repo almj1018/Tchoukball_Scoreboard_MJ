@@ -10,6 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
         <BitmapImage x:Key="DefaultImage" UriSource="genesislogo.png"/>
     </UserControl.Resources>
     
@@ -58,14 +59,14 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Viewbox Grid.Column="2" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.HomePossesion}">
+                <Viewbox Grid.Column="2" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.HomePossesion, Converter={StaticResource BoolToVisibilityConv}}">
                     <Polygon Points="0,0 15,5 0,10">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>
                         </Polygon.Fill>
                     </Polygon>
                 </Viewbox>
-                <Viewbox Grid.Column="0" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.AwayPossesion}">
+                <Viewbox Grid.Column="0" Margin="15, 0, 15, 0" Visibility="{Binding Scoreboard.AwayPossesion, Converter={StaticResource BoolToVisibilityConv}}">
                     <Polygon Points="15,0 15,10 0,5">
                         <Polygon.Fill>
                             <SolidColorBrush Color="Red"/>
