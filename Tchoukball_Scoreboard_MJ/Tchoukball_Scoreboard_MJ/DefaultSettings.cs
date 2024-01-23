@@ -22,7 +22,7 @@ namespace Tchoukball_Scoreboard_MJ
         //default other settings
         public const bool EnableBreakTimerScreen = false;
         public const bool DisableTimerResetButtonWhileTimerIsStarted = false;
-        public const bool AutoIncrementPeriod = true;
+        public const bool AutoIncrementPeriod = false;
 
         public static TimeSpan PeriodTime = new TimeSpan(0, 15, 0);
         public static TimeSpan BreakTime = new TimeSpan(0, 2, 0);
