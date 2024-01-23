@@ -58,8 +58,8 @@ namespace Tchoukball_Scoreboard_MJ.Helper
 
                 DefaultHomeName = GetStringValue("DefaultHomeName", SettingsEnum.OtherSettings) ?? DefaultSettings.DefaultHomeName,
                 DefaultAwayName = GetStringValue("DefaultAwayName", SettingsEnum.OtherSettings) ?? DefaultSettings.DefaultAwayName,
-                BreakTime = GetTimeSpanValue("BreakTime", SettingsEnum.OtherSettings) ?? DefaultSettings.PeriodTime,
-                PeriodTime = GetTimeSpanValue("PeriodTime", SettingsEnum.OtherSettings) ?? DefaultSettings.BreakTime,
+                BreakTime = GetTimeSpanValue("BreakTime", SettingsEnum.OtherSettings) ?? DefaultSettings.BreakTime,
+                PeriodTime = GetTimeSpanValue("PeriodTime", SettingsEnum.OtherSettings) ?? DefaultSettings.PeriodTime,
             };
         }
 
@@ -108,7 +108,7 @@ namespace Tchoukball_Scoreboard_MJ.Helper
             }
             else
             {
-                if (TimeSpan.TryParseExact(a, "mm:ss", CultureInfo.InvariantCulture, out var result))
+                if (TimeSpan.TryParseExact(a, "m\\:ss", CultureInfo.InvariantCulture, out var result))
                 {
                     return result;
                 }

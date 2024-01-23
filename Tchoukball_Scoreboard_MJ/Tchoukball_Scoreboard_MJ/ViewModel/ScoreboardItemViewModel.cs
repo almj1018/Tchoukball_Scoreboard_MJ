@@ -21,7 +21,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             _model = new Scoreboard
             {
                 Period = 1,
-                Timer = new TimeSpan(0, 0, 10),
                 HomeName = "Home",
                 AwayName = "Away",
                 HomePoints = 0,
@@ -87,6 +86,26 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             set
             {
                 _model.Timer = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public TimeSpan PeriodTimer
+        {
+            get => _model.PeriodTimer;
+            set
+            {
+                _model.PeriodTimer = value;
+                RaisePropertyChanged();
+            }
+        }
+        
+        public TimeSpan BreakTimer
+        {
+            get => _model.BreakTimer;
+            set
+            {
+                _model.BreakTimer = value;
                 RaisePropertyChanged();
             }
         }
