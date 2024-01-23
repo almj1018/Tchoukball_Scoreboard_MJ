@@ -1,10 +1,5 @@
 ﻿using Tchoukball_Scoreboard_MJ.Command;
 using Tchoukball_Scoreboard_MJ.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using Microsoft.Win32;
 
@@ -35,6 +30,10 @@ public class MainViewModel : ViewModelBase
         OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
 
         Scoreboard = scoreboardItemViewModel;
+        Scoreboard.PeriodTimer = OtherSettings!.PeriodTime;
+        Scoreboard.BreakTimer = OtherSettings!.BreakTime;
+        Scoreboard.Timer = OtherSettings!.PeriodTime;
+
         AddCommand = new DelegateCommand(Add);
         MinusCommand = new DelegateCommand(Minus);
         StartStopTimerCommand = new DelegateCommand(StartStop);
@@ -113,6 +112,16 @@ public class MainViewModel : ViewModelBase
         set
         {
             _scoreboardItemViewModel = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    public OtherSettingsItemViewModel? OtherSettings
+    {
+        get => _otherSettingsItemViewModel;
+        set
+        {
+            _otherSettingsItemViewModel = value!;
             RaisePropertyChanged();
         }
     }
