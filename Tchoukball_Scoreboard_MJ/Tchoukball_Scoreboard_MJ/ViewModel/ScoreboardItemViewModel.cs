@@ -17,6 +17,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private DispatcherTimer dispatcherTimer;
         public event EventHandler<TimerEndEventArgs>? TimerEnd;
         public bool EnableBreakTimerScreen => _otherSettingsItemViewModel.EnableBreakTimerScreen;
+        public bool AutoIncrementPeriod => _otherSettingsItemViewModel.AutoIncrementPeriod;
         private OtherSettingsItemViewModel _otherSettingsItemViewModel;
         private bool IsBreak = false;
 
@@ -69,6 +70,10 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             TimerEnd?.Invoke(this, e);
             if (!IsBreak)
             {
+                if (AutoIncrementPeriod)
+                {
+                    Period++;
+                }
                 Timer = _otherSettingsItemViewModel.BreakTime;
                 IsBreak = true;
                 StartTimer();
