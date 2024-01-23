@@ -25,14 +25,21 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         private void SwitchView(object? sender, TimerEndEventArgs e)
         {
-            if (_selectedViewModel!.GetType() == typeof(ScoreboardViewModel))
+            if (ScoreboardViewModel!.Scoreboard!.EnableBreakTimerScreen)
             {
-                SelectViewModel(BreakTimerViewModel);
-                ScoreboardViewModel!.Scoreboard!.Period++;
+                if (_selectedViewModel!.GetType() == typeof(ScoreboardViewModel))
+                {
+                    SelectViewModel(BreakTimerViewModel);
+                }
+                else
+                {
+                    SelectViewModel(ScoreboardViewModel);
+                } 
             }
             else
             {
-                SelectViewModel(ScoreboardViewModel);
+                if (_selectedViewModel!.GetType() == typeof(BreakTimerViewModel))
+                    SelectViewModel(ScoreboardViewModel);
             }
         }
 

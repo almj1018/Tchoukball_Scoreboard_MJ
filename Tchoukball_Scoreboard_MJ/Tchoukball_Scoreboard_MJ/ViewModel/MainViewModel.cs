@@ -12,12 +12,10 @@ public class MainViewModel : ViewModelBase
     private KeyboardSettingsItemViewModel? _keyboardSettingsItemViewModel;
 
     private OtherSettingsWindowView _otherSettingsWindowView;
-    private OtherSettingsItemViewModel _otherSettingsItemViewModel;
 
     public MainViewModel(ScoreboardItemViewModel scoreboardItemViewModel, 
         KeyboardSettingsItemViewModel keyboardSettingsItemViewModel, 
         KeyboardSettingsWindowView keyboardSettingsWindowView, 
-        OtherSettingsItemViewModel otherSettingsItemViewModel, 
         OtherSettingsWindowView otherSettingsWindowView)
     {
         _keyboardSettingsView = keyboardSettingsWindowView;
@@ -26,15 +24,9 @@ public class MainViewModel : ViewModelBase
         OpenKeyboardSettingsCommand = new DelegateCommand(OpenKeyboardSettings);
 
         _otherSettingsWindowView = otherSettingsWindowView;
-        _otherSettingsItemViewModel = otherSettingsItemViewModel;
         OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
 
         Scoreboard = scoreboardItemViewModel;
-        Scoreboard.PeriodTimer = OtherSettings!.PeriodTime;
-        Scoreboard.BreakTimer = OtherSettings!.BreakTime;
-        Scoreboard.Timer = OtherSettings!.PeriodTime;
-        Scoreboard.HomeName = OtherSettings!.DefaultHomeName;
-        Scoreboard.AwayName = OtherSettings!.DefaultAwayName;
 
         AddCommand = new DelegateCommand(Add);
         MinusCommand = new DelegateCommand(Minus);
@@ -118,16 +110,6 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public OtherSettingsItemViewModel? OtherSettings
-    {
-        get => _otherSettingsItemViewModel;
-        set
-        {
-            _otherSettingsItemViewModel = value!;
-            RaisePropertyChanged();
-        }
-    }
-
     public DelegateCommand AddCommand { get; }
     public DelegateCommand MinusCommand { get; }
     public DelegateCommand StartStopTimerCommand { get; }
@@ -183,7 +165,7 @@ public class MainViewModel : ViewModelBase
     private void Reset(object? o)
     {
         Scoreboard!.StopTimer();
-        Scoreboard!.Timer = new TimeSpan(0, 15, 0);
+        Scoreboard!.ResetTimer();
     }
 
     private void UploadLogo(object? team)
