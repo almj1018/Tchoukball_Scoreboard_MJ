@@ -11,11 +11,11 @@
   <ItemGroup>
     <None Remove="Fonts\DigitalDismay.ttf" />
     <None Remove="View\DigitalDismay.ttf" />
-    <None Remove="View\genesislogo.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Images\" />
     <Folder Include="Resources\" />
   </ItemGroup>
 
@@ -34,7 +34,7 @@
     <Resource Include="View\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="View\genesislogo.png">
+    <Resource Include="TeamLogos\genesislogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

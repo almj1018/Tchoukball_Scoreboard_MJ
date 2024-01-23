@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
+        Title="MainWindow" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
@@ -23,18 +23,18 @@
                     CommandParameter="home"/>
         <KeyBinding Key="{Binding KeyboardSettings.AwayAddPointKey}"
             Command="{Binding AddCommand}"
-                    CommandParameter="guest"/>
+                    CommandParameter="away"/>
         <KeyBinding Key="{Binding KeyboardSettings.AwayMinusPointKey}"
             Command="{Binding MinusCommand}"
-                    CommandParameter="guest"/>
+                    CommandParameter="away"/>
         <KeyBinding Key="{Binding KeyboardSettings.AddPeriodKey}"
             Command="{Binding AddCommand}"
                     CommandParameter="period"/>
         <KeyBinding Key="{Binding KeyboardSettings.MinusPeriodKey}"
             Command="{Binding MinusCommand}"
                     CommandParameter="period"/>
-        <!--<KeyBinding Key="{Binding KeyboardSettings.SwitchPossesionKey}"
-            Command="{Binding SwitchPossesion}"/>-->
+        <KeyBinding Key="{Binding KeyboardSettings.SwitchPossesionKey}"
+            Command="{Binding SwitchPossesionCommand}"/>
     </Window.InputBindings>
     <Grid
         Background="WhiteSmoke"
@@ -57,7 +57,7 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
@@ -129,9 +129,9 @@
 
                             <Label Grid.Row="15"/>
 
-                            <Label Grid.Row="16" Content="Possesion" HorizontalAlignment="Left" FontWeight="Bold"/>
-                            <Label Grid.Row="17" Grid.Column="0" Content="Switch Possesion"/>
-                            <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossesion}"/>
+                            <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
+                            <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
+                            <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>
@@ -197,7 +197,7 @@
                     </Viewbox>
 
                     <Viewbox Grid.Row="2">
-                        <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home" Margin="5,5" Padding="5,5"/>
+                        <Button Content="Upload Home Logo" Command="{Binding UploadLogoCommand}" CommandParameter="home" Margin="10,10" Padding="10,10"/>
                     </Viewbox>
 
                     <Grid Grid.Row="3">
@@ -210,7 +210,7 @@
                     </Grid>
                 </Grid>
 
-                <!--Guest Controls-->
+                <!--Away Controls-->
                 <Grid Grid.Row="1" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="2*"/>
@@ -220,15 +220,15 @@
                     </Grid.RowDefinitions>
 
                     <Viewbox Grid.Row="0">
-                        <Label Content="{Binding Scoreboard.GuestPoints}"/>
+                        <Label Content="{Binding Scoreboard.AwayPoints}"/>
                     </Viewbox>
 
                     <Viewbox Grid.Row="1">
-                        <TextBox Text="{Binding Scoreboard.GuestName}"/>
+                        <TextBox Text="{Binding Scoreboard.AwayName}"/>
                     </Viewbox>
 
                     <Viewbox Grid.Row="2">
-                        <Button Content="Upload Guest Logo" Command="{Binding UploadLogoCommand}" CommandParameter="guest" Margin="5,5" Padding="5,5"/>
+                        <Button Content="Upload Away Logo" Command="{Binding UploadLogoCommand}" CommandParameter="away" Margin="10,10" Padding="10,10"/>
                     </Viewbox>
 
                     <Grid Grid.Row="3">
@@ -236,8 +236,8 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="guest" Margin="5,5"/>
-                        <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="guest" Margin="5,5"/>
+                        <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="away" Margin="5,5"/>
+                        <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="away" Margin="5,5"/>
                     </Grid>
                 </Grid>
 

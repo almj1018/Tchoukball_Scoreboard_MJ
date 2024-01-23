@@ -9,94 +9,102 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BitmapImage x:Key="DefaultImage" UriSource="genesislogo.png"/>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
     </UserControl.Resources>
+    
     <Grid Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="3.75*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4.25*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+        <!--logo and timer-->
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="1" HorizontalAlignment="Left" Margin="10, 0, 0 ,0">
-                <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+            <Viewbox Grid.Column="1">
+                <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}, FallbackValue=00:00}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
             </Viewbox>
+
             <Viewbox Grid.Column="0">
-                <Image Source="{Binding GuestLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="20,0,0,0"/>
+                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="20,20"/>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2">
+                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}" Margin="20,20"/>
             </Viewbox>
         </Grid>
 
-        <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+        <!--team names and possesion-->
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
+            <Viewbox Grid.Column="0" HorizontalAlignment="Center" Margin="5,5">
+                <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay, FallbackValue=Singapore}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+            </Viewbox>
+            
+            <!--possession-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
-            <Viewbox Grid.Column="0" HorizontalAlignment="Right" Margin="0, 0, 10 ,0">
-                <Label Content="{Binding Scoreboard.GuestName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+                <Viewbox Grid.Column="2" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
+                    <Polygon Points="0,0 15,5 0,10" Margin="5, 0, 5, 0">
+                        <Polygon.Fill>
+                            <SolidColorBrush Color="Red"/>
+                        </Polygon.Fill>
+                    </Polygon>
+                </Viewbox>
+                <Viewbox Grid.Column="0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
+                    <Polygon Points="15,0 15,10 0,5" Margin="5, 0, 5, 0">
+                        <Polygon.Fill>
+                            <SolidColorBrush Color="Red"/>
+                        </Polygon.Fill>
+                    </Polygon>
+                </Viewbox>
+                
+            </Grid>
+
+            <Viewbox Grid.Column="2" HorizontalAlignment="Center" Margin="5,5">
+                <Label Content="{Binding Scoreboard.AwayName, Mode=OneWay, FallbackValue=Australia}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent" HorizontalContentAlignment="Center"/>
+            </Viewbox>
+        </Grid>
+
+        <!--score and period-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Viewbox Grid.Column="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
+                    <Label Content="{Binding Scoreboard.HomePoints, Mode=OneWay, FallbackValue=0}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"/>
+                </StackPanel>
+            </Viewbox>
+
+            <Viewbox Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
+                    <Label Content="{Binding Scoreboard.AwayPoints, Mode=OneWay, FallbackValue=0}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
+                </StackPanel>
             </Viewbox>
 
             <Viewbox Grid.Column="1">
-                <Image Source="{Binding GuestLogo, Mode=OneWay, FallbackValue={StaticResource DefaultImage}}" Margin="0,0,20,0"/>
+                <Label Content="{Binding Scoreboard.Period, Mode=OneWay, FallbackValue=1}" Background="Transparent" Foreground="Red" FontFamily="DigitalDismay.ttf #Digital Dismay" BorderBrush="Transparent"></Label>
             </Viewbox>
+
         </Grid>
-
-        <Viewbox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
-                <Label Content="{Binding Scoreboard.HomePoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"/>
-            </StackPanel>
-        </Viewbox>
-
-        <Viewbox Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" >
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
-                <Label Content="{Binding Scoreboard.GuestPoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
-            </StackPanel>
-        </Viewbox>
-
-        <Grid Grid.Row="1" Grid.Column="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-
-            <Viewbox Grid.Column="1">
-                <Label Content="{Binding Scoreboard.Period, Mode=OneWay}" Background="Transparent" Foreground="Red" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
-            </Viewbox>
-
-            <Viewbox Grid.Column="2" Margin="0, 0, 10, 0">
-                <Polygon Points="0,0 15,5 0,10">
-                    <Polygon.Fill>
-                        <SolidColorBrush Color="Red"/>
-                    </Polygon.Fill>
-                </Polygon>
-            </Viewbox>
-            <Viewbox Grid.Column="0" Margin="10, 0, 0, 0">
-                <Polygon Points="15,0 15,10 0,5">
-                    <Polygon.Fill>
-                        <SolidColorBrush Color="Red"/>
-                    </Polygon.Fill>
-                </Polygon>
-            </Viewbox>
-        </Grid>
-
-        <Viewbox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3">
-            <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
-        </Viewbox>
-
     </Grid>
 </UserControl>

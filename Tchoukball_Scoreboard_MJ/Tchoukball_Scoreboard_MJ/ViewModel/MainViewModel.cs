@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
@@ -38,6 +39,7 @@ public class MainViewModel : ViewModelBase
         MinusCommand = new DelegateCommand(Minus);
         StartStopTimerCommand = new DelegateCommand(StartStop);
         ResetTimerCommand = new DelegateCommand(Reset);
+        UploadLogoCommand = new DelegateCommand(UploadLogo);
 
         var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
         scoreboardWindowView.Show();
@@ -119,6 +121,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand MinusCommand { get; }
     public DelegateCommand StartStopTimerCommand { get; }
     public DelegateCommand ResetTimerCommand { get; }
+    public DelegateCommand UploadLogoCommand { get; }
 
     private void Add(object? team)
     {
@@ -127,9 +130,9 @@ public class MainViewModel : ViewModelBase
         {
             Scoreboard!.HomePoints++;
         }
-        else if (a == "guest")
+        else if (a == "away")
         {
-            Scoreboard!.GuestPoints++;
+            Scoreboard!.AwayPoints++;
         }
         else if (a == "period")
         {
@@ -144,9 +147,9 @@ public class MainViewModel : ViewModelBase
         {
             Scoreboard!.HomePoints--;
         }
-        else if (a == "guest")
+        else if (a == "away")
         {
-            Scoreboard!.GuestPoints--;
+            Scoreboard!.AwayPoints--;
         }
         else if (a == "period")
         {
@@ -170,5 +173,35 @@ public class MainViewModel : ViewModelBase
     {
         Scoreboard!.StopTimer();
         Scoreboard!.Timer = new TimeSpan(0, 15, 0);
+    }
+
+    private void UploadLogo(object? team)
+    {
+        var a = team!.ToString();
+        if (a == "home")
+        {
+            Scoreboard!.HomeLogo = LoadImagePath();
+        }
+        else if (a == "away")
+        {
+            Scoreboard!.AwayLogo = LoadImagePath();
+        }
+    }
+
+    private string? LoadImagePath()
+    {
+        OpenFileDialog open = new OpenFileDialog();
+        open.DefaultExt = (".png");
+        open.Filter = "All Images Files (*.png;*.jpeg;*.gif;*.jpg;*.bmp;*.tiff;*.tif)|*.png;*.jpeg;*.gif;*.jpg;*.bmp;*.tiff;*.tif" +
+            "|PNG Portable Network Graphics (*.png)|*.png" +
+            "|JPEG File Interchange Format (*.jpg *.jpeg *jfif)|*.jpg;*.jpeg;*.jfif" +
+            "|BMP Windows Bitmap (*.bmp)|*.bmp" +
+            "|TIF Tagged Imaged File Format (*.tif *.tiff)|*.tif;*.tiff" +
+            "|GIF Graphics Interchange Format (*.gif)|*.gif";
+
+        if (open.ShowDialog() == true)
+            return open.FileName;
+
+        return null;
     }
 }
