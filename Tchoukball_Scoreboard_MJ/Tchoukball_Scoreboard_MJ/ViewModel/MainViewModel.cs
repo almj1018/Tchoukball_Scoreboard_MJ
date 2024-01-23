@@ -33,6 +33,8 @@ public class MainViewModel : ViewModelBase
         Scoreboard.PeriodTimer = OtherSettings!.PeriodTime;
         Scoreboard.BreakTimer = OtherSettings!.BreakTime;
         Scoreboard.Timer = OtherSettings!.PeriodTime;
+        Scoreboard.HomeName = OtherSettings!.DefaultHomeName;
+        Scoreboard.AwayName = OtherSettings!.DefaultAwayName;
 
         AddCommand = new DelegateCommand(Add);
         MinusCommand = new DelegateCommand(Minus);
