@@ -7,16 +7,44 @@ using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows.Input;
 using Tchoukball_Scoreboard_MJ.CustomEventArgs;
+using System.Windows.Navigation;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class ScoreboardItemViewModel : ValidationViewModelBase
     {
-        private readonly Scoreboard _model;
+        private Scoreboard _model;
         private DispatcherTimer dispatcherTimer;
         public event EventHandler<TimerEndEventArgs>? TimerEnd;
+        public bool EnableBreakTimerScreen => _otherSettingsItemViewModel.EnableBreakTimerScreen;
+        private OtherSettingsItemViewModel _otherSettingsItemViewModel;
+        private bool IsBreak = false;
 
-        public ScoreboardItemViewModel()
+        public ScoreboardItemViewModel(OtherSettingsItemViewModel otherSettingsItemViewModel)
+        {
+            _otherSettingsItemViewModel = otherSettingsItemViewModel;
+            _model = new Scoreboard
+            {
+                Period = 1,
+                HomePoints = 0,
+                AwayPoints = 0,
+                HomeLogo = null,
+                AwayLogo = null,
+                HomePossession = true,
+                AwayPossession = false,
+                Timer = _otherSettingsItemViewModel.PeriodTime,
+                PeriodTimer = _otherSettingsItemViewModel.PeriodTime,
+                BreakTimer = _otherSettingsItemViewModel.BreakTime,
+                HomeName = _otherSettingsItemViewModel.DefaultHomeName,
+                AwayName = _otherSettingsItemViewModel.DefaultAwayName
+            };
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
+            dispatcherTimer.Tick += Timer_Tick;
+        }
+
+        public void ResetScoreboard()
         {
             _model = new Scoreboard
             {
@@ -26,18 +54,30 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 HomeLogo = null,
                 AwayLogo = null,
                 HomePossession = true,
-                AwayPossession = false
+                AwayPossession = false,
+                Timer = _otherSettingsItemViewModel.PeriodTime,
+                PeriodTimer = _otherSettingsItemViewModel.PeriodTime,
+                BreakTimer = _otherSettingsItemViewModel.BreakTime,
+                HomeName = _otherSettingsItemViewModel.DefaultHomeName,
+                AwayName = _otherSettingsItemViewModel.DefaultAwayName
             };
-
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += Timer_Tick;
-        }
+            IsBreak = false;
+    }
 
         protected virtual void OnTimerEnded(TimerEndEventArgs e)
         {
             TimerEnd?.Invoke(this, e);
-            Timer = new TimeSpan(0, 0, 20);
+            if (!IsBreak)
+            {
+                Timer = _otherSettingsItemViewModel.BreakTime;
+                IsBreak = true;
+                StartTimer();
+            }
+            else
+            {
+                Timer = _otherSettingsItemViewModel.PeriodTime; 
+                IsBreak = false;
+            }
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
@@ -63,6 +103,18 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         public void StopTimer()
         {
             dispatcherTimer.Stop();
+        }
+
+        public void ResetTimer()
+        {
+            if (IsBreak)
+            {
+                Timer = _otherSettingsItemViewModel.BreakTime;
+            }
+            else
+            {
+                Timer = _otherSettingsItemViewModel.PeriodTime;
+            }
         }
 
         public int Period
@@ -117,6 +169,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 RaisePropertyChanged();
             }
         }
+
         public string? AwayName
         {
             get => _model.AwayName;
