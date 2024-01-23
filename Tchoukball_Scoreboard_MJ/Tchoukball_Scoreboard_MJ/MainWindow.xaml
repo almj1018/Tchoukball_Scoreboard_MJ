@@ -47,6 +47,8 @@
         </Grid.RowDefinitions>
 
         <Menu FontSize="20">
+            <MenuItem Header="_New" Command="{Binding NewCommand}">
+            </MenuItem>
             <MenuItem Header="_Settings">
                 <MenuItem Header="_Keyboard Settings"
                             Command="{Binding OpenKeyboardSettingsCommand}"/>
