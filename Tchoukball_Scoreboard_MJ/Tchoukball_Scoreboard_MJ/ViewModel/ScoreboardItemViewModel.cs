@@ -21,8 +21,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             _model = new Scoreboard
             {
                 Period = 1,
-                HomeName = "Home",
-                AwayName = "Away",
                 HomePoints = 0,
                 AwayPoints = 0,
                 HomeLogo = null,
