@@ -47,23 +47,23 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public void ResetScoreboard()
         {
-            _model = new Scoreboard
-            {
-                Period = 1,
-                HomePoints = 0,
-                AwayPoints = 0,
-                HomeLogo = null,
-                AwayLogo = null,
-                HomePossession = true,
-                AwayPossession = false,
-                Timer = _otherSettingsItemViewModel.PeriodTime,
-                PeriodTimer = _otherSettingsItemViewModel.PeriodTime,
-                BreakTimer = _otherSettingsItemViewModel.BreakTime,
-                HomeName = _otherSettingsItemViewModel.DefaultHomeName,
-                AwayName = _otherSettingsItemViewModel.DefaultAwayName
-            };
+            Period = 1;
+            HomePoints = 0;
+            AwayPoints = 0;
+            HomeLogo = null;
+            AwayLogo = null;
+            HomePossession = true;
+            AwayPossession = false;
+            Timer = _otherSettingsItemViewModel.PeriodTime;
+            PeriodTimer = _otherSettingsItemViewModel.PeriodTime;
+            BreakTimer = _otherSettingsItemViewModel.BreakTime;
+            HomeName = _otherSettingsItemViewModel.DefaultHomeName;
+            AwayName = _otherSettingsItemViewModel.DefaultAwayName;
+
+
+
             IsBreak = false;
-    }
+        }
 
         protected virtual void OnTimerEnded(TimerEndEventArgs e)
         {
@@ -80,7 +80,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
             else
             {
-                Timer = _otherSettingsItemViewModel.PeriodTime; 
+                Timer = _otherSettingsItemViewModel.PeriodTime;
                 IsBreak = false;
             }
         }
@@ -130,7 +130,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 if (value >= 0)
                 {
                     _model.Period = value;
-                    RaisePropertyChanged(); 
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 RaisePropertyChanged();
             }
         }
-        
+
         public TimeSpan BreakTimer
         {
             get => _model.BreakTimer;
@@ -193,7 +193,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 if (value >= 0)
                 {
                     _model.HomePoints = value;
-                    RaisePropertyChanged(); 
+                    RaisePropertyChanged();
                 }
             }
         }

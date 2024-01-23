@@ -2,6 +2,7 @@
 using Tchoukball_Scoreboard_MJ.View;
 using System.ComponentModel;
 using Microsoft.Win32;
+using System.Windows;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
@@ -25,6 +26,8 @@ public class MainViewModel : ViewModelBase
 
         _otherSettingsWindowView = otherSettingsWindowView;
         OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
+
+        NewCommand = new DelegateCommand(New);
 
         Scoreboard = scoreboardItemViewModel;
 
@@ -51,6 +54,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand SelectViewModelCommand { get; }
     public DelegateCommand OpenKeyboardSettingsCommand { get; }
     public DelegateCommand OpenOtherSettingsCommand { get; }
+    public DelegateCommand NewCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -74,6 +78,13 @@ public class MainViewModel : ViewModelBase
     private void OpenOtherSettings(object? parameter)
     {
         _otherSettingsWindowView.Show();
+    }
+
+    private void New(object? parameter)
+    {
+        var result = MessageBox.Show("Everything will be reset to their default values. Confirm?", "New Scoreboard Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+        if (result == MessageBoxResult.Yes)
+            Scoreboard!.ResetScoreboard();
     }
 
     private ScoreboardItemViewModel? _scoreboardItemViewModel;
