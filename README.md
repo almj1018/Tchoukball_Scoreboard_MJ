@@ -1,1 +1,3 @@
-# Tchoukball_Scoreboard_MJ
+# Tchoukball Scoreboard
+
+Simple scoreboard desktop application
