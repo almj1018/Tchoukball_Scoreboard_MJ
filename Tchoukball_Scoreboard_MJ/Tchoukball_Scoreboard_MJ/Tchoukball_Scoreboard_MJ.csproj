@@ -6,12 +6,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>soccersports_futbo_3658.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Fonts\DigitalDismay.ttf" />
-    <None Remove="Resources\Sounds\buzzer.wav" />
     <None Remove="View\DigitalDismay.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="soccersports_futbo_3658.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
@@ -29,20 +34,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Fonts\**">
+    <Resource Include="Fonts\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Resources\**">
+    </Resource>
+    <Resource Include="View\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="View\DigitalDismay.ttf">
+    </Resource>
+    <Resource Include="TeamLogos\genesislogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TeamLogos\**">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  
-</ItemGroup>
+    </Resource>
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
