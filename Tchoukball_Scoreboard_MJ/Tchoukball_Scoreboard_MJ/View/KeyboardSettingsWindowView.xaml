@@ -23,6 +23,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left">
@@ -60,7 +61,11 @@
         <Viewbox Grid.Row="8" HorizontalAlignment="Left">
             <Label Content="Switch Possession"/>
         </Viewbox>
-
+        
+        <Viewbox Grid.Row="9" HorizontalAlignment="Left">
+            <Label Content="Full Screen"/>
+        </Viewbox>
+        
         <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,10,0"
                  x:Name="StartStopTimer" 
                  Text="{Binding KeyboardSettings.TimerStartStop}" 
@@ -133,8 +138,15 @@
                  FontSize="20"
                  HorizontalContentAlignment="Right"
                  VerticalAlignment="Center"/>
+        <TextBox Grid.Row="9" Grid.Column="2" Margin="0,0,10,0"
+         x:Name="Fullscreen" 
+         Text="F11" 
+         IsEnabled="False"
+         FontSize="20"
+         HorizontalContentAlignment="Right"
+         VerticalAlignment="Center"/>
 
-        <Grid Grid.Row="9" Grid.ColumnSpan="2">
+        <Grid Grid.Row="10" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal" Margin="205,0,0,0">
                 <Button Content="Reset" Margin="0,5,5,10" Width="80"
                         Command="{Binding ResetCommand}"
