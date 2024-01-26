@@ -33,7 +33,7 @@
             </Viewbox>
 
             <Viewbox Grid.Column="0" Margin="25">
-                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="50"/>
+                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="30"/>
             </Viewbox>
 
             <Viewbox Grid.Column="2" Margin="25">
@@ -41,7 +41,7 @@
             </Viewbox>
         </Grid>
 
-        <!--team names and possesion-->
+        <!--team names and possession-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2.5*"/>

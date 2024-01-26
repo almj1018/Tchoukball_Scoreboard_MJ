@@ -16,6 +16,6 @@ namespace Tchoukball_Scoreboard_MJ.Model
         public Key AwayMinusPointKey;
         public Key AddPeriodKey;
         public Key MinusPeriodKey;
-        public Key SwitchPossesionKey;
+        public Key SwitchPossessionKey;
     }
 }
