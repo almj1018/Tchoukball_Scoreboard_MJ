@@ -9,10 +9,6 @@
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
         Title="Scoreboard Control" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
-    <Window.Resources>
-        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
-    </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="{Binding KeyboardSettings.TimerStartStopKey}"
                     Command="{Binding StartStopTimerCommand}"/>
@@ -281,14 +277,14 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
+                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BooleanToVisibilityConv}}">
                             <Polygon Points="15,0 15,10 0,5" Margin="5">
                                 <Polygon.Fill>
                                     <SolidColorBrush Color="Black"/>
                                 </Polygon.Fill>
                             </Polygon>
                         </Viewbox>
-                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
+                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BooleanToVisibilityConv}}">
                             <Polygon Points="0,0 15,5 0,10" Margin="5">
                                 <Polygon.Fill>
                                     <SolidColorBrush Color="Black"/>
