@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using Tchoukball_Scoreboard_MJ.Command;
 using Tchoukball_Scoreboard_MJ.Model;
@@ -35,12 +36,29 @@ public class KeyboardSettingsWindowViewModel : ViewModelBase
 
     private void Save(object? parameter)
     {
-        _model.Save();
+        try
+        {
+            _model.Save();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Failed to save settings. Error: " + ex.Message, "Saved", MessageBoxButton.OK);
+        }
+        MessageBox.Show("Settings saved successfully", "Saved", MessageBoxButton.OK);
     }
 
     private void Reset(object? parameter)
     {
-        _model.Reset();
+        try
+        {
+            _model.Reset();
+
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show("Failed to reset settings. Error: " + ex.Message, "Reset", MessageBoxButton.OK);
+        }
+        MessageBox.Show("Settings reset successfully", "Reset", MessageBoxButton.OK);
     }
 
     public void OnKeyPressHandler(string parameter, Key key)
