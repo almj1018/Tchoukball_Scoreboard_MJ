@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <None Remove="Resources\Sounds\buzzer.wav" />
-    <None Remove="View\DigitalDismay.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,16 +34,24 @@
     </None>
     <None Remove="Resources\Converters.xaml" />
     <None Remove="Resources\Fonts.xaml" />
+    <None Remove="Resources\Fonts\DigitalDismay.ttf" />
+    <None Remove="Resources\Fonts\DigitalPlay.ttf" />
     <Page Remove="Resources\Converters.xaml" />
     <Page Remove="Resources\Fonts.xaml" />
-    <None Include="View\DigitalDismay.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   
 </ItemGroup>
 
   <ItemGroup>
     <Content Include="favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Fonts\DigitalDismay.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Fonts\DigitalPlay.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -57,12 +64,6 @@
     </None>
     <None Update="Resources\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Resources\Fonts\DigitalDismay.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Fonts\DigitalPlay.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Sounds\buzzer.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

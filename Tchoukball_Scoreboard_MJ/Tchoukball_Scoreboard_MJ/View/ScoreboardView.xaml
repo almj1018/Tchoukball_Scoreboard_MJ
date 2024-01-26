@@ -24,7 +24,12 @@
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" Grid.ColumnSpan="3">
-                <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="0"/>
+                <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}}" 
+                       Background="Transparent" 
+                       Foreground="LawnGreen" 
+                       FontFamily="{StaticResource NumberFont}" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" Padding="0"/>
             </Viewbox>
 
             <Viewbox Grid.Column="0" Margin="25">
@@ -44,7 +49,11 @@
                 <ColumnDefinition Width="2.5*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Grid.Column="0" HorizontalAlignment="Center" Margin="5,5">
-                <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent"/>
+                <Label Content="{Binding Scoreboard.HomeName, Mode=OneWay}" 
+                       Background="Transparent" 
+                       Foreground="White" 
+                       FontFamily="{StaticResource LetterFont}"
+                       Padding="0" BorderBrush="Transparent"/>
             </Viewbox>
             
             <!--possession-->
@@ -72,7 +81,12 @@
             </Grid>
 
             <Viewbox Grid.Column="2" HorizontalAlignment="Center" Margin="5,5">
-                <Label Content="{Binding Scoreboard.AwayName, Mode=OneWay}" Background="Transparent" Foreground="White" FontFamily="DigitalPlay.ttf #Digital Play St" Padding="0" BorderBrush="Transparent" HorizontalContentAlignment="Center"/>
+                <Label Content="{Binding Scoreboard.AwayName, Mode=OneWay}" 
+                       Background="Transparent" 
+                       Foreground="White" 
+                       FontFamily="{StaticResource LetterFont}" 
+                       Padding="0" BorderBrush="Transparent" 
+                       HorizontalContentAlignment="Center"/>
             </Viewbox>
         </Grid>
 
@@ -86,18 +100,30 @@
             
             <Viewbox Grid.Column="0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
-                    <Label Content="{Binding Scoreboard.HomePoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"/>
+                    <Label Content="{Binding Scoreboard.HomePoints, Mode=OneWay}" 
+                           Background="Transparent" 
+                           Foreground="LawnGreen" 
+                           FontFamily="{StaticResource NumberFont}" 
+                           Padding="0" BorderBrush="Transparent"/>
                 </StackPanel>
             </Viewbox>
 
             <Viewbox Grid.Column="2">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Height="Auto" Width="Auto">
-                    <Label Content="{Binding Scoreboard.AwayPoints, Mode=OneWay}" Background="Transparent" Foreground="LawnGreen" FontFamily="DigitalDismay.ttf #Digital Dismay" Padding="0" BorderBrush="Transparent"></Label>
+                    <Label Content="{Binding Scoreboard.AwayPoints, Mode=OneWay}" 
+                           Background="Transparent" 
+                           Foreground="LawnGreen" 
+                           FontFamily="{StaticResource NumberFont}" 
+                           Padding="0" BorderBrush="Transparent"></Label>
                 </StackPanel>
             </Viewbox>
 
             <Viewbox Grid.Column="1">
-                <Label Content="{Binding Scoreboard.Period, Mode=OneWay}" Background="Transparent" Foreground="Red" FontFamily="DigitalDismay.ttf #Digital Dismay" BorderBrush="Transparent"></Label>
+                <Label Content="{Binding Scoreboard.Period, Mode=OneWay}" 
+                       Background="Transparent" 
+                       Foreground="Red" 
+                       FontFamily="{StaticResource NumberFont}" 
+                       BorderBrush="Transparent"></Label>
             </Viewbox>
 
         </Grid>
