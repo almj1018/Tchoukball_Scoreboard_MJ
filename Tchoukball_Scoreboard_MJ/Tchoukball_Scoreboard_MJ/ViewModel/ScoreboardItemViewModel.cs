@@ -10,6 +10,10 @@ using Tchoukball_Scoreboard_MJ.CustomEventArgs;
 using System.Windows.Navigation;
 using System.Media;
 using System.Windows;
+using System.Data;
+using System.Data.Common;
+using System.IO;
+using ClosedXML.Excel;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
@@ -22,6 +26,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         public bool AutoIncrementPeriod => _otherSettingsItemViewModel.AutoIncrementPeriod;
         private OtherSettingsItemViewModel _otherSettingsItemViewModel;
         private bool IsBreak = false;
+        private DataSet ds;
+        public string ScoreDataFileName;
 
         public ScoreboardItemViewModel(OtherSettingsItemViewModel otherSettingsItemViewModel)
         {
@@ -41,6 +47,25 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 HomeName = _otherSettingsItemViewModel.DefaultHomeName,
                 AwayName = _otherSettingsItemViewModel.DefaultAwayName
             };
+            DataTable dt = new DataTable(DateTime.Now.ToString("yyMMddHHmmss"));
+            DataColumn Home = new DataColumn("Home", typeof(string));
+            DataColumn dc = new DataColumn("VS", typeof(string));
+            DataColumn Away = new DataColumn("Away", typeof(string));
+            dt.Columns.Add(Home);
+            dt.Columns.Add(dc);
+            dt.Columns.Add(Away);
+
+            ds = new DataSet();
+            ds.Tables.Add(dt);
+
+            int count = 1;
+            string DateTimeToday = DateTime.Today.ToString("yyMMdd");
+            ScoreDataFileName = string.Format("{0}{1}", DateTimeToday, ".xlsx");
+            while (File.Exists(ScoreDataFileName))
+            {
+                ScoreDataFileName = string.Format("{0}({1}){2}", DateTimeToday, count, ".xlsx");
+                count++;
+            }
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
@@ -68,6 +93,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         protected virtual void OnTimerEnded(TimerEndEventArgs e)
         {
             TimerEnd?.Invoke(this, e);
+            RecordScore();
             if (_otherSettingsItemViewModel.AutoSetBreakTimer)
             {
                 if (!IsBreak)
@@ -80,7 +106,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                     IsBreak = true;
                     if (_otherSettingsItemViewModel.AutoStartBreakTimer)
                     {
-                        StartTimer(); 
+                        StartTimer();
                     }
                     return;
                 }
@@ -106,7 +132,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                     }
                     catch (Exception)
                     {
-                    } 
+                    }
                 }
                 StopTimer();
                 DelayAction(1500, () => OnTimerEnded(new TimerEndEventArgs { TimerEnded = true }));
@@ -221,7 +247,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 if (value >= 0)
                 {
                     _model.AwayPoints = value;
-                    RaisePropertyChanged(); 
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -278,6 +304,49 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
             timer.Interval = TimeSpan.FromMilliseconds(millisecond);
             timer.Start();
+        }
+
+        private void RecordScore()
+        {
+            if (Period == 1)
+            {
+                ds.Tables[0].Rows.Add("", "", "");
+                ds.Tables[0].Rows.Add(HomeName, "VS", AwayName);
+                ds.Tables[0].Rows.Add(HomePoints, ":", AwayPoints);
+            }
+            else
+            {
+                ds.Tables[0].Rows.Add(HomePoints, ":", AwayPoints);
+            }
+        }
+
+        public bool ExportScoreData()
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                try
+                {
+                    DataTable dt = ds.Tables[0];
+                    string[] columnNames = (from dc in dt.Columns.Cast<DataColumn>() select dc.ColumnName).ToArray();
+                    // int Cell = 0;  
+
+                    int count = columnNames.Length;
+                    object[] array = new object[count];
+                    dt.Rows.Add(array);
+                    wb.Worksheets.Add(dt, ds.Tables[0].TableName);
+
+                    wb.SaveAs(ScoreDataFileName);
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+                finally
+                {
+
+                }
+            }
+            return true;
         }
     }
 }

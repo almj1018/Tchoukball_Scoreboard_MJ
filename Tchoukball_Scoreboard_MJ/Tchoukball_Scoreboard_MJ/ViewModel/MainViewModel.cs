@@ -30,6 +30,7 @@ public class MainViewModel : ViewModelBase
 
         NewCommand = new DelegateCommand(New);
         PlayBuzzerCommand = new DelegateCommand(PlayBuzzer);
+        ExportCommand = new DelegateCommand(Export);
 
         Scoreboard = scoreboardItemViewModel;
 
@@ -59,6 +60,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand OpenOtherSettingsCommand { get; }
     public DelegateCommand NewCommand { get; }
     public DelegateCommand PlayBuzzerCommand { get; }
+    public DelegateCommand ExportCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -101,6 +103,18 @@ public class MainViewModel : ViewModelBase
         catch (Exception)
         {
             MessageBox.Show("Error playing sound. Sound file 'buzzer.wav' is not found or corrupted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    public void Export(object? parameter)
+    {
+        if (_scoreboardItemViewModel!.ExportScoreData())
+        {
+            MessageBox.Show("Scores successfully exported to file: " + _scoreboardItemViewModel.ScoreDataFileName, "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        else
+        {
+            MessageBox.Show("Failed to export scores", "Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 
