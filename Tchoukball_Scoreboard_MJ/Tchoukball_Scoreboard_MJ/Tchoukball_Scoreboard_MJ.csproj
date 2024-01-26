@@ -6,16 +6,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>soccersports_futbo_3658.ico</ApplicationIcon>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Fonts\DigitalDismay.ttf" />
+    <None Remove="Resources\Sounds\buzzer.wav" />
     <None Remove="View\DigitalDismay.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="soccersports_futbo_3658.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,15 +31,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\DigitalDismay.ttf">
+    <None Include="Fonts\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="View\DigitalDismay.ttf">
+    </None>
+    <None Include="Resources\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="TeamLogos\genesislogo.png">
+    </None>
+    <None Include="View\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
+    <None Include="TeamLogos\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  
+</ItemGroup>
+
+  <ItemGroup>
+    <Content Include="favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
