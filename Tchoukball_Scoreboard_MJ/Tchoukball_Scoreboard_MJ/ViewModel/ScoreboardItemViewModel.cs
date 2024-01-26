@@ -60,29 +60,28 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             HomeName = _otherSettingsItemViewModel.DefaultHomeName;
             AwayName = _otherSettingsItemViewModel.DefaultAwayName;
 
-
-
             IsBreak = false;
         }
 
         protected virtual void OnTimerEnded(TimerEndEventArgs e)
         {
             TimerEnd?.Invoke(this, e);
-            if (!IsBreak)
+            if (_otherSettingsItemViewModel.AutoSetBreakTimer)
             {
-                if (AutoIncrementPeriod)
+                if (!IsBreak)
                 {
-                    Period++;
+                    if (AutoIncrementPeriod)
+                    {
+                        Period++;
+                    }
+                    Timer = _otherSettingsItemViewModel.BreakTime;
+                    IsBreak = true;
+                    StartTimer();
+                    return;
                 }
-                Timer = _otherSettingsItemViewModel.BreakTime;
-                IsBreak = true;
-                StartTimer();
             }
-            else
-            {
-                Timer = _otherSettingsItemViewModel.PeriodTime;
-                IsBreak = false;
-            }
+            Timer = _otherSettingsItemViewModel.PeriodTime;
+            IsBreak = false;
         }
 
         private void Timer_Tick(object? sender, EventArgs e)
