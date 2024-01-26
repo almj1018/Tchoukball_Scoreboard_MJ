@@ -36,6 +36,7 @@ public class MainViewModel : ViewModelBase
         StartStopTimerCommand = new DelegateCommand(StartStop);
         ResetTimerCommand = new DelegateCommand(Reset);
         UploadLogoCommand = new DelegateCommand(UploadLogo);
+        SwitchPossessionCommand = new DelegateCommand(SwitchPossession);
 
         var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
         scoreboardWindowView.Show();
@@ -126,6 +127,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand StartStopTimerCommand { get; }
     public DelegateCommand ResetTimerCommand { get; }
     public DelegateCommand UploadLogoCommand { get; }
+    public DelegateCommand SwitchPossessionCommand { get; }
 
     private void Add(object? team)
     {
@@ -184,15 +186,15 @@ public class MainViewModel : ViewModelBase
         var a = team!.ToString();
         if (a == "home")
         {
-            Scoreboard!.HomeLogo = LoadImagePath();
+            Scoreboard!.HomeLogo = LoadImagePath(a);
         }
         else if (a == "away")
         {
-            Scoreboard!.AwayLogo = LoadImagePath();
+            Scoreboard!.AwayLogo = LoadImagePath(a);
         }
     }
 
-    private string? LoadImagePath()
+    private string? LoadImagePath(string? team)
     {
         OpenFileDialog open = new OpenFileDialog();
         open.DefaultExt = (".png");
@@ -206,6 +208,12 @@ public class MainViewModel : ViewModelBase
         if (open.ShowDialog() == true)
             return open.FileName;
 
-        return null;
+        return team == "home" ? Scoreboard!.HomeLogo : Scoreboard!.AwayLogo;
+    }
+
+    public void SwitchPossession(object? param)
+    {
+        Scoreboard!.HomePossession = !Scoreboard.HomePossession;
+        Scoreboard!.AwayPossession = !Scoreboard.AwayPossession;
     }
 }

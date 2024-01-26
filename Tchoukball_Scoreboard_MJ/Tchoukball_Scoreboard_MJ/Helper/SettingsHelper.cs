@@ -44,7 +44,7 @@ namespace Tchoukball_Scoreboard_MJ.Helper
                 AwayMinusPointKey = GetKeyValue("AwayMinusPointKey", SettingsEnum.KeyboardSettings) ?? DefaultSettings.AwayMinusPointKey,
                 AddPeriodKey = GetKeyValue("AddPeriodKey", SettingsEnum.KeyboardSettings) ?? DefaultSettings.PeriodAddKey,
                 MinusPeriodKey = GetKeyValue("MinusPeriodKey", SettingsEnum.KeyboardSettings) ?? DefaultSettings.PeriodMinusKey,
-                SwitchPossesionKey = GetKeyValue("SwitchPossesionKey", SettingsEnum.KeyboardSettings) ?? DefaultSettings.SwitchPossesionKey,
+                SwitchPossessionKey = GetKeyValue("SwitchPossessionKey", SettingsEnum.KeyboardSettings) ?? DefaultSettings.SwitchPossessionKey,
             };
         }
 

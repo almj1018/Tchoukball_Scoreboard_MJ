@@ -29,7 +29,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private Key previousAwayMinusPointKey;
         private Key previousAddPeriodKey;
         private Key previousMinusPeriodKey;
-        private Key previousSwitchPossesionKey;
+        private Key previousSwitchPossessionKey;
 
         public KeyboardSettingsItemViewModel(SettingsHelper settings)
         {
@@ -43,7 +43,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             previousAwayMinusPointKey = _model.AwayMinusPointKey;
             previousAddPeriodKey = _model.AddPeriodKey;
             previousMinusPeriodKey = _model.MinusPeriodKey;
-            previousSwitchPossesionKey = _model.SwitchPossesionKey;
+            previousSwitchPossessionKey = _model.SwitchPossessionKey;
 
             TimerStartStop = GetStrFromKey(TimerStartStopKey);
             HomeAddPoint = GetStrFromKey(HomeAddPointKey);
@@ -52,7 +52,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             AwayMinusPoint = GetStrFromKey(AwayMinusPointKey);
             AddPeriod = GetStrFromKey(AddPeriodKey);
             MinusPeriod = GetStrFromKey(MinusPeriodKey);
-            SwitchPossesion = GetStrFromKey(SwitchPossesionKey);
+            SwitchPossession = GetStrFromKey(SwitchPossessionKey);
         }
 
         private bool CanUpdateKey(Key key)
@@ -71,7 +71,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 return false;
             else if (MinusPeriodKey == key)
                 return false;
-            else if (SwitchPossesionKey == key)
+            else if (SwitchPossessionKey == key)
                 return false;
             else
                 return true;
@@ -155,13 +155,13 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public Key SwitchPossesionKey
+        public Key SwitchPossessionKey
         {
-            get => _model.SwitchPossesionKey;
+            get => _model.SwitchPossessionKey;
             set
             {
-                _model.SwitchPossesionKey = value;
-                SwitchPossesion = GetStrFromKey(value);
+                _model.SwitchPossessionKey = value;
+                SwitchPossession = GetStrFromKey(value);
                 RaisePropertyChanged();
             }
         }
@@ -266,16 +266,16 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        private string _switchPossesion;
-        public String SwitchPossesion
+        private string _switchPossession;
+        public String SwitchPossession
         {
             get
             {
-                return _switchPossesion;
+                return _switchPossession;
             }
             set
             {
-                _switchPossesion = value;
+                _switchPossession = value;
                 RaisePropertyChanged();
             }
         }
@@ -326,8 +326,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                     case "MinusPeriod":
                         MinusPeriodKey = key;
                         break;
-                    case "SwitchPossesion":
-                        SwitchPossesionKey = key;
+                    case "SwitchPossession":
+                        SwitchPossessionKey = key;
                         break;
                 }
             }
@@ -342,7 +342,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             previousAwayAddPointKey = _model.AwayAddPointKey;
             previousAddPeriodKey = _model.AddPeriodKey;
             previousMinusPeriodKey = _model.MinusPeriodKey;
-            previousSwitchPossesionKey = _model.SwitchPossesionKey;
+            previousSwitchPossessionKey = _model.SwitchPossessionKey;
 
             _settings.SaveToFile(keyboardSettings: _model);
 
@@ -358,7 +358,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             AwayAddPointKey = DefaultSettings.AwayAddPointKey;
             AddPeriodKey = DefaultSettings.PeriodAddKey;
             MinusPeriodKey = DefaultSettings.PeriodMinusKey;
-            SwitchPossesionKey = DefaultSettings.SwitchPossesionKey;
+            SwitchPossessionKey = DefaultSettings.SwitchPossessionKey;
 
             Save();
         }
@@ -372,7 +372,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             AwayAddPointKey = previousAwayAddPointKey;
             AddPeriodKey = previousAddPeriodKey;
             MinusPeriodKey = previousMinusPeriodKey;
-            SwitchPossesionKey = previousSwitchPossesionKey;
+            SwitchPossessionKey = previousSwitchPossessionKey;
 
             hasUnsavedChanges = false;
         }

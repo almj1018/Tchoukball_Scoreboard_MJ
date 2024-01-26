@@ -11,6 +11,7 @@
         Title="MainWindow" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="{Binding KeyboardSettings.TimerStartStopKey}"
@@ -33,8 +34,8 @@
         <KeyBinding Key="{Binding KeyboardSettings.MinusPeriodKey}"
             Command="{Binding MinusCommand}"
                     CommandParameter="period"/>
-        <KeyBinding Key="{Binding KeyboardSettings.SwitchPossesionKey}"
-            Command="{Binding SwitchPossesionCommand}"/>
+        <KeyBinding Key="{Binding KeyboardSettings.SwitchPossessionKey}"
+            Command="{Binding SwitchPossessionCommand}"/>
     </Window.InputBindings>
     <Grid
         Background="WhiteSmoke"
@@ -246,13 +247,42 @@
                 <!--Period Controls-->
                 <Grid Grid.Row="1" Grid.Column="1">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2.5*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="2*"/>
                         <RowDefinition Height="1*"/>
-                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1.5*"/>
                     </Grid.RowDefinitions>
 
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.AwayPossession, Converter={StaticResource BoolToVisibilityConv}}">
+                            <Polygon Points="15,0 15,10 0,5" Margin="5">
+                                <Polygon.Fill>
+                                    <SolidColorBrush Color="Black"/>
+                                </Polygon.Fill>
+                            </Polygon>
+                        </Viewbox>
+                        <Viewbox Grid.Row="0" Visibility="{Binding Scoreboard.HomePossession, Converter={StaticResource BoolToVisibilityConv}}">
+                            <Polygon Points="0,0 15,5 0,10" Margin="5">
+                                <Polygon.Fill>
+                                    <SolidColorBrush Color="Black"/>
+                                </Polygon.Fill>
+                            </Polygon>
+                        </Viewbox>
+                        <Button Grid.Row="1" Margin="5"
+                                Command="{Binding SwitchPossessionCommand}">
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                                Switch Possession
+                            </TextBlock>
+                        </Button>
+                        
+                    </Grid>
+                    
                     <Viewbox Grid.Row="1">
                         <Label Content="Period"/>
                     </Viewbox>

@@ -17,7 +17,7 @@ namespace Tchoukball_Scoreboard_MJ
         public const Key AwayMinusPointKey = Key.OemComma;
         public const Key PeriodAddKey = Key.Up;
         public const Key PeriodMinusKey = Key.Down;
-        public const Key SwitchPossesionKey = Key.R;
+        public const Key SwitchPossessionKey = Key.R;
 
         //default other settings
         public const bool EnableBreakTimerScreen = false;
