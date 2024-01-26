@@ -24,6 +24,7 @@ namespace Tchoukball_Scoreboard_MJ
         public const bool DisableTimerResetButtonWhileTimerIsStarted = false;
         public const bool AutoIncrementPeriod = false;
         public const bool AutoSetBreakTimer = true;
+        public const bool AutoStartBreakTimer = true;
 
         public static TimeSpan PeriodTime = new TimeSpan(0, 15, 0);
         public static TimeSpan BreakTime = new TimeSpan(0, 2, 0);
