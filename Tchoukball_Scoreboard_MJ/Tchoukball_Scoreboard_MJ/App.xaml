@@ -5,8 +5,11 @@
             xmlns:view="clr-namespace:Tchoukball_Scoreboard_MJ.View"
             xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel">
     <Application.Resources>
-        <!--<Style x:Key="testfont" TargetType="Label">
-            <Setter Property="FontFamily" Value="Fonts/DigitalDismay.ttf #Digital Dismay"/>
-        </Style>-->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Converters.xaml"/>
+                <ResourceDictionary Source="Fonts.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

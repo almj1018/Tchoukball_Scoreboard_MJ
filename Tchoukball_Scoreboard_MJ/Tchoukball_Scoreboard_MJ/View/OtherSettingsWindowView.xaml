@@ -8,9 +8,6 @@
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
         Title="Other Settings" Height="360" Width="400" Closing="OnClosingHandler">
-    <Window.Resources>
-        <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
-    </Window.Resources>
     <ScrollViewer>
         <Grid>
             <StackPanel>

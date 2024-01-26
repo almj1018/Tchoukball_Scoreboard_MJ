@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\DigitalDismay.ttf" />
     <None Remove="Resources\Sounds\buzzer.wav" />
     <None Remove="View\DigitalDismay.ttf" />
   </ItemGroup>
@@ -18,7 +17,7 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Images\" />
-    <Folder Include="Resources\" />
+    <Folder Include="Resources\Images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,16 +30,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Fonts\**">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Resources\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Remove="Resources\Converters.xaml" />
+    <None Remove="Resources\Fonts.xaml" />
+    <Page Remove="Resources\Converters.xaml" />
+    <Page Remove="Resources\Fonts.xaml" />
     <None Include="View\DigitalDismay.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="TeamLogos\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   
@@ -52,6 +49,19 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\Fonts\DigitalDismay.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\DigitalPlay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Sounds\buzzer.wav">
