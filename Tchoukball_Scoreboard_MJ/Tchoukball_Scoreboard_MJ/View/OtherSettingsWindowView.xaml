@@ -28,6 +28,11 @@
                         Margin="10 20 0 0">
                 Auto increment period (after end of period)
             </CheckBox>
+            <CheckBox IsChecked="{Binding OtherSettings.AutoSetBreakTimer,
+            Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Margin="10 20 0 0">
+                Auto switch to break timer (after end of period)
+            </CheckBox>
             <Label></Label>
             
             <DockPanel LastChildFill="false">

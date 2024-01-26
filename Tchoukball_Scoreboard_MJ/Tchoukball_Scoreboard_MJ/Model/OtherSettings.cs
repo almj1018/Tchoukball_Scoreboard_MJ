@@ -11,7 +11,9 @@ public class OtherSettings
     public bool EnableBreakTimerScreen { get; set; }
     public bool DisableTimerResetButtonWhileTimerIsStarted { get; set; }
     public bool AutoIncrementPeriod { get; set; }
-    
+    public bool AutoSetBreakTimer { get; set; }
+
+
     public TimeSpan PeriodTime { get; set; }
     public TimeSpan BreakTime { get; set; }
     public string? DefaultHomeName { get; set; }

@@ -21,6 +21,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     private bool previousEnableBreakTimerScreen;
     private bool previousDisableTimerResetButtonWhileTimerIsStarted;
     private bool previousAutoIncrementPeriod;
+    private bool previousAutoSetBreakTimer;
     private string? previousDefaultHomeName;
     private string? previousDefaultAwayName;
     private TimeSpan previousBreakTime;
@@ -34,6 +35,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         previousEnableBreakTimerScreen = _model.EnableBreakTimerScreen;
         previousDisableTimerResetButtonWhileTimerIsStarted = _model.DisableTimerResetButtonWhileTimerIsStarted;
         previousAutoIncrementPeriod = _model.AutoIncrementPeriod;
+        previousAutoSetBreakTimer = _model.AutoSetBreakTimer;
         previousDefaultHomeName = _model.DefaultHomeName;
         previousDefaultAwayName = _model.DefaultAwayName;
         previousBreakTime = _model.BreakTime;
@@ -69,6 +71,16 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         set
         {
             _model.AutoIncrementPeriod = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    public bool AutoSetBreakTimer
+    {
+        get => _model.AutoSetBreakTimer;
+        set
+        {
+            _model.AutoSetBreakTimer = value;
             RaisePropertyChanged();
         }
     }
@@ -143,6 +155,10 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         {
             result = true;
         }
+        else if (_model.AutoSetBreakTimer != previousAutoSetBreakTimer)
+        {
+            result = true;
+        }
         else if(_model.DefaultHomeName != previousDefaultHomeName)
         {
             result = true;
@@ -168,6 +184,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         previousEnableBreakTimerScreen = _model.EnableBreakTimerScreen;
         previousDisableTimerResetButtonWhileTimerIsStarted = _model.DisableTimerResetButtonWhileTimerIsStarted;
         previousAutoIncrementPeriod = _model.AutoIncrementPeriod;
+        previousAutoSetBreakTimer = _model.AutoSetBreakTimer;
         previousDefaultHomeName = _model.DefaultHomeName;
         previousDefaultAwayName = _model.DefaultAwayName;
         previousBreakTime = _model.BreakTime;
@@ -183,6 +200,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         EnableBreakTimerScreen = DefaultSettings.EnableBreakTimerScreen;
         DisableTimerResetButtonWhileTimerIsStarted = DefaultSettings.DisableTimerResetButtonWhileTimerIsStarted;
         AutoIncrementPeriod = DefaultSettings.AutoIncrementPeriod;
+        AutoSetBreakTimer = DefaultSettings.AutoSetBreakTimer;
         DefaultHomeName = DefaultSettings.DefaultHomeName;
         DefaultAwayName = DefaultSettings.DefaultAwayName;
         BreakTime = DefaultSettings.BreakTime;
@@ -195,6 +213,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         _model.EnableBreakTimerScreen = previousEnableBreakTimerScreen;
         _model.DisableTimerResetButtonWhileTimerIsStarted = previousDisableTimerResetButtonWhileTimerIsStarted;
         _model.AutoIncrementPeriod = previousAutoIncrementPeriod;
+        _model.AutoSetBreakTimer = previousAutoSetBreakTimer;
         _model.DefaultHomeName = previousDefaultHomeName;
         _model.DefaultAwayName = previousDefaultAwayName;
         _model.BreakTime = previousBreakTime;
