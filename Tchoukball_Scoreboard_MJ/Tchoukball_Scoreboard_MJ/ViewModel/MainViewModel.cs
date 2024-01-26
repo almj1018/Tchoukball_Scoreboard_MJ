@@ -3,6 +3,7 @@ using Tchoukball_Scoreboard_MJ.View;
 using System.ComponentModel;
 using Microsoft.Win32;
 using System.Windows;
+using System.Media;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
@@ -28,6 +29,7 @@ public class MainViewModel : ViewModelBase
         OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
 
         NewCommand = new DelegateCommand(New);
+        PlayBuzzerCommand = new DelegateCommand(PlayBuzzer);
 
         Scoreboard = scoreboardItemViewModel;
 
@@ -56,6 +58,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand OpenKeyboardSettingsCommand { get; }
     public DelegateCommand OpenOtherSettingsCommand { get; }
     public DelegateCommand NewCommand { get; }
+    public DelegateCommand PlayBuzzerCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -86,6 +89,12 @@ public class MainViewModel : ViewModelBase
         var result = MessageBox.Show("Everything will be reset to their default values. Confirm?", "New Scoreboard Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
         if (result == MessageBoxResult.Yes)
             Scoreboard!.ResetScoreboard();
+    }
+
+    private void PlayBuzzer(object? parameter)
+    {
+        SoundPlayer player = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "Resources\\Sounds\\buzzer.wav");
+        player.Play();
     }
 
     private ScoreboardItemViewModel? _scoreboardItemViewModel;
