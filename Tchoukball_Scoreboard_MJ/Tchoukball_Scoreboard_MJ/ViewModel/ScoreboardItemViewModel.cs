@@ -203,8 +203,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             get => _model.AwayPoints;
             set
             {
-                _model.AwayPoints = value;
-                RaisePropertyChanged();
+                if (value >= 0)
+                {
+                    _model.AwayPoints = value;
+                    RaisePropertyChanged(); 
+                }
             }
         }
 
