@@ -7,7 +7,7 @@
         xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="Other Settings" Height="350" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
+        Title="Other Settings" Height="360" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
@@ -32,6 +32,12 @@
             Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
             Margin="10 20 0 0">
                 Auto switch to break timer (after end of period)
+            </CheckBox>
+            <CheckBox IsChecked="{Binding OtherSettings.AutoStartBreakTimer,
+                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                Margin="50 20 0 0"
+                IsEnabled="{Binding OtherSettings.AutoSetBreakTimer}">
+                Auto start to break timer
             </CheckBox>
             <Label></Label>
             

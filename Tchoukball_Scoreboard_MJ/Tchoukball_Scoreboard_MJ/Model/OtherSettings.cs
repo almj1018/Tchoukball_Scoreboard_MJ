@@ -12,6 +12,7 @@ public class OtherSettings
     public bool DisableTimerResetButtonWhileTimerIsStarted { get; set; }
     public bool AutoIncrementPeriod { get; set; }
     public bool AutoSetBreakTimer { get; set; }
+    public bool AutoStartBreakTimer { get; set; }
 
 
     public TimeSpan PeriodTime { get; set; }

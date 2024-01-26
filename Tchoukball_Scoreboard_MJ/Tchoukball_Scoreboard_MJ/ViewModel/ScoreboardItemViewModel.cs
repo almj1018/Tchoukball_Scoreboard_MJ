@@ -76,7 +76,10 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                     }
                     Timer = _otherSettingsItemViewModel.BreakTime;
                     IsBreak = true;
-                    StartTimer();
+                    if (_otherSettingsItemViewModel.AutoStartBreakTimer)
+                    {
+                        StartTimer(); 
+                    }
                     return;
                 }
             }
