@@ -95,6 +95,8 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
@@ -135,6 +137,11 @@
                             <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
                             <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
                             <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
+
+                            <Label Grid.Row="18"/>
+
+                            <Label Grid.Row="19" Grid.Column="0" Content="Fullscreen"/>
+                            <Label Grid.Row="19" Grid.Column="1" Content="F11"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

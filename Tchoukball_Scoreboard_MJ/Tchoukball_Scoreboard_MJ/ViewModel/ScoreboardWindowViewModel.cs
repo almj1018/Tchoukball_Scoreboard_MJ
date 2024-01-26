@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Tchoukball_Scoreboard_MJ.Command;
 using Tchoukball_Scoreboard_MJ.CustomEventArgs;
 using Tchoukball_Scoreboard_MJ.Data;
@@ -21,6 +22,9 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             BreakTimerViewModel = new BreakTimerViewModel(model);
             SelectedViewModel = ScoreboardViewModel;
             SelectViewModelCommand = new DelegateCommand(SelectViewModel);
+            FullScreenCommand = new DelegateCommand(FullScreen);
+            WindowState = WindowState.Normal;
+            WindowStyle = WindowStyle.SingleBorderWindow;
         }
 
         private void SwitchView(object? sender, TimerEndEventArgs e)
@@ -34,7 +38,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 else
                 {
                     SelectViewModel(ScoreboardViewModel);
-                } 
+                }
             }
             else
             {
@@ -56,6 +60,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         public ScoreboardViewModel ScoreboardViewModel { get; }
         public BreakTimerViewModel BreakTimerViewModel { get; }
         public DelegateCommand SelectViewModelCommand { get; }
+        public DelegateCommand FullScreenCommand { get; }
 
         public async override Task LoadAsync()
         {
@@ -69,6 +74,34 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         {
             SelectedViewModel = parameter as ViewModelBase;
             await LoadAsync();
+        }
+
+        public void FullScreen(object? parameter)
+        {
+            WindowState = WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+            WindowStyle = WindowStyle == WindowStyle.SingleBorderWindow ? WindowStyle.None : WindowStyle.SingleBorderWindow;
+        }
+
+        private WindowState _windowState;
+        public WindowState WindowState 
+        {
+            get => _windowState;
+            set
+            {
+                _windowState = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private WindowStyle _windowStyle;
+        public WindowStyle WindowStyle 
+        {
+            get => _windowStyle;
+            set
+            {
+                _windowStyle = value;
+                RaisePropertyChanged();
+            }
         }
     }
 }
