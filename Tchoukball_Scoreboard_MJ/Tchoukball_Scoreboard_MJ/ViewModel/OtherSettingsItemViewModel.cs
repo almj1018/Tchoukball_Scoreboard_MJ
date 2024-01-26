@@ -19,6 +19,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     private readonly SettingsHelper _settings;
 
     private bool previousEnableBreakTimerScreen;
+    private bool previousSoundBuzzer;
     private bool previousDisableTimerResetButtonWhileTimerIsStarted;
     private bool previousAutoIncrementPeriod;
     private bool previousAutoSetBreakTimer;
@@ -34,6 +35,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         _model = _settings._otherSettings;
 
         previousEnableBreakTimerScreen = _model.EnableBreakTimerScreen;
+        previousSoundBuzzer = _model.SoundBuzzer;
         previousDisableTimerResetButtonWhileTimerIsStarted = _model.DisableTimerResetButtonWhileTimerIsStarted;
         previousAutoIncrementPeriod = _model.AutoIncrementPeriod;
         previousAutoSetBreakTimer = _model.AutoSetBreakTimer;
@@ -53,6 +55,16 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         set
         {
             _model.EnableBreakTimerScreen = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    public bool SoundBuzzer
+    {
+        get => _model.SoundBuzzer;
+        set
+        {
+            _model.SoundBuzzer = value;
             RaisePropertyChanged();
         }
     }
@@ -159,6 +171,10 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         {
             result = true;
         }
+        else if (_model.SoundBuzzer != previousSoundBuzzer)
+        {
+            result = true;
+        }
         else if (_model.DisableTimerResetButtonWhileTimerIsStarted != previousDisableTimerResetButtonWhileTimerIsStarted)
         {
             result = true;
@@ -198,6 +214,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     public void Save()
     {
         previousEnableBreakTimerScreen = _model.EnableBreakTimerScreen;
+        previousSoundBuzzer = _model.SoundBuzzer;
         previousDisableTimerResetButtonWhileTimerIsStarted = _model.DisableTimerResetButtonWhileTimerIsStarted;
         previousAutoIncrementPeriod = _model.AutoIncrementPeriod;
         previousAutoSetBreakTimer = _model.AutoSetBreakTimer;
@@ -215,6 +232,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     public void Reset()
     {
         EnableBreakTimerScreen = DefaultSettings.EnableBreakTimerScreen;
+        SoundBuzzer = DefaultSettings.SoundBuzzer;
         DisableTimerResetButtonWhileTimerIsStarted = DefaultSettings.DisableTimerResetButtonWhileTimerIsStarted;
         AutoIncrementPeriod = DefaultSettings.AutoIncrementPeriod;
         AutoSetBreakTimer = DefaultSettings.AutoSetBreakTimer;
@@ -229,6 +247,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     public void UndoToLastSetting()
     {
         _model.EnableBreakTimerScreen = previousEnableBreakTimerScreen;
+        _model.SoundBuzzer = previousSoundBuzzer;
         _model.DisableTimerResetButtonWhileTimerIsStarted = previousDisableTimerResetButtonWhileTimerIsStarted;
         _model.AutoIncrementPeriod = previousAutoIncrementPeriod;
         _model.AutoSetBreakTimer = previousAutoSetBreakTimer;

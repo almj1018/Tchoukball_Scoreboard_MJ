@@ -8,6 +8,8 @@ using System.Windows.Threading;
 using System.Windows.Input;
 using Tchoukball_Scoreboard_MJ.CustomEventArgs;
 using System.Windows.Navigation;
+using System.Media;
+using System.Windows;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
@@ -95,8 +97,19 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
             else
             {
+                if (_otherSettingsItemViewModel.SoundBuzzer)
+                {
+                    SoundPlayer player = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "Resources\\Sounds\\buzzer.wav");
+                    try
+                    {
+                        player.Play();
+                    }
+                    catch (Exception)
+                    {
+                    } 
+                }
                 StopTimer();
-                OnTimerEnded(new TimerEndEventArgs { TimerEnded = true });
+                DelayAction(1500, () => OnTimerEnded(new TimerEndEventArgs { TimerEnded = true }));
             }
         }
 
@@ -251,6 +264,20 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 _model.AwayPossession = value;
                 RaisePropertyChanged();
             }
+        }
+
+        public static void DelayAction(int millisecond, Action action)
+        {
+            var timer = new DispatcherTimer();
+            timer.Tick += delegate
+
+            {
+                action.Invoke();
+                timer.Stop();
+            };
+
+            timer.Interval = TimeSpan.FromMilliseconds(millisecond);
+            timer.Start();
         }
     }
 }
