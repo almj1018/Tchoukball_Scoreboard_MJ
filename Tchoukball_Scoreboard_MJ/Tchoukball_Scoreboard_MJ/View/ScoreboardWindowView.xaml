@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         mc:Ignorable="d"
-        Title="ScoreboardWindowView" Height="450" Width="800" Closing="OnClosingHandler" WindowState="{Binding WindowState}" WindowStyle="{Binding WindowStyle}">
+        Title="Scoreboard" Height="450" Width="800" Closing="OnClosingHandler" WindowState="{Binding WindowState}" WindowStyle="{Binding WindowStyle}">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:ScoreboardViewModel}">
             <local:ScoreboardView/>

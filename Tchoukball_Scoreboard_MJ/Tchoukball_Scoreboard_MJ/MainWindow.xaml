@@ -8,7 +8,7 @@
         xmlns:viewModel="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
+        Title="Scoreboard Control" Height="550" Width="800" Loaded="MainWindow_Loaded" Closing="ClosingWindow" MouseDown="On_MouseDown">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConv"/>
