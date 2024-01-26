@@ -11,73 +11,80 @@
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
-    <Grid>
-        <StackPanel>
-            <CheckBox IsChecked="{Binding OtherSettings.EnableBreakTimerScreen,
-                            Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                            Margin="10 10 0 0">
-                Enable break timer screen
-            </CheckBox>
-            <CheckBox IsChecked="{Binding OtherSettings.DisableTimerResetButtonWhileTimerIsStarted,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                Margin="10 20 0 0">
-                Disable timer reset button while timer is started
-            </CheckBox>
-            <CheckBox IsChecked="{Binding OtherSettings.AutoIncrementPeriod,
+    <ScrollViewer>
+        <Grid>
+            <StackPanel>
+                <CheckBox IsChecked="{Binding OtherSettings.EnableBreakTimerScreen,
                         Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                        Margin="10 20 0 0">
-                Auto increment period (after end of period)
-            </CheckBox>
-            <CheckBox IsChecked="{Binding OtherSettings.AutoSetBreakTimer,
+                        Margin="10 10 0 0">
+                    Enable break timer screen
+                </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.SoundBuzzer,
+                    Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Margin="10,20,0,0">
+                    Sound buzzer when timer ends
+                </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.DisableTimerResetButtonWhileTimerIsStarted,
             Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
             Margin="10 20 0 0">
-                Auto switch to break timer (after end of period)
-            </CheckBox>
-            <CheckBox IsChecked="{Binding OtherSettings.AutoStartBreakTimer,
-                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                Margin="50 20 0 0"
-                IsEnabled="{Binding OtherSettings.AutoSetBreakTimer}">
-                Auto start to break timer
-            </CheckBox>
-            <Label></Label>
-            
-            <DockPanel LastChildFill="false">
-                <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
-                         DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
-                         HorizontalContentAlignment="Right" 
-                         VerticalContentAlignment="Center" 
-                         Padding="5, 0" 
-                         TextChanged="TimeTextBox_TextChanged"/>
-            </DockPanel>
-            <DockPanel LastChildFill="false">
-                <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
-                         DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
-                         HorizontalContentAlignment="Right" 
-                         VerticalContentAlignment="Center" 
-                         Padding="5, 0" 
-                         TextChanged="TimeTextBox_TextChanged"/>
-            </DockPanel>
-            <DockPanel LastChildFill="false">
-                <Label Content="Default home name" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.DefaultHomeName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
-            </DockPanel>
-            <DockPanel LastChildFill="false">
-                <Label Content="Default away name" DockPanel.Dock="Left"/>
-                <TextBox Text="{Binding OtherSettings.DefaultAwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
-            </DockPanel>
-            <Label></Label>
+                    Disable timer reset button while timer is started
+                </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.AutoIncrementPeriod,
+                    Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                    Margin="10 20 0 0">
+                    Auto increment period (after end of period)
+                </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.AutoSetBreakTimer,
+        Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+        Margin="10 20 0 0">
+                    Auto switch to break timer (after end of period)
+                </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.AutoStartBreakTimer,
+            Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Margin="50 20 0 0"
+            IsEnabled="{Binding OtherSettings.AutoSetBreakTimer}">
+                    Auto start to break timer
+                </CheckBox>
+                <Label></Label>
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="7*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="1" Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="10,0,5,0">Reset</Button>
-                <Button Grid.Column="2"  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="5, 0, 10,0">Save</Button>
-            </Grid>
-        </StackPanel>
-    </Grid>
+                <DockPanel LastChildFill="false">
+                    <Label Content="Default time every period (mm:ss)" DockPanel.Dock="Left"/>
+                    <TextBox Text="{Binding OtherSettings.PeriodTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
+                     DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
+                     HorizontalContentAlignment="Right" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5, 0" 
+                     TextChanged="TimeTextBox_TextChanged"/>
+                </DockPanel>
+                <DockPanel LastChildFill="false">
+                    <Label Content="Default time during break (mm:ss)" DockPanel.Dock="Left"/>
+                    <TextBox Text="{Binding OtherSettings.BreakTime, Mode=TwoWay, Converter={StaticResource TimeSpanToTextConv}}" 
+                     DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" 
+                     HorizontalContentAlignment="Right" 
+                     VerticalContentAlignment="Center" 
+                     Padding="5, 0" 
+                     TextChanged="TimeTextBox_TextChanged"/>
+                </DockPanel>
+                <DockPanel LastChildFill="false">
+                    <Label Content="Default home name" DockPanel.Dock="Left"/>
+                    <TextBox Text="{Binding OtherSettings.DefaultHomeName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                </DockPanel>
+                <DockPanel LastChildFill="false">
+                    <Label Content="Default away name" DockPanel.Dock="Left"/>
+                    <TextBox Text="{Binding OtherSettings.DefaultAwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
+                </DockPanel>
+                <Label></Label>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="10,0,5,0">Reset</Button>
+                    <Button Grid.Column="2"  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="5, 0, 10,0">Save</Button>
+                </Grid>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

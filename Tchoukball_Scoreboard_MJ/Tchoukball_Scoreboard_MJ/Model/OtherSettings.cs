@@ -9,6 +9,7 @@ namespace Tchoukball_Scoreboard_MJ.Model;
 public class OtherSettings
 {
     public bool EnableBreakTimerScreen { get; set; }
+    public bool SoundBuzzer { get; set; }
     public bool DisableTimerResetButtonWhileTimerIsStarted { get; set; }
     public bool AutoIncrementPeriod { get; set; }
     public bool AutoSetBreakTimer { get; set; }

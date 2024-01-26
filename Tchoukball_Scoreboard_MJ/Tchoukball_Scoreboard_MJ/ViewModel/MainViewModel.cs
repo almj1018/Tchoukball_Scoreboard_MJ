@@ -94,7 +94,14 @@ public class MainViewModel : ViewModelBase
     private void PlayBuzzer(object? parameter)
     {
         SoundPlayer player = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "Resources\\Sounds\\buzzer.wav");
-        player.Play();
+        try
+        {
+            player.Play();
+        }
+        catch (Exception)
+        {
+            MessageBox.Show("Error playing sound. Sound file 'buzzer.wav' is not found or corrupted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private ScoreboardItemViewModel? _scoreboardItemViewModel;

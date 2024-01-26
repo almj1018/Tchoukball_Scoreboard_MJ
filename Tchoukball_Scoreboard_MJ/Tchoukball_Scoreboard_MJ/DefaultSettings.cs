@@ -21,6 +21,7 @@ namespace Tchoukball_Scoreboard_MJ
 
         //default other settings
         public const bool EnableBreakTimerScreen = false;
+        public const bool SoundBuzzer = true;
         public const bool DisableTimerResetButtonWhileTimerIsStarted = false;
         public const bool AutoIncrementPeriod = false;
         public const bool AutoSetBreakTimer = true;

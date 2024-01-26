@@ -53,6 +53,7 @@ namespace Tchoukball_Scoreboard_MJ.Helper
             _otherSettings = new OtherSettings
             {
                 EnableBreakTimerScreen = GetBooleanValue("EnableBreakTimerScreen", SettingsEnum.OtherSettings) ?? DefaultSettings.EnableBreakTimerScreen,
+                SoundBuzzer = GetBooleanValue("SoundBuzzer", SettingsEnum.OtherSettings) ?? DefaultSettings.SoundBuzzer,
                 DisableTimerResetButtonWhileTimerIsStarted = GetBooleanValue("DisableTimerResetButtonWhileTimerIsStarted", SettingsEnum.OtherSettings) ?? DefaultSettings.DisableTimerResetButtonWhileTimerIsStarted,
                 AutoIncrementPeriod = GetBooleanValue("AutoIncrementPeriod", SettingsEnum.OtherSettings) ?? DefaultSettings.AutoIncrementPeriod,
                 AutoSetBreakTimer = GetBooleanValue("AutoSetBreakTimer", SettingsEnum.OtherSettings) ?? DefaultSettings.AutoSetBreakTimer,
