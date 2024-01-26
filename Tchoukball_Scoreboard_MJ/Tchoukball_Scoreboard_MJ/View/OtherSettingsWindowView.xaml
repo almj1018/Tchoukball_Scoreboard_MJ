@@ -7,7 +7,7 @@
         xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="Other Settings" Height="360" Width="400" ResizeMode="NoResize" Closing="OnClosingHandler">
+        Title="Other Settings" Height="360" Width="400" Closing="OnClosingHandler">
     <Window.Resources>
         <converter:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
     </Window.Resources>
@@ -84,6 +84,7 @@
                     <Button Grid.Column="1" Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="10,0,5,0">Reset</Button>
                     <Button Grid.Column="2"  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="5, 0, 10,0">Save</Button>
                 </Grid>
+                <Label></Label>
             </StackPanel>
         </Grid>
     </ScrollViewer>
