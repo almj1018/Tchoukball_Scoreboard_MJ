@@ -299,9 +299,9 @@
                                 Switch Possession
                             </TextBlock>
                         </Button>
-                        
+
                     </Grid>
-                    
+
                     <Viewbox Grid.Row="1">
                         <Label Content="Period"/>
                     </Viewbox>
@@ -318,6 +318,12 @@
                         <Button Grid.Column="0" Content="-" Command="{Binding MinusCommand}" CommandParameter="period" Margin="5,5"/>
                         <Button Grid.Column="1" Content="+" Command="{Binding AddCommand}" CommandParameter="period" Margin="5,5"/>
                     </Grid>
+
+                    <Button Grid.Row="4"
+                            Margin="10"
+                            Command="{Binding PlayBuzzerCommand}">
+                        Buzzer
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>

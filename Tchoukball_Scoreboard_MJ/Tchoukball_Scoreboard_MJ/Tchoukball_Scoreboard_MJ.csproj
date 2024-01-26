@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <None Remove="Fonts\DigitalDismay.ttf" />
+    <None Remove="Resources\Sounds\buzzer.wav" />
     <None Remove="View\DigitalDismay.ttf" />
   </ItemGroup>
 
@@ -28,19 +29,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\DigitalDismay.ttf">
+    <None Include="Fonts\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="View\DigitalDismay.ttf">
+    </None>
+    <None Include="Resources\**">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="TeamLogos\genesislogo.png">
+    </None>
+    <None Include="View\DigitalDismay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
+    </None>
+    <None Include="TeamLogos\**">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  
+</ItemGroup>
 
   <ItemGroup>
     <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Sounds\buzzer.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
