@@ -15,11 +15,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     {
         private ViewModelBase? _selectedViewModel;
 
-        public ScoreboardWindowViewModel(ScoreboardItemViewModel model)
+        public ScoreboardWindowViewModel(ScoreboardItemViewModel model, TimerViewModel timerViewModel)
         {
-            model.TimerEnd += SwitchView;
-            ScoreboardViewModel = new ScoreboardViewModel(model);
-            BreakTimerViewModel = new BreakTimerViewModel(model);
+            timerViewModel.TimerEnd += SwitchView;
+            ScoreboardViewModel = new ScoreboardViewModel(model, timerViewModel);
+            BreakTimerViewModel = new BreakTimerViewModel(timerViewModel);
             SelectedViewModel = ScoreboardViewModel;
             SelectViewModelCommand = new DelegateCommand(SelectViewModel);
             FullScreenCommand = new DelegateCommand(FullScreen);

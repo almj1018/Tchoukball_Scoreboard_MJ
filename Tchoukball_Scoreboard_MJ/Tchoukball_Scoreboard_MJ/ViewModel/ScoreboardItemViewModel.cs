@@ -20,12 +20,8 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
     public class ScoreboardItemViewModel : ValidationViewModelBase
     {
         private Scoreboard _model;
-        private DispatcherTimer dispatcherTimer;
-        public event EventHandler<TimerEndEventArgs>? TimerEnd;
-        public bool EnableBreakTimerScreen => _otherSettingsItemViewModel.EnableBreakTimerScreen;
-        public bool AutoIncrementPeriod => _otherSettingsItemViewModel.AutoIncrementPeriod;
         private OtherSettingsItemViewModel _otherSettingsItemViewModel;
-        private bool IsBreak = false;
+        public bool IsBreak = false;
         private DataSet ds;
         public string ScoreDataFileName;
 
@@ -41,7 +37,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 AwayLogo = null,
                 HomePossession = true,
                 AwayPossession = false,
-                Timer = _otherSettingsItemViewModel.PeriodTime,
                 PeriodTimer = _otherSettingsItemViewModel.PeriodTime,
                 BreakTimer = _otherSettingsItemViewModel.BreakTime,
                 HomeName = _otherSettingsItemViewModel.DefaultHomeName,
@@ -66,11 +61,16 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 ScoreDataFileName = string.Format("{0}({1}){2}", DateTimeToday, count, ".xlsx");
                 count++;
             }
-
-            dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += Timer_Tick;
         }
+
+        #region Other Settings Properties
+        public bool EnableBreakTimerScreen => _otherSettingsItemViewModel.EnableBreakTimerScreen;
+        public bool AutoIncrementPeriod => _otherSettingsItemViewModel.AutoIncrementPeriod;
+        public bool SoundBuzzer => _otherSettingsItemViewModel.SoundBuzzer;
+        public bool AutoSetBreakTimer => _otherSettingsItemViewModel.AutoSetBreakTimer;
+        public bool AutoStartBreakTimer => _otherSettingsItemViewModel.AutoStartBreakTimer;
+        public bool DisableTimerResetButtonWhileTimerIsStarted => _otherSettingsItemViewModel.DisableTimerResetButtonWhileTimerIsStarted;
+        #endregion
 
         public void ResetScoreboard()
         {
@@ -81,86 +81,12 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             AwayLogo = null;
             HomePossession = true;
             AwayPossession = false;
-            Timer = _otherSettingsItemViewModel.PeriodTime;
             PeriodTimer = _otherSettingsItemViewModel.PeriodTime;
             BreakTimer = _otherSettingsItemViewModel.BreakTime;
             HomeName = _otherSettingsItemViewModel.DefaultHomeName;
             AwayName = _otherSettingsItemViewModel.DefaultAwayName;
 
             IsBreak = false;
-        }
-
-        protected virtual void OnTimerEnded(TimerEndEventArgs e)
-        {
-            TimerEnd?.Invoke(this, e);
-            RecordScore();
-            if (_otherSettingsItemViewModel.AutoSetBreakTimer)
-            {
-                if (!IsBreak)
-                {
-                    if (AutoIncrementPeriod)
-                    {
-                        Period++;
-                    }
-                    Timer = _otherSettingsItemViewModel.BreakTime;
-                    IsBreak = true;
-                    if (_otherSettingsItemViewModel.AutoStartBreakTimer)
-                    {
-                        StartTimer();
-                    }
-                    return;
-                }
-            }
-            Timer = _otherSettingsItemViewModel.PeriodTime;
-            IsBreak = false;
-        }
-
-        private void Timer_Tick(object? sender, EventArgs e)
-        {
-            if (Timer.TotalSeconds > 0)
-            {
-                Timer = Timer.Subtract(TimeSpan.FromSeconds(1));
-            }
-            else
-            {
-                if (_otherSettingsItemViewModel.SoundBuzzer)
-                {
-                    SoundPlayer player = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "Resources\\Sounds\\buzzer.wav");
-                    try
-                    {
-                        player.Play();
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-                StopTimer();
-                DelayAction(1500, () => OnTimerEnded(new TimerEndEventArgs { TimerEnded = true }));
-            }
-        }
-
-        public bool IsTimerStarted { get { return dispatcherTimer.IsEnabled; } }
-
-        public void StartTimer()
-        {
-            dispatcherTimer.Start();
-        }
-
-        public void StopTimer()
-        {
-            dispatcherTimer.Stop();
-        }
-
-        public void ResetTimer()
-        {
-            if (IsBreak)
-            {
-                Timer = _otherSettingsItemViewModel.BreakTime;
-            }
-            else
-            {
-                Timer = _otherSettingsItemViewModel.PeriodTime;
-            }
         }
 
         public int Period
@@ -173,16 +99,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                     _model.Period = value;
                     RaisePropertyChanged();
                 }
-            }
-        }
-
-        public TimeSpan Timer
-        {
-            get => _model.Timer;
-            set
-            {
-                _model.Timer = value;
-                RaisePropertyChanged();
             }
         }
 
@@ -292,21 +208,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public static void DelayAction(int millisecond, Action action)
-        {
-            var timer = new DispatcherTimer();
-            timer.Tick += delegate
-
-            {
-                action.Invoke();
-                timer.Stop();
-            };
-
-            timer.Interval = TimeSpan.FromMilliseconds(millisecond);
-            timer.Start();
-        }
-
-        private void RecordScore()
+        public void RecordScore()
         {
             if (Period == 1)
             {
@@ -320,33 +222,62 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public bool ExportScoreData()
+        public bool? ExportScoreData()
         {
-            using (XLWorkbook wb = new XLWorkbook())
+            if (ds.Tables[0].Rows.Count > 1)
             {
-                try
+                using (XLWorkbook wb = new XLWorkbook())
                 {
-                    DataTable dt = ds.Tables[0];
-                    string[] columnNames = (from dc in dt.Columns.Cast<DataColumn>() select dc.ColumnName).ToArray();
-                    // int Cell = 0;  
+                    try
+                    {
+                        DataTable dt = ds.Tables[0];
+                        string[] columnNames = (from dc in dt.Columns.Cast<DataColumn>() select dc.ColumnName).ToArray();
+                        // int Cell = 0;  
 
-                    int count = columnNames.Length;
-                    object[] array = new object[count];
-                    dt.Rows.Add(array);
-                    wb.Worksheets.Add(dt, ds.Tables[0].TableName);
+                        int count = columnNames.Length;
+                        object[] array = new object[count];
+                        dt.Rows.Add(array);
+                        wb.Worksheets.Add(dt, ds.Tables[0].TableName);
 
-                    wb.SaveAs(ScoreDataFileName);
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-                finally
-                {
+                        wb.SaveAs(ScoreDataFileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+                    finally
+                    {
 
+                    }
                 }
+                return true;
             }
-            return true;
+            return null;
+        }
+
+        public TimeSpan GetTimer(bool IsReset)
+        {
+            if (IsReset)
+            {
+                return IsBreak ? _otherSettingsItemViewModel.BreakTime : _otherSettingsItemViewModel.PeriodTime;
+            }
+            else
+            {
+                if (_otherSettingsItemViewModel.AutoSetBreakTimer)
+                {
+                    if (!IsBreak)
+                    {
+                        if (AutoIncrementPeriod)
+                        {
+                            Period++;
+                        }
+                        IsBreak = true;
+                        return _otherSettingsItemViewModel.BreakTime;
+                    }
+                }
+                IsBreak = false;
+                return _otherSettingsItemViewModel.PeriodTime;
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Tchoukball_Scoreboard_MJ.Data
             return new Scoreboard
             {
                 Period = 0,
-                Timer = new TimeSpan(0, 15, 0),
                 HomeName = "Home",
                 AwayName = "Away",
                 HomePoints = 0,

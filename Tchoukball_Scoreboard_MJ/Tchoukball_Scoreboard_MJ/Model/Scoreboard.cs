@@ -5,7 +5,6 @@ namespace Tchoukball_Scoreboard_MJ.Model
     public class Scoreboard
     {
         public int Period { get; set; }
-        public TimeSpan Timer { get; set; }
         public TimeSpan PeriodTimer { get; set; }
         public TimeSpan BreakTimer { get; set; }
         public string? HomeName { get; set; }
