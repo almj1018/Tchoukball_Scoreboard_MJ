@@ -4,6 +4,9 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using System.Windows;
 using System.Media;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using Tchoukball_Scoreboard_MJ.CustomEventArgs;
+using Tchoukball_Scoreboard_MJ.Helper;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel;
 
@@ -12,13 +15,15 @@ public class MainViewModel : ViewModelBase
     private ViewModelBase? _selectedViewModel;
     private KeyboardSettingsWindowView _keyboardSettingsView;
     private KeyboardSettingsItemViewModel? _keyboardSettingsItemViewModel;
+    private TimerViewModel _timerViewModel;
 
     private OtherSettingsWindowView _otherSettingsWindowView;
 
     public MainViewModel(ScoreboardItemViewModel scoreboardItemViewModel, 
         KeyboardSettingsItemViewModel keyboardSettingsItemViewModel, 
         KeyboardSettingsWindowView keyboardSettingsWindowView, 
-        OtherSettingsWindowView otherSettingsWindowView)
+        OtherSettingsWindowView otherSettingsWindowView,
+        TimerViewModel timerViewModel)
     {
         _keyboardSettingsView = keyboardSettingsWindowView;
         _keyboardSettingsItemViewModel = keyboardSettingsItemViewModel;
@@ -33,6 +38,9 @@ public class MainViewModel : ViewModelBase
         ExportCommand = new DelegateCommand(Export);
 
         Scoreboard = scoreboardItemViewModel;
+        Timer = timerViewModel;
+        Timer.Timer = Scoreboard!.PeriodTimer;
+        timerViewModel.TimerEnd += OnTimerEnded;
 
         AddCommand = new DelegateCommand(Add);
         MinusCommand = new DelegateCommand(Minus);
@@ -41,8 +49,36 @@ public class MainViewModel : ViewModelBase
         UploadLogoCommand = new DelegateCommand(UploadLogo);
         SwitchPossessionCommand = new DelegateCommand(SwitchPossession);
 
-        var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard));
+        var scoreboardWindowView = new ScoreboardWindowView(new ScoreboardWindowViewModel(Scoreboard, timerViewModel));
         scoreboardWindowView.Show();
+    }
+
+    protected virtual void OnTimerEnded(object? sender, TimerEndEventArgs e)
+    {
+        if (Scoreboard!.SoundBuzzer)
+        {
+            SoundPlayer player = new SoundPlayer(AppDomain.CurrentDomain.BaseDirectory + "Resources\\Sounds\\buzzer.wav");
+            try
+            {
+                player.Play();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        _scoreboardItemViewModel!.RecordScore();
+        if (Scoreboard!.AutoSetBreakTimer)
+        {
+            _timerViewModel.Timer = _scoreboardItemViewModel!.GetTimer(false); 
+        }
+
+        if (Scoreboard!.AutoStartBreakTimer)
+        {
+            if (_scoreboardItemViewModel.IsBreak)
+            {
+                Task.Delay(1500).ContinueWith(t => StartStop(null)); 
+            }
+        }
     }
 
     public ViewModelBase? SelectedViewModel
@@ -90,7 +126,10 @@ public class MainViewModel : ViewModelBase
     {
         var result = MessageBox.Show("Everything will be reset to their default values. Confirm?", "New Scoreboard Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
         if (result == MessageBoxResult.Yes)
+        {
             Scoreboard!.ResetScoreboard();
+            Reset(null);
+        }
     }
 
     private void PlayBuzzer(object? parameter)
@@ -108,13 +147,18 @@ public class MainViewModel : ViewModelBase
 
     public void Export(object? parameter)
     {
-        if (_scoreboardItemViewModel!.ExportScoreData())
+        bool? exportResult = _scoreboardItemViewModel!.ExportScoreData();
+
+        if (exportResult != null)
         {
-            MessageBox.Show("Scores successfully exported to file: " + _scoreboardItemViewModel.ScoreDataFileName, "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-        }
-        else
-        {
-            MessageBox.Show("Failed to export scores", "Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            if ((bool)exportResult)
+            {
+                MessageBox.Show("Scores successfully exported to file: " + _scoreboardItemViewModel.ScoreDataFileName, "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Failed to export scores", "Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            } 
         }
     }
 
@@ -148,6 +192,16 @@ public class MainViewModel : ViewModelBase
         set
         {
             _scoreboardItemViewModel = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    public TimerViewModel? Timer
+    {
+        get => _timerViewModel;
+        set
+        {
+            _timerViewModel = value;
             RaisePropertyChanged();
         }
     }
@@ -195,20 +249,20 @@ public class MainViewModel : ViewModelBase
 
     private void StartStop(object? o)
     {
-        if (Scoreboard!.IsTimerStarted)
+        if (Timer!.IsTimerStarted)
         {
-            Scoreboard!.StopTimer();
+            Timer!.StopTimer();
         }
         else
         {
-            Scoreboard!.StartTimer();
+            Timer!.StartTimer();
         }
     }
 
     private void Reset(object? o)
     {
-        Scoreboard!.StopTimer();
-        Scoreboard!.ResetTimer();
+        Timer!.StopTimer();
+        Timer.Timer = Scoreboard!.GetTimer(true);
     }
 
     private void UploadLogo(object? team)

@@ -39,6 +39,9 @@ namespace Tchoukball_Scoreboard_MJ
             if (result == MessageBoxResult.Yes)
             {
                 _viewModel.Export(null);
+                // Stop the timer, wait for up to 1 sec for current event to finish,
+                //  if it does not finish within this time abort the timer thread
+                _viewModel.Timer!.DisposeMicroTimer();
                 Application.Current.Shutdown();
             }
             else

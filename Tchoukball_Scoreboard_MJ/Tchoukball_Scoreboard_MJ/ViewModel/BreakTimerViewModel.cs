@@ -6,11 +6,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
     public class BreakTimerViewModel : ViewModelBase
     {
-        private ScoreboardItemViewModel? _scoreboard;
+        private TimerViewModel? _timer;
 
-        public BreakTimerViewModel(ScoreboardItemViewModel timerModel)
+        public BreakTimerViewModel(TimerViewModel timerModel)
         {
-            _scoreboard = timerModel;
+            _timer = timerModel;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -20,15 +20,16 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ScoreboardItemViewModel Scoreboard
+        public TimerViewModel Timer
+
         {
             get
             {
-                return _scoreboard!;
+                return _timer!;
             }
             set
             {
-                _scoreboard = value;
+                _timer = value;
                 RaisePropertyChanged();
             }
         }

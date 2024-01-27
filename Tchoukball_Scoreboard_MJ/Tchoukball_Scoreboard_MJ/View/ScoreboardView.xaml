@@ -8,6 +8,11 @@
              xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:TimerViewModel}">
+            <local:TimerView/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="3.75*"/>
@@ -24,12 +29,7 @@
             </Grid.ColumnDefinitions>
 
             <Viewbox Grid.Column="0" Grid.ColumnSpan="3">
-                <Label Content="{Binding Scoreboard.Timer, Mode=OneWay, Converter={StaticResource TimeSpanToTextConv}}" 
-                       Background="Transparent" 
-                       Foreground="LawnGreen" 
-                       FontFamily="{StaticResource NumberFont}" 
-                       HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" Padding="0"/>
+                <ContentControl Content="{Binding Timer}"/>
             </Viewbox>
 
             <Viewbox Grid.Column="0" Margin="25">
