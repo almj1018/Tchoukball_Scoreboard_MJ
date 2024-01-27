@@ -94,7 +94,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             get => _model.Period;
             set
             {
-                if (value >= 0)
+                if (value >= 1)
                 {
                     _model.Period = value;
                     RaisePropertyChanged();
