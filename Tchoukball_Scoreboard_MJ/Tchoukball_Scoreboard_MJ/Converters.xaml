@@ -3,4 +3,5 @@
                     xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.Converter">
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConv"/>
     <local:TimeSpanToTextConverter x:Key="TimeSpanToTextConv"/>
+    <local:TimeSpanToTextControlConverter x:Key="TimeSpanToTextControlConv"/>
 </ResourceDictionary>
