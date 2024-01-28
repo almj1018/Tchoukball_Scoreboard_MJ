@@ -64,12 +64,13 @@ namespace Tchoukball_Scoreboard_MJ
             string cleanedInput = Regex.Replace(textBox.Text, @"[^0-9]", "");
 
             // Ensure the input doesn't exceed 4 characters
-            cleanedInput = cleanedInput.Length > 4 ? cleanedInput.Substring(0, 4) : cleanedInput;
+            cleanedInput = cleanedInput.Length > 6 ? cleanedInput.Substring(0, 6) : cleanedInput;
 
-            // Add colons to format as mm:ss
+            // Add colons to format as mm:ss.ff
             if (cleanedInput.Length >= 2)
             {
                 cleanedInput = cleanedInput.Insert(2, ":");
+                cleanedInput = cleanedInput.Insert(5, ".");
             }
 
             // Update the TextBox text
