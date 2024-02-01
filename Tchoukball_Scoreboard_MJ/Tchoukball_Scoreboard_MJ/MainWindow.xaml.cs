@@ -38,10 +38,10 @@ namespace Tchoukball_Scoreboard_MJ
             var result = MessageBox.Show("Do you want to close the scoreboard?", "Confirm Exit?", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                _viewModel.Export(null);
+                _viewModel._scoreboardControlViewModel!.Export(null);
                 // Stop the timer, wait for up to 1 sec for current event to finish,
                 //  if it does not finish within this time abort the timer thread
-                _viewModel.Timer!.DisposeMicroTimer();
+                _viewModel._timerViewModel!.DisposeMicroTimer();
                 Application.Current.Shutdown();
             }
             else

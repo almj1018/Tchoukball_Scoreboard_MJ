@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="Tchoukball_Scoreboard_MJ.View.KeyboardShortcutsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <!--Keyboard Shortcuts-->
+        <ScrollViewer>
+            <Grid Grid.Column="0">
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"/>
+
+                        <Label Grid.Row="1" Content="Timer" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Start/Stop"/>
+                        <Label Grid.Row="2" Grid.Column="1" Content="{Binding KeyboardSettings.TimerStartStop}"/>
+
+                        <Label Grid.Row="3"/>
+
+                        <Label Grid.Row="4" Content="Home" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="5" Grid.Column="0" Content="Add Point"/>
+                        <Label Grid.Row="5" Grid.Column="1" Content="{Binding KeyboardSettings.HomeAddPoint}"/>
+                        <Label Grid.Row="6" Grid.Column="0" Content="Minus Point"/>
+                        <Label Grid.Row="6" Grid.Column="1" Content="{Binding KeyboardSettings.HomeMinusPoint}"/>
+
+                        <Label Grid.Row="7"/>
+
+                        <Label Grid.Row="8" Content="Away" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="9" Grid.Column="0" Content="Add Point"/>
+                        <Label Grid.Row="9" Grid.Column="1" Content="{Binding KeyboardSettings.AwayAddPoint}"/>
+                        <Label Grid.Row="10" Grid.Column="0" Content="Minus Point"/>
+                        <Label Grid.Row="10" Grid.Column="1" Content="{Binding KeyboardSettings.AwayMinusPoint}"/>
+
+                        <Label Grid.Row="11"/>
+
+                        <Label Grid.Row="12" Content="Period" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="13" Grid.Column="0" Content="Add Period"/>
+                        <Label Grid.Row="13" Grid.Column="1" Content="{Binding KeyboardSettings.AddPeriod}"/>
+                        <Label Grid.Row="14" Grid.Column="0" Content="Minus Period"/>
+                        <Label Grid.Row="14" Grid.Column="1" Content="{Binding KeyboardSettings.MinusPeriod}"/>
+
+                        <Label Grid.Row="15"/>
+
+                        <Label Grid.Row="16" Content="Possession" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        <Label Grid.Row="17" Grid.Column="0" Content="Switch Possession"/>
+                        <Label Grid.Row="17" Grid.Column="1" Content="{Binding KeyboardSettings.SwitchPossession}"/>
+
+                        <Label Grid.Row="18"/>
+
+                        <Label Grid.Row="19" Grid.Column="0" Content="Fullscreen"/>
+                        <Label Grid.Row="19" Grid.Column="1" Content="F11"/>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
