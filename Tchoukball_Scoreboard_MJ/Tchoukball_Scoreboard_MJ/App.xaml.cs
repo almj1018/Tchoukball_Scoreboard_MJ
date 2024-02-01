@@ -38,6 +38,8 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddSingleton<KeyboardSettingsWindowViewModel>();
             services.AddSingleton<OtherSettingsWindowViewModel>();
             services.AddSingleton<TimerViewModel>();
+            services.AddSingleton<ScoreboardControlViewModel>();
+            services.AddTransient<KeyboardShortcutsViewModel>();
 
             services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
             services.AddSingleton<ScoreboardItemViewModel>();
