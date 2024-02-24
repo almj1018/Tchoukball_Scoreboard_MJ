@@ -114,14 +114,14 @@
                             Command="{Binding MinusCommand}" 
                             CommandParameter="home" 
                             Margin="5,5,5,10">
-                    <Image Source="{StaticResource MinusImg}" Height="28" Width="55"/>
+                    <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
                             Command="{Binding AddCommand}" 
                             CommandParameter="home" 
                             Margin="5,5,5,10">
-                    <Image Source="{StaticResource PlusImg}" Height="40" Width="55"/>
+                    <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
         </Grid>
@@ -168,7 +168,7 @@
                             CommandParameter="away" 
                             Margin="5,5,5,10" 
                             FontFamily="{StaticResource LetterFont}">
-                    <Image Source="{StaticResource MinusImg}" Height="28" Width="55"/>
+                    <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
@@ -176,7 +176,7 @@
                             CommandParameter="away" 
                             Margin="5,5,5,10" 
                             FontFamily="{StaticResource LetterFont}">
-                    <Image Source="{StaticResource PlusImg}" Height="40" Width="55"/>
+                    <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
         </Grid>
@@ -238,14 +238,14 @@
                             Command="{Binding MinusCommand}" 
                             CommandParameter="period" 
                             Margin="5,5">
-                    <Image Source="{StaticResource MinusImg}" Height="28" Width="30"/>
+                    <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
                             Command="{Binding AddCommand}" 
                             CommandParameter="period" 
                             Margin="5,5">
-                    <Image Source="{StaticResource PlusImg}" Height="28" Width="30"/>
+                    <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
 

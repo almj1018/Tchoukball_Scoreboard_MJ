@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Tchoukball_Scoreboard_MJ.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="LightGray">
         <!--Keyboard Shortcuts-->
         <ScrollViewer>
             <Grid Grid.Column="0">
