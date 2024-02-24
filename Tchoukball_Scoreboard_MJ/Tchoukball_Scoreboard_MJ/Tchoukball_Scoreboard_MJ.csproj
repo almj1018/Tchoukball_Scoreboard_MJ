@@ -10,7 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="add_box_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="continue.png" />
+    <None Remove="file_save_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="history_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="home_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="keyboard_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="manufacturing_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="power_settings_new_FILL0_wght400_GRAD0_opsz24.png" />
     <None Remove="Resources\Sounds\buzzer.wav" />
+    <None Remove="resume_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="settings_FILL0_wght400_GRAD0_opsz24.png" />
+    <None Remove="View\home.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,8 +46,19 @@
     <None Remove="Resources\Fonts.xaml" />
     <None Remove="Resources\Fonts\DigitalDismay.ttf" />
     <None Remove="Resources\Fonts\DigitalPlay.ttf" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\add_box.png" />
+    <None Remove="Resources\Images\file_save.png" />
+    <None Remove="Resources\Images\history.png" />
+    <None Remove="Resources\Images\home.png" />
+    <None Remove="Resources\Images\keyboard.png" />
+    <None Remove="Resources\Images\manufacturing.png" />
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\plus.png" />
+    <None Remove="Resources\Images\power.png" />
+    <None Remove="Resources\Images\remove.png" />
+    <None Remove="Resources\Images\resume.png" />
+    <None Remove="Resources\Images\settings.png" />
     <Page Remove="Resources\Converters.xaml" />
     <Page Remove="Resources\Fonts.xaml" />
   
@@ -53,10 +75,40 @@
     <Resource Include="Resources\Fonts\DigitalPlay.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\add_box.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\file_save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\history.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\keyboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\minus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\plus.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\power.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\remove.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\resume.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -71,6 +123,9 @@
     </None>
     <None Update="Resources\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Resources\Images\continue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Sounds\buzzer.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

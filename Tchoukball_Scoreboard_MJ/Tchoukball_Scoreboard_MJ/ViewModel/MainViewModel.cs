@@ -64,6 +64,10 @@ public class MainViewModel : ViewModelBase
         set
         {
             _selectedSideBarViewModel = value;
+            if (_selectedSideBarViewModel.GetType() == typeof(KeyboardShortcutsViewModel))
+                IsKeyboardSidePanel = true;
+            else
+                IsKeyboardSidePanel = false;
             RaisePropertyChanged();
         }
     }
@@ -140,6 +144,19 @@ public class MainViewModel : ViewModelBase
         {
             _scoreboardControlViewModel = value;
             RaisePropertyChanged();
+        }
+    }
+
+    private bool _isKeyboardSidePanel;
+    public bool IsKeyboardSidePanel
+    {
+        get
+        {
+            return _isKeyboardSidePanel;
+        }
+        set
+        {
+            _isKeyboardSidePanel = value;
         }
     }
 }
