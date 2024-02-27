@@ -17,64 +17,61 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0">
-            <Viewbox Margin="10">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="{Binding Scoreboard.CategoryColor}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label HorizontalContentAlignment="Center"
+       VerticalContentAlignment="Center"
+       FontSize="25"
+       FontWeight="Bold"
+       Padding="0"
+       Content="Match No: "/>
+                <TextBox HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       FontSize="25"
+                       FontWeight="Bold"
+                       Padding="0"
+                       Text="{Binding Scoreboard.MatchNo}"
+                         Background="Transparent"
+                         BorderThickness="0"/>
+
+                <Label HorizontalContentAlignment="Center"
+       VerticalContentAlignment="Center"
+       FontSize="25"
+       FontWeight="Bold"
+       Padding="0"
+       Content="    Category: "/>
+
+                <TextBox Grid.Row="0" Grid.ColumnSpan="3"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"
+               FontSize="25"
+               FontWeight="Bold"
+               Padding="0"
+               Text="{Binding Scoreboard.CategoryName}"
+                         Background="Transparent"
+                         BorderThickness="0"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Viewbox Margin="30">
                 <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}"/>
             </Viewbox>
         </Grid>
 
-        <Grid Grid.Row="0" Grid.Column="2">
-            <Viewbox Margin="10">
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Viewbox Margin="30">
                 <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}"/>
             </Viewbox>
         </Grid>
 
-        <!--Timer Controls-->
-        <Grid Grid.Row="0" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-
-            <Viewbox Grid.Row="0">
-                <Label Content="Timer" HorizontalAlignment="Center" Padding="0"/>
-            </Viewbox>
-
-            <Viewbox Grid.Row="1">
-                <TextBox Text="{Binding Timer.Timer, Mode=TwoWay, Converter={StaticResource TimeSpanToTextControlConv}}" 
-                             Background="Transparent" 
-                             HorizontalAlignment="Center" 
-                             TextChanged="TimeTextBox_TextChanged"/>
-            </Viewbox>
-
-            <Viewbox Grid.Row="2">
-                <Button Style="{StaticResource ButtonBaseStyle}" Command="{Binding StartStopTimerCommand}" Margin="3">
-                    <TextBlock Text="Start/Stop" TextWrapping="Wrap"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Padding="5,0"
-                                   FontSize="18"/>
-                </Button>
-            </Viewbox>
-
-            <Viewbox Grid.Row="3">
-                <Button Style="{StaticResource ButtonBaseStyle}" Command="{Binding ResetTimerCommand}" Margin="3">
-                    <TextBlock Text="Reset" TextWrapping="Wrap"
-       VerticalAlignment="Center"
-       HorizontalAlignment="Center"
-       Padding="5,0" FontSize="18"/>
-                </Button>
-            </Viewbox>
-        </Grid>
-
         <!--Home Controls-->
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Row="2" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
@@ -90,7 +87,7 @@
                 <TextBox Text="{Binding Scoreboard.HomeName}"/>
             </Viewbox>
 
-            <Button Grid.Row="2" 
+            <Button Grid.Row="2"
                         Style="{StaticResource ButtonBaseStyle}" 
                         Command="{Binding UploadLogoCommand}" 
                         CommandParameter="home" Margin="35,5" 
@@ -114,20 +111,26 @@
                             Command="{Binding MinusCommand}" 
                             CommandParameter="home" 
                             Margin="5,5,5,10">
+                    <Button.Background>
+                        <SolidColorBrush Color="Red" Opacity="0.507"/>
+                    </Button.Background>
                     <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
                             Command="{Binding AddCommand}" 
-                            CommandParameter="home" 
+                            CommandParameter="home"
                             Margin="5,5,5,10">
+                    <Button.Background>
+                        <SolidColorBrush Color="Green" Opacity="0.5"/>
+                    </Button.Background>
                     <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
         </Grid>
 
         <!--Away Controls-->
-        <Grid Grid.Row="1" Grid.Column="2">
+        <Grid Grid.Row="2" Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
@@ -166,23 +169,29 @@
                             Grid.Column="0"
                             Command="{Binding MinusCommand}" 
                             CommandParameter="away" 
-                            Margin="5,5,5,10" 
+                            Margin="5,5,5,10"
                             FontFamily="{StaticResource LetterFont}">
+                    <Button.Background>
+                        <SolidColorBrush Color="Red" Opacity="0.5"/>
+                    </Button.Background>
                     <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
                             Command="{Binding AddCommand}" 
                             CommandParameter="away" 
-                            Margin="5,5,5,10" 
+                            Margin="5,5,5,10"
                             FontFamily="{StaticResource LetterFont}">
+                    <Button.Background>
+                        <SolidColorBrush Color="Green" Opacity="0.5"/>
+                    </Button.Background>
                     <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
         </Grid>
 
         <!--Period Controls-->
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2.5*"/>
                 <RowDefinition Height="1*"/>
@@ -236,15 +245,21 @@
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="0" 
                             Command="{Binding MinusCommand}" 
-                            CommandParameter="period" 
+                            CommandParameter="period"
                             Margin="5,5">
+                    <Button.Background>
+                        <SolidColorBrush Color="Red" Opacity="0.5"/>
+                    </Button.Background>
                     <Image Source="{StaticResource MinusImg}"/>
                 </Button>
                 <Button Style="{StaticResource ButtonBaseStyle}" 
                             Grid.Column="1" 
                             Command="{Binding AddCommand}" 
-                            CommandParameter="period" 
+                            CommandParameter="period"
                             Margin="5,5">
+                    <Button.Background>
+                        <SolidColorBrush Color="Green" Opacity="0.5"/>
+                    </Button.Background>
                     <Image Source="{StaticResource PlusImg}"/>
                 </Button>
             </Grid>
@@ -254,8 +269,64 @@
                         Margin="10"
                         Command="{Binding PlayBuzzerCommand}"
                         FontSize="18">
+                <Button.Background>
+                    <SolidColorBrush Color="Yellow" Opacity="0.5"/>
+                </Button.Background>
                 Buzzer
             </Button>
+        </Grid>
+
+        <!--Timer Controls-->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.3*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox Grid.Row="0">
+                <Label Content="Timer" HorizontalAlignment="Center" Padding="0"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="1">
+                <TextBox Text="{Binding Timer.Timer, Converter={StaticResource TimeSpanToTextControlConv}, Mode=TwoWay}" 
+                             Background="Transparent" 
+                             HorizontalAlignment="Center" 
+                             TextChanged="TimeTextBox_TextChanged"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="2">
+                <Button Style="{StaticResource ButtonBaseStyle}" Command="{Binding StartStopTimerCommand}" Margin="3">
+                    <TextBlock Text="Start/Stop" TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Padding="5,0"
+                                   FontSize="18"/>
+                </Button>
+            </Viewbox>
+
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Viewbox>
+                    <Button Style="{StaticResource ButtonBaseStyle}" Command="{Binding ResetTimerCommand}" CommandParameter="period" Margin="3,0">
+                        <TextBlock Text="Reset Period" TextWrapping="Wrap"
+       VerticalAlignment="Center"
+       HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+       Padding="5,0" RenderTransformOrigin="0.5,0.5" Width="55">
+                        </TextBlock>
+                    </Button>
+                </Viewbox>
+                <Viewbox>
+                    <Button Style="{StaticResource ButtonBaseStyle}" Command="{Binding ResetTimerCommand}" CommandParameter="break" Margin="3,0" HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center">
+                        <TextBlock Text="Reset Break" TextWrapping="Wrap" TextAlignment="Center"
+VerticalAlignment="Center"
+HorizontalAlignment="Center"
+Padding="5,0" Width="55"/>
+                    </Button>
+                </Viewbox>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

@@ -23,6 +23,15 @@ namespace Tchoukball_Scoreboard_MJ.View
             Loaded += ScoreboardWindow_Loaded;
         }
 
+        public void SwitchScoreboard(ScoreboardWindowViewModel viewModel)
+        {
+            ScoreboardWindowViewModel originalViewModel = _viewModel as ScoreboardWindowViewModel;
+            viewModel.WindowState = originalViewModel.WindowState;
+            viewModel.WindowStyle = originalViewModel.WindowStyle;
+            _viewModel = viewModel;
+            DataContext = _viewModel;
+        }
+
         private async void ScoreboardWindow_Loaded(object sender, RoutedEventArgs e)
         {
             await _viewModel!.LoadAsync();

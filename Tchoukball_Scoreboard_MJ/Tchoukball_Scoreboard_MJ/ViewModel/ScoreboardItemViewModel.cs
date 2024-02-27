@@ -22,45 +22,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private Scoreboard _model;
         private OtherSettingsItemViewModel _otherSettingsItemViewModel;
         public bool IsBreak = false;
-        private DataSet ds;
-        public string ScoreDataFileName;
 
-        public ScoreboardItemViewModel(OtherSettingsItemViewModel otherSettingsItemViewModel)
+        public ScoreboardItemViewModel(Scoreboard scoreboard, OtherSettingsItemViewModel otherSettingsItemViewModel)
         {
+            _model = scoreboard;
             _otherSettingsItemViewModel = otherSettingsItemViewModel;
-            _model = new Scoreboard
-            {
-                Period = 1,
-                HomePoints = 0,
-                AwayPoints = 0,
-                HomeLogo = null,
-                AwayLogo = null,
-                HomePossession = true,
-                AwayPossession = false,
-                PeriodTimer = _otherSettingsItemViewModel.PeriodTime,
-                BreakTimer = _otherSettingsItemViewModel.BreakTime,
-                HomeName = _otherSettingsItemViewModel.DefaultHomeName,
-                AwayName = _otherSettingsItemViewModel.DefaultAwayName
-            };
-            DataTable dt = new DataTable(DateTime.Now.ToString("yyMMddHHmmss"));
-            DataColumn Home = new DataColumn("Home", typeof(string));
-            DataColumn dc = new DataColumn("VS", typeof(string));
-            DataColumn Away = new DataColumn("Away", typeof(string));
-            dt.Columns.Add(Home);
-            dt.Columns.Add(dc);
-            dt.Columns.Add(Away);
-
-            ds = new DataSet();
-            ds.Tables.Add(dt);
-
-            int count = 1;
-            string DateTimeToday = DateTime.Today.ToString("yyMMdd");
-            ScoreDataFileName = string.Format("{0}{1}", DateTimeToday, ".xlsx");
-            while (File.Exists(ScoreDataFileName))
-            {
-                ScoreDataFileName = string.Format("{0}({1}){2}", DateTimeToday, count, ".xlsx");
-                count++;
-            }
         }
 
         #region Other Settings Properties
@@ -87,6 +53,17 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             AwayName = _otherSettingsItemViewModel.DefaultAwayName;
 
             IsBreak = false;
+        }
+
+        #region Scoreboard Display Properties
+        public string MatchNo
+        {
+            get => _model.MatchNo;
+            set
+            {
+                _model.MatchNo = value;
+                RaisePropertyChanged();
+            }
         }
 
         public int Period
@@ -150,6 +127,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 if (value >= 0)
                 {
                     _model.HomePoints = value;
+                    RecordScore();
                     RaisePropertyChanged();
                 }
             }
@@ -163,6 +141,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 if (value >= 0)
                 {
                     _model.AwayPoints = value;
+                    RecordScore();
                     RaisePropertyChanged();
                 }
             }
@@ -208,58 +187,72 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public void RecordScore()
+        public string CategoryName
         {
-            if (Period == 1)
+            get => _model.Category;
+            set
             {
-                ds.Tables[0].Rows.Add("", "", "");
-                ds.Tables[0].Rows.Add(HomeName, "VS", AwayName);
-                ds.Tables[0].Rows.Add(HomePoints, ":", AwayPoints);
-            }
-            else
-            {
-                ds.Tables[0].Rows.Add(HomePoints, ":", AwayPoints);
+                _model.Category = value;
+                RaisePropertyChanged();
             }
         }
 
-        public bool? ExportScoreData()
+        public string CategoryColor
         {
-            if (ds.Tables[0].Rows.Count > 1)
+            get
             {
-                using (XLWorkbook wb = new XLWorkbook())
+                if (string.IsNullOrEmpty(_model.CategoryColor))
                 {
-                    try
-                    {
-                        DataTable dt = ds.Tables[0];
-                        string[] columnNames = (from dc in dt.Columns.Cast<DataColumn>() select dc.ColumnName).ToArray();
-                        // int Cell = 0;  
-
-                        int count = columnNames.Length;
-                        object[] array = new object[count];
-                        dt.Rows.Add(array);
-                        wb.Worksheets.Add(dt, ds.Tables[0].TableName);
-
-                        wb.SaveAs(ScoreDataFileName);
-                    }
-                    catch (Exception ex)
-                    {
-                        return false;
-                    }
-                    finally
-                    {
-
-                    }
+                    return "#FFD3D3D3";
                 }
-                return true;
+                else
+                    return _model.CategoryColor;
             }
-            return null;
+            set
+            {
+                _model.CategoryColor = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
+        public ObservableDictionary<int, PeriodScore> PeriodScores
+        {
+            get => _model.ScoreHistory;
+            set
+            {
+                _model.ScoreHistory = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public async void RecordScore()
+        {
+            if (_model.ScoreHistory.ContainsKey(Period))
+            {
+                _model.ScoreHistory[Period] = new PeriodScore
+                {
+                    HomeScore = HomePoints,
+                    AwayScore = AwayPoints
+                };
+            }
+            else
+            {
+                _model.ScoreHistory.Add(Period, new PeriodScore
+                {
+                    HomeScore = HomePoints,
+                    AwayScore = AwayPoints
+                });
+            }
+
+            PeriodScores = _model.ScoreHistory;
         }
 
         public TimeSpan GetTimer(bool IsReset)
         {
             if (IsReset)
             {
-                return IsBreak ? _otherSettingsItemViewModel.BreakTime : _otherSettingsItemViewModel.PeriodTime;
+                return IsBreak ? _model.BreakTime : _model.PeriodTime;
             }
             else
             {
@@ -272,11 +265,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                             Period++;
                         }
                         IsBreak = true;
-                        return _otherSettingsItemViewModel.BreakTime;
+                        return _model.BreakTime;
                     }
                 }
                 IsBreak = false;
-                return _otherSettingsItemViewModel.PeriodTime;
+                return _model.PeriodTime;
             }
         }
     }

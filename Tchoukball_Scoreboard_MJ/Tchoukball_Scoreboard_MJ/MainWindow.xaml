@@ -17,24 +17,32 @@
         <DataTemplate DataType="{x:Type viewModel:KeyboardShortcutsViewModel}">
             <view:KeyboardShortcutsView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <view:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MatchHistoryViewModel}">
+            <view:MatchHistoryView/>
+        </DataTemplate>
         <Storyboard x:Key="SidePanelON">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <EasingDoubleKeyFrame KeyTime="00:00:00" Value="50"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="100"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="150"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="250"/>
-                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="260"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.1000000" Value="50"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.2000000" Value="100"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.3000000" Value="150"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.4000000" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.5000000" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.6000000" Value="280"/>
+                <EasingDoubleKeyFrame KeyTime="00:00:00.7000000" Value="300"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="SidePanelOFF">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="grid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
-                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="260"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="250"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="200"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="150"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="100"/>
-                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="50"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="280"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2000000" Value="250"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="200"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.4000000" Value="150"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.5000000" Value="100"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.6000000" Value="50"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.7000000" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -75,7 +83,7 @@ Focusable="True">
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" x:Name="mainControlGrid" MouseLeftButtonUp="MainGridOnClick">
+        <Grid Grid.Row="0" x:Name="mainControlGrid" MouseLeftButtonUp="MainGridOnClick" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
                 <ColumnDefinition Width="*"/>
@@ -91,7 +99,7 @@ Focusable="True">
         <StatusBar Grid.Row="1">
             <StatusBarItem FontSize="10" Content=" (c) MJ" HorizontalAlignment="Right" VerticalAlignment="Center"/>
         </StatusBar>
-        <Grid x:Name="grid" Width="260" Height="{Binding ActualHeight, ElementName=mainControlGrid}" HorizontalAlignment="Left" Margin="-260,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Grid.Row="0">
+        <Grid x:Name="grid" Width="350" Height="{Binding ActualHeight, ElementName=mainControlGrid}" HorizontalAlignment="Left" Margin="-300,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -107,8 +115,11 @@ Focusable="True">
                 <b:EventTrigger EventName="Checked" SourceName="keyboardButton">
                     <b:ControlStoryboardAction x:Name="keyboardONAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelON}"/>
                 </b:EventTrigger>
-                <b:EventTrigger EventName="Click" SourceName="historyButton">
-                    <b:ControlStoryboardAction x:Name="historyAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelON}"/>
+                <b:EventTrigger EventName="Unchecked" SourceName="historyButton">
+                    <b:ControlStoryboardAction x:Name="historyOFFAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelOFF}"/>
+                </b:EventTrigger>
+                <b:EventTrigger EventName="Checked" SourceName="historyButton">
+                    <b:ControlStoryboardAction x:Name="historyONAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelON}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>
             <Rectangle x:Name="rectangle" HorizontalAlignment="Center" Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Stroke="#FF6B6B6B" VerticalAlignment="Center" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type Grid}}}" Fill="LightGray" RenderTransformOrigin="0.5,0.5">
@@ -133,30 +144,29 @@ Focusable="True">
                 <ContentControl x:Name="contentControl" Content="{Binding SelectedSideBarViewModel}" Margin="50,0,0,0"/>
                 <Button x:Name="settingsButton1" Margin="0,0,38,29" Style="{StaticResource SideBarButton}"
                         Command="{Binding OpenKeyboardSettingsCommand}"
-                        IsEnabled="{Binding IsKeyboardSidePanel}"
-                        Visibility="{Binding IsKeyboardSidePanel, Converter={StaticResource BooleanToVisibilityConv}}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="30">
-
+                        Visibility="{Binding ElementName=keyboardButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConv}}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="30">
                     <Image Source="{StaticResource KeyboardSettingsImg}"/>
-
                 </Button>
             </Grid>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=grid}" Width="50" Grid.Row="0">
             <Rectangle x:Name="rectangle1" HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=grid}" VerticalAlignment="Top" Width="50" Fill="LightGray"/>
-            <Button x:Name="homeButton" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}">
-
+            <Button x:Name="homeButton" HorizontalAlignment="Center" Height="35" Margin="0,10,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}"
+                    Command="{Binding SelectViewModelCommand}"
+                    CommandParameter="{Binding HomeViewModel}">
                 <Image Source="{StaticResource HomeImg}"/>
-
             </Button>
-            <Button x:Name="newButton" HorizontalAlignment="Center" Height="35" Margin="0,55,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Command="{Binding NewCommand}">
-
-                <Image Source="{StaticResource NewImg}"/>
-
+            <Button x:Name="newButton" HorizontalAlignment="Center" Height="35" Margin="0,55,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Command="{Binding RefreshCommand}">
+                <Image Source="{StaticResource RefreshImg}"/>
             </Button>
-            <Button x:Name="continueButton" HorizontalAlignment="Center" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}">
+            <Button x:Name="continueButton" HorizontalAlignment="Center" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" 
+                    Command="{Binding SelectViewModelCommand}"
+                    CommandParameter="{Binding ScoreboardControl}">
                 <Image Source="{StaticResource ResumeImg}"/>
             </Button>
-            <ToggleButton x:Name="keyboardButton" HorizontalAlignment="Center" Height="35" Margin="0,145,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="{x:Null}">
+            <ToggleButton x:Name="keyboardButton" HorizontalAlignment="Center" Height="35" Margin="0,145,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="{x:Null}"
+                          Command="{Binding ShowSideBarCommand}"
+                          CommandParameter="{Binding KeyboardShortcutsViewModel}">
                 <ToggleButton.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -164,12 +174,17 @@ Focusable="True">
                 </ToggleButton.Resources>
                 <Image Source="{StaticResource KeyboardImg}"/>
             </ToggleButton>
-            <Button x:Name="historyButton" HorizontalAlignment="Center" Height="32" VerticalAlignment="Top" Width="35" Margin="0,190,0,0" IsEnabled="False" Style="{StaticResource SideBarButton}">
-
+            <ToggleButton x:Name="historyButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Margin="0,190,0,0" Background="LightGray" BorderBrush="{x:Null}" 
+                    Command="{Binding ShowSideBarCommand}"
+                    CommandParameter="{Binding MatchHistoryViewModel}">
+                <ToggleButton.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </ToggleButton.Resources>
                 <Image Source="{StaticResource HistoryImg}"/>
-
-            </Button>
-            <Button x:Name="exportButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Margin="0,235,0,0">
+            </ToggleButton>
+            <Button x:Name="exportButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Margin="0,235,0,0" Command="{Binding SaveMatchHistoryCommand}">
 
                 <Image Source="{StaticResource SaveImg}"/>
 

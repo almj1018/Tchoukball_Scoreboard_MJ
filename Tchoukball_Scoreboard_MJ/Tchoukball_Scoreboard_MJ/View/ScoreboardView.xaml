@@ -21,24 +21,32 @@
         </Grid.RowDefinitions>
 
         <!--logo and timer-->
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" Margin="20,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2.5*"/>
-                <ColumnDefinition Width="1.5*"/>
-                <ColumnDefinition Width="2.5*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <Viewbox Grid.Column="0" Grid.ColumnSpan="3">
+            <Viewbox Margin="20,0" Grid.Column="0" HorizontalAlignment="Center">
+                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}"/>
+            </Viewbox>
+            <Viewbox Grid.Column="1">
                 <ContentControl Content="{Binding Timer}"/>
             </Viewbox>
-
-            <Viewbox Grid.Column="0" Margin="25">
-                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="30"/>
+            <Viewbox Margin="20,0" Grid.Column="2" HorizontalAlignment="Center">
+                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}"/>
             </Viewbox>
-
-            <Viewbox Grid.Column="2" Margin="25">
-                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}" Margin="30"/>
-            </Viewbox>
+            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Viewbox Margin="50">
+                    <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="50"/>
+                </Viewbox>
+                <Viewbox>
+                    <ContentControl Content="{Binding Timer}"/>
+                </Viewbox>
+                <Viewbox Margin="50">
+                    <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}" Margin="50"/>
+                </Viewbox>
+            </StackPanel>-->
         </Grid>
 
         <!--team names and possession-->

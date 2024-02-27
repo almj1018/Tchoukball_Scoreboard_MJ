@@ -14,7 +14,8 @@
            Foreground="LawnGreen" 
            FontFamily="{StaticResource NumberFont}" 
            HorizontalAlignment="Center" 
-           VerticalAlignment="Center" Padding="0"/>
+           VerticalAlignment="Center" Padding="0"
+                    BorderBrush="LightGray" BorderThickness="0.1"/>
         </Viewbox>
     </Grid>
 </UserControl>

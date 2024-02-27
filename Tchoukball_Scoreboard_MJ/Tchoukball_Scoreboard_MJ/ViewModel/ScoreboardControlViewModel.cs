@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Tchoukball_Scoreboard_MJ.Command;
 using Tchoukball_Scoreboard_MJ.CustomEventArgs;
+using Tchoukball_Scoreboard_MJ.Data;
 
 namespace Tchoukball_Scoreboard_MJ.ViewModel
 {
@@ -20,10 +21,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public ScoreboardControlViewModel(ScoreboardItemViewModel model, TimerViewModel timerViewModel, KeyboardSettingsItemViewModel keyboardSettingsItemViewModel)
         {
-            Scoreboard = model;
-            Timer = timerViewModel; 
-            Timer.Timer = Scoreboard.PeriodTimer;
-            timerViewModel.TimerEnd += OnTimerEnded;
+            Timer = timerViewModel;
+            Timer.Timer = model.PeriodTimer;
+            Timer.TimerEnd += OnTimerEnded;
+
+            _scoreboardItemViewModel = model;
 
             AddCommand = new DelegateCommand(Add);
             MinusCommand = new DelegateCommand(Minus);
@@ -32,7 +34,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             UploadLogoCommand = new DelegateCommand(UploadLogo);
             SwitchPossessionCommand = new DelegateCommand(SwitchPossession);
             PlayBuzzerCommand = new DelegateCommand(PlayBuzzer);
-            ExportCommand = new DelegateCommand(Export);
         }
 
         protected virtual void OnTimerEnded(object? sender, TimerEndEventArgs e)
@@ -48,7 +49,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
                 {
                 }
             }
-            _scoreboardItemViewModel!.RecordScore();
+
             if (Scoreboard!.AutoSetBreakTimer)
             {
                 _timerViewModel.Timer = _scoreboardItemViewModel!.GetTimer(false);
@@ -105,8 +106,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         public DelegateCommand UploadLogoCommand { get; }
         public DelegateCommand SwitchPossessionCommand { get; }
         public DelegateCommand PlayBuzzerCommand { get; }
-        public DelegateCommand ExportCommand { get; }
-
 
         private void Add(object? team)
         {
@@ -154,10 +153,21 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             }
         }
 
-        public void Reset(object? o)
+        public void Reset(object? timer)
         {
+            var a = timer!.ToString();
+
             Timer!.StopTimer();
-            Timer.Timer = Scoreboard!.GetTimer(true);
+            if (a == "period")
+            {
+                Scoreboard!.IsBreak = false;
+                Timer.Timer = Scoreboard!.GetTimer(true);
+            }
+            else
+            {
+                Scoreboard!.IsBreak = true;
+                Timer.Timer = Scoreboard!.GetTimer(true);
+            }
         }
 
         private void UploadLogo(object? team)
@@ -206,23 +216,6 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             catch (Exception)
             {
                 MessageBox.Show("Error playing sound. Sound file 'buzzer.wav' is not found or corrupted.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        public void Export(object? parameter)
-        {
-            bool? exportResult = _scoreboardItemViewModel!.ExportScoreData();
-
-            if (exportResult != null)
-            {
-                if ((bool)exportResult)
-                {
-                    MessageBox.Show("Scores successfully exported to file: " + _scoreboardItemViewModel.ScoreDataFileName, "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                else
-                {
-                    MessageBox.Show("Failed to export scores", "Export Failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
             }
         }
 

@@ -20,10 +20,6 @@ namespace Tchoukball_Scoreboard_MJ
     public partial class MainWindow : Window
     {
         private readonly MainViewModel _viewModel;
-        private DispatcherTimer _timer;
-
-        double panelWidth;
-        bool hidden;
 
         public MainWindow(MainViewModel viewModel)
         {
@@ -31,12 +27,6 @@ namespace Tchoukball_Scoreboard_MJ
             _viewModel = viewModel;
             DataContext = _viewModel;
             Loaded += MainWindow_Loaded;
-
-            _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 0, 0, 10);
-            _timer.Tick += Timer_Tick;
-
-            panelWidth = sidePanel.Width;
         }
 
         private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -49,7 +39,7 @@ namespace Tchoukball_Scoreboard_MJ
             var result = MessageBox.Show("Do you want to close the scoreboard?", "Confirm Exit?", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                _viewModel._scoreboardControlViewModel!.Export(null);
+                _viewModel.ExportMatchHistory();
                 // Stop the timer, wait for up to 1 sec for current event to finish,
                 //  if it does not finish within this time abort the timer thread
                 _viewModel._timerViewModel!.DisposeMicroTimer();
@@ -90,34 +80,12 @@ namespace Tchoukball_Scoreboard_MJ
             textBox.CaretIndex = Math.Min(caretIndex, textBox.Text.Length);
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            if (hidden)
-            {
-                sidePanel.Width += 1;
-                if (sidePanel.Width >= panelWidth)
-                {
-                    _timer.Stop();
-                    hidden = false;
-                }
-            }
-            else
-            {
-                sidePanel.Width -= 1;
-                if (sidePanel.Width <= 35)
-                {
-                    _timer.Stop();
-                    hidden = true;
-                }
-            }
-        }
-
         private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var result = MessageBox.Show("Do you want to close the scoreboard?", "Confirm Exit?", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                _viewModel._scoreboardControlViewModel!.Export(null);
+                _viewModel.ExportMatchHistory();
                 // Stop the timer, wait for up to 1 sec for current event to finish,
                 //  if it does not finish within this time abort the timer thread
                 _viewModel._timerViewModel!.DisposeMicroTimer();
@@ -130,6 +98,7 @@ namespace Tchoukball_Scoreboard_MJ
         private void MainGridOnClick(object sender, MouseButtonEventArgs e)
         {
             keyboardButton.IsChecked = false;
+            historyButton.IsChecked = false;
         }
     }
 }

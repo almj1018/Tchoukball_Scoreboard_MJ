@@ -32,17 +32,19 @@ namespace Tchoukball_Scoreboard_MJ
             services.AddTransient<OtherSettingsWindowView>();
 
             services.AddTransient<MainViewModel>();
-            services.AddSingleton<ScoreboardWindowViewModel>();
-            services.AddSingleton<ScoreboardViewModel>();
+            services.AddTransient<ScoreboardWindowViewModel>();
+            services.AddTransient<ScoreboardViewModel>();
             services.AddTransient<BreakTimerViewModel>();
             services.AddSingleton<KeyboardSettingsWindowViewModel>();
             services.AddSingleton<OtherSettingsWindowViewModel>();
-            services.AddSingleton<TimerViewModel>();
-            services.AddSingleton<ScoreboardControlViewModel>();
-            services.AddTransient<KeyboardShortcutsViewModel>();
+            services.AddTransient<TimerViewModel>();
+            services.AddTransient<ScoreboardControlViewModel>();
+            services.AddSingleton<KeyboardShortcutsViewModel>();
+            services.AddSingleton<HomeViewModel>();
+            services.AddTransient<MatchHistoryViewModel>();
 
             services.AddTransient<IScoreboardDataProvider, ScoreboardDataProvider>();
-            services.AddSingleton<ScoreboardItemViewModel>();
+            services.AddTransient<ScoreboardItemViewModel>();
             services.AddSingleton<KeyboardSettingsItemViewModel>();
             services.AddSingleton<OtherSettingsItemViewModel>();
 

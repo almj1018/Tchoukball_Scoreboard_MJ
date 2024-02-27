@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Images\" />
+    <Folder Include="TeamLogos\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,9 +57,11 @@
     <None Remove="Resources\Images\minus.png" />
     <None Remove="Resources\Images\plus.png" />
     <None Remove="Resources\Images\power.png" />
+    <None Remove="Resources\Images\refresh.png" />
     <None Remove="Resources\Images\remove.png" />
     <None Remove="Resources\Images\resume.png" />
     <None Remove="Resources\Images\settings.png" />
+    <None Remove="Resources\Images\splashscreen.jpg" />
     <Page Remove="Resources\Converters.xaml" />
     <Page Remove="Resources\Fonts.xaml" />
   
@@ -93,6 +96,9 @@
     <Resource Include="Resources\Images\keyboard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\manufacturing.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Images\minus.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -100,6 +106,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\power.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\refresh.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\remove.png">
@@ -111,6 +120,10 @@
     <Resource Include="Resources\Images\settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SplashScreen Include="Resources\Images\splashscreen.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -128,6 +141,24 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Sounds\buzzer.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Template.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Johor.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Negeri Sembilan.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Penang.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Sarawak.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Selangor.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
