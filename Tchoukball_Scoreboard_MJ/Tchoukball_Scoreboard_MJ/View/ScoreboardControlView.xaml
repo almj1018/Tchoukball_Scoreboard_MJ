@@ -60,13 +60,13 @@
 
         <Grid Grid.Row="1" Grid.Column="0">
             <Viewbox Margin="30">
-                <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}"/>
+                    <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}"/>
             </Viewbox>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="2">
             <Viewbox Margin="30">
-                <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}"/>
+                    <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}"/>
             </Viewbox>
         </Grid>
 

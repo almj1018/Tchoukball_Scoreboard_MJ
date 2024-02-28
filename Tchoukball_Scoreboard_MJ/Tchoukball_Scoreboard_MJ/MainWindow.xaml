@@ -86,10 +86,11 @@ Focusable="True">
         <Grid Grid.Row="0" x:Name="mainControlGrid" MouseLeftButtonUp="MainGridOnClick" d:IsHidden="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="{Binding SidebarWidth}"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid x:Name="mainControl" Grid.Column="1">
+            <Grid x:Name="mainControl" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
@@ -110,15 +111,43 @@ Focusable="True">
             </Grid.RenderTransform>
             <b:Interaction.Triggers>
                 <b:EventTrigger EventName="Unchecked" SourceName="keyboardButton">
+                    <b:Interaction.Behaviors>
+                        <b:ConditionBehavior>
+                            <b:ConditionalExpression ForwardChaining="And">
+                                <b:ComparisonCondition LeftOperand="{Binding ElementName=historyButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                            </b:ConditionalExpression>
+                        </b:ConditionBehavior>
+                    </b:Interaction.Behaviors>
                     <b:ControlStoryboardAction x:Name="keyboardOFFAction" ControlStoryboardOption="Play" IsEnabled="True" Storyboard="{StaticResource SidePanelOFF}"/>
                 </b:EventTrigger>
                 <b:EventTrigger EventName="Checked" SourceName="keyboardButton">
+                    <b:Interaction.Behaviors>
+                        <b:ConditionBehavior>
+                            <b:ConditionalExpression ForwardChaining="And">
+                                <b:ComparisonCondition LeftOperand="{Binding ElementName=historyButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                            </b:ConditionalExpression>
+                        </b:ConditionBehavior>
+                    </b:Interaction.Behaviors>
                     <b:ControlStoryboardAction x:Name="keyboardONAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelON}"/>
                 </b:EventTrigger>
                 <b:EventTrigger EventName="Unchecked" SourceName="historyButton">
+                    <b:Interaction.Behaviors>
+                        <b:ConditionBehavior>
+                            <b:ConditionalExpression ForwardChaining="And">
+                                <b:ComparisonCondition LeftOperand="{Binding ElementName=keyboardButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                            </b:ConditionalExpression>
+                        </b:ConditionBehavior>
+                    </b:Interaction.Behaviors>
                     <b:ControlStoryboardAction x:Name="historyOFFAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelOFF}"/>
                 </b:EventTrigger>
                 <b:EventTrigger EventName="Checked" SourceName="historyButton">
+                    <b:Interaction.Behaviors>
+                        <b:ConditionBehavior>
+                            <b:ConditionalExpression ForwardChaining="And">
+                                <b:ComparisonCondition LeftOperand="{Binding ElementName=keyboardButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                            </b:ConditionalExpression>
+                        </b:ConditionBehavior>
+                    </b:Interaction.Behaviors>
                     <b:ControlStoryboardAction x:Name="historyONAction" ControlStoryboardOption="Play" Storyboard="{StaticResource SidePanelON}"/>
                 </b:EventTrigger>
             </b:Interaction.Triggers>
@@ -147,6 +176,33 @@ Focusable="True">
                         Visibility="{Binding ElementName=keyboardButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConv}}" Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="30">
                     <Image Source="{StaticResource KeyboardSettingsImg}"/>
                 </Button>
+                <ToggleButton x:Name="pinButton" Margin="0,10,25,0" HorizontalAlignment="Right" Width="20" Height="20" VerticalAlignment="Top"
+                              Background="LightGray" BorderBrush="{x:Null}">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="Checked">
+                            <b:ChangePropertyAction TargetObject="{Binding}" PropertyName="SidebarWidth" Value="300"/>
+                        </b:EventTrigger>
+                        <b:EventTrigger EventName="Unchecked">
+                            <b:ChangePropertyAction TargetObject="{Binding}" PropertyName="SidebarWidth" Value="0"/>
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                    <ToggleButton.Template>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Grid>
+                                <Image Name="LogoImage" Stretch="Uniform" Source="{StaticResource UnpinImg}"/>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter TargetName="LogoImage" Property="Source" Value="{StaticResource PinImg}"/>
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="LogoImage" Property="Source" Value="{StaticResource UnpinImg}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ToggleButton.Template>
+                </ToggleButton>
             </Grid>
         </Grid>
         <Grid HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=grid}" Width="50" Grid.Row="0">
@@ -156,15 +212,15 @@ Focusable="True">
                     CommandParameter="{Binding HomeViewModel}">
                 <Image Source="{StaticResource HomeImg}"/>
             </Button>
-            <Button x:Name="newButton" HorizontalAlignment="Center" Height="35" Margin="0,55,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Command="{Binding RefreshCommand}">
+            <Button x:Name="newButton" HorizontalAlignment="Center" Height="35" Margin="0,235,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Command="{Binding RefreshCommand}">
                 <Image Source="{StaticResource RefreshImg}"/>
             </Button>
-            <Button x:Name="continueButton" HorizontalAlignment="Center" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" 
+            <Button x:Name="continueButton" HorizontalAlignment="Center" Height="35" Margin="0,55,0,0" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" 
                     Command="{Binding SelectViewModelCommand}"
                     CommandParameter="{Binding ScoreboardControl}">
                 <Image Source="{StaticResource ResumeImg}"/>
             </Button>
-            <ToggleButton x:Name="keyboardButton" HorizontalAlignment="Center" Height="35" Margin="0,145,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="{x:Null}"
+            <ToggleButton x:Name="keyboardButton" HorizontalAlignment="Center" Height="35" Margin="0,100,0,0" VerticalAlignment="Top" Width="35" Background="LightGray" BorderBrush="{x:Null}"
                           Command="{Binding ShowSideBarCommand}"
                           CommandParameter="{Binding KeyboardShortcutsViewModel}">
                 <ToggleButton.Resources>
@@ -172,9 +228,24 @@ Focusable="True">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </ToggleButton.Resources>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Checked">
+                        <b:ChangePropertyAction TargetName="historyButton" TargetObject="{Binding ElementName=historyButton, Mode=OneWay}" PropertyName="IsChecked" Value="False"/>
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="Unchecked">
+                        <b:Interaction.Behaviors>
+                            <b:ConditionBehavior>
+                                <b:ConditionalExpression>
+                                    <b:ComparisonCondition LeftOperand="{Binding ElementName=keyboardButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                                </b:ConditionalExpression>
+                            </b:ConditionBehavior>
+                        </b:Interaction.Behaviors>
+                        <b:ChangePropertyAction TargetName="pinButton" TargetObject="{Binding ElementName=pinButton, Mode=OneWay}" PropertyName="IsChecked" Value="False"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
                 <Image Source="{StaticResource KeyboardImg}"/>
             </ToggleButton>
-            <ToggleButton x:Name="historyButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Margin="0,190,0,0" Background="LightGray" BorderBrush="{x:Null}" 
+            <ToggleButton x:Name="historyButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Margin="0,145,0,0" Background="LightGray" BorderBrush="{x:Null}" 
                     Command="{Binding ShowSideBarCommand}"
                     CommandParameter="{Binding MatchHistoryViewModel}">
                 <ToggleButton.Resources>
@@ -182,9 +253,24 @@ Focusable="True">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </ToggleButton.Resources>
+                <b:Interaction.Triggers>
+                    <b:EventTrigger EventName="Checked">
+                        <b:ChangePropertyAction TargetName="keyboardButton" TargetObject="{Binding ElementName=keyboardButton, Mode=OneWay}" PropertyName="IsChecked" Value="False"/>
+                    </b:EventTrigger>
+                    <b:EventTrigger EventName="Unchecked">
+                        <b:Interaction.Behaviors>
+                            <b:ConditionBehavior>
+                                <b:ConditionalExpression>
+                                    <b:ComparisonCondition LeftOperand="{Binding ElementName=historyButton, Path=IsChecked}" RightOperand="False" Operator="Equal"/>
+                                </b:ConditionalExpression>
+                            </b:ConditionBehavior>
+                        </b:Interaction.Behaviors>
+                        <b:ChangePropertyAction TargetName="pinButton" TargetObject="{Binding ElementName=pinButton, Mode=OneWay}" PropertyName="IsChecked" Value="False"/>
+                    </b:EventTrigger>
+                </b:Interaction.Triggers>
                 <Image Source="{StaticResource HistoryImg}"/>
             </ToggleButton>
-            <Button x:Name="exportButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Margin="0,235,0,0" Command="{Binding SaveMatchHistoryCommand}">
+            <Button x:Name="exportButton" HorizontalAlignment="Center" Height="35" VerticalAlignment="Top" Width="35" Style="{StaticResource SideBarButton}" Margin="0,190,0,0" Command="{Binding SaveMatchHistoryCommand}">
 
                 <Image Source="{StaticResource SaveImg}"/>
 

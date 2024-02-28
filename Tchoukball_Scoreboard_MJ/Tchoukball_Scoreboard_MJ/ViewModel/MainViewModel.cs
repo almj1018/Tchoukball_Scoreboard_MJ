@@ -37,6 +37,7 @@ public class MainViewModel : ViewModelBase
         SelectViewModelCommand = new DelegateCommand(SelectViewModel);
         ShowSideBarCommand = new DelegateCommand(SelectSideBarViewModel);
         OpenKeyboardSettingsCommand = new DelegateCommand(OpenKeyboardSettings);
+        PinSideBarCommand = new DelegateCommand(PinSideBar);
 
         _otherSettingsWindowView = otherSettingsWindowView;
         OpenOtherSettingsCommand = new DelegateCommand(OpenOtherSettings);
@@ -52,6 +53,7 @@ public class MainViewModel : ViewModelBase
         _homeViewModel.SwitchUC += OnSwitchControl;
 
         IsKeyboardSidePanel = false;
+        SidebarWidth = 0;
 
         _matchHistoryViewModel = new MatchHistoryViewModel(_homeViewModel);
         _scoreboardControlViewModel = new ScoreboardControlViewModel(HomeViewModel.SelectedMatch, _timerViewModel, _keyboardSettingsItemViewModel);
@@ -90,6 +92,7 @@ public class MainViewModel : ViewModelBase
     public DelegateCommand RefreshCommand { get; }
     public DelegateCommand SaveMatchHistoryCommand { get; }
     public DelegateCommand ShowSideBarCommand { get; }
+    public DelegateCommand PinSideBarCommand { get; }
 
     public async override Task LoadAsync()
     {
@@ -156,6 +159,18 @@ public class MainViewModel : ViewModelBase
         }
     }
 
+    private void PinSideBar(object? parameter)
+    {
+        if (SidebarWidth == 0)
+        {
+            SidebarWidth = 300;
+        }
+        else
+        {
+            SidebarWidth = 0;
+        }
+    }
+
     public void ExportMatchHistory()
     {
         SaveMatchHistory(null);
@@ -218,6 +233,17 @@ public class MainViewModel : ViewModelBase
         set
         {
             _matchHistoryViewModel = value;
+            RaisePropertyChanged();
+        }
+    }
+
+    private int _sidebarWidth;
+    public int SidebarWidth
+    {
+        get => _sidebarWidth;
+        set
+        {
+            _sidebarWidth = value;
             RaisePropertyChanged();
         }
     }

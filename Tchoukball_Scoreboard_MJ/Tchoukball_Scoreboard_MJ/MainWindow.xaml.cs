@@ -97,8 +97,11 @@ namespace Tchoukball_Scoreboard_MJ
 
         private void MainGridOnClick(object sender, MouseButtonEventArgs e)
         {
-            keyboardButton.IsChecked = false;
-            historyButton.IsChecked = false;
+            if (pinButton.IsChecked == false)
+            {
+                keyboardButton.IsChecked = false;
+                historyButton.IsChecked = false; 
+            }
         }
     }
 }

@@ -40,6 +40,8 @@
     <BitmapImage x:Key="KeyboardSettingsImg" UriSource="/Resources/Images/manufacturing.png"/>
     <BitmapImage x:Key="PowerImg" UriSource="/Resources/Images/power.png"/>
     <BitmapImage x:Key="RefreshImg" UriSource="/Resources/Images/refresh.png"/>
+    <BitmapImage x:Key="PinImg" UriSource="/Resources/Images/push_pin.png"/>
+    <BitmapImage x:Key="UnpinImg" UriSource="/Resources/Images/unpin.png"/>
 
     <Style TargetType="Button" x:Key="SideBarButton">
         <Setter Property="OverridesDefaultStyle" Value="True" />
