@@ -24,8 +24,9 @@ namespace Tchoukball_Scoreboard_MJ
         public const bool SoundBuzzer = true;
         public const bool DisableTimerResetButtonWhileTimerIsStarted = false;
         public const bool AutoIncrementPeriod = false;
-        public const bool AutoSetBreakTimer = true;
-        public const bool AutoStartBreakTimer = true;
+        public const bool AutoSetBreakTimer = false;
+        public const bool AutoStartBreakTimer = false;
+        public const bool CountdownByMilliseconds = false;
 
         public static TimeSpan PeriodTime = new TimeSpan(0, 15, 0);
         public static TimeSpan BreakTime = new TimeSpan(0, 2, 0);

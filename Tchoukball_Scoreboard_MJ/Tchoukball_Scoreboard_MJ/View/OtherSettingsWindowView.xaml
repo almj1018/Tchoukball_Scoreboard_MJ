@@ -7,7 +7,7 @@
         xmlns:viewmodel ="clr-namespace:Tchoukball_Scoreboard_MJ.ViewModel"
         xmlns:converter="clr-namespace:Tchoukball_Scoreboard_MJ.Converter"
         mc:Ignorable="d"
-        Title="Other Settings" Height="360" Width="400" Closing="OnClosingHandler">
+        Title="Other Settings" Height="450" Width="400" Closing="OnClosingHandler">
     <ScrollViewer>
         <Grid>
             <StackPanel>
@@ -16,6 +16,8 @@
                         Margin="10 10 0 0">
                     Enable break timer screen
                 </CheckBox>
+                <CheckBox IsChecked="{Binding OtherSettings.CountdownByMilliseconds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Content="Countdown by milliseconds" Margin="10,20,0,0"/>
                 <CheckBox IsChecked="{Binding OtherSettings.SoundBuzzer,
                     Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Margin="10,20,0,0">
@@ -71,18 +73,10 @@
                     <TextBox Text="{Binding OtherSettings.DefaultAwayName}" DockPanel.Dock="Right" Width="100" Margin="0, 0, 10, 0" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Padding="5, 0"/>
                 </DockPanel>
                 <Label></Label>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="7*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="1" Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="10,0,5,0">Reset</Button>
-                    <Button Grid.Column="2"  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="5, 0, 10,0">Save</Button>
-                </Grid>
                 <Label></Label>
             </StackPanel>
+            <Button Command="{Binding ResetCommand}" CommandParameter="OtherSettings" Margin="0,0,75,12" Content="Reset" HorizontalAlignment="Right" Width="54" Height="21" VerticalAlignment="Bottom"/>
+            <Button  Command="{Binding SaveCommand}" CommandParameter="OtherSettings" Margin="0,0,10,12" Content="Save" HorizontalAlignment="Right" Width="54" Height="21" VerticalAlignment="Bottom"/>
         </Grid>
     </ScrollViewer>
 </Window>

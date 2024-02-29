@@ -8,11 +8,14 @@ public class TimeSpanToTextConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         TimeSpan ts = (TimeSpan)value;
-        if (ts.TotalSeconds < 60)
-        {
-            return ts.ToString("ss\\.ff");
-        }
-        return ts.ToString("mm\\:ss");
+        string returnVal;
+
+        if (StaticSettings.CountdownByMilliseconds && ts.TotalSeconds < 60)
+            returnVal = ts.ToString("ss\\.ff");
+        else
+            returnVal = ts.ToString("mm\\:ss");
+
+        return returnVal;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

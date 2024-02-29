@@ -17,28 +17,42 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private CountdownTimer _model;
         public event EventHandler<TimerEndEventArgs>? TimerEnd;
         private readonly MicroTimer _microTimer;
+        private TimeSpan _timeInterval;
+        private bool _countdownByMilliseconds;
 
         public TimerViewModel()
         {
             _model = new CountdownTimer();
+            _countdownByMilliseconds = StaticSettings.CountdownByMilliseconds;
 
             _microTimer = new MicroTimer();
             _microTimer.MicroTimerElapsed += new MicroTimer.MicroTimerElapsedEventHandler(Timer_Tick);
-            _microTimer.Interval = 10000;
-            _microTimer.IgnoreEventIfLateBy = 10000 / 2;
+            if (StaticSettings.CountdownByMilliseconds)
+            {
+                _timeInterval = TimeSpan.FromMilliseconds(10);
+                _microTimer.Interval = 10000;
+                _microTimer.IgnoreEventIfLateBy = 10000 / 2; 
+            }
+            else
+            {
+                _timeInterval = TimeSpan.FromSeconds(1);
+                _microTimer.Interval = 1000000;
+                _microTimer.IgnoreEventIfLateBy = 1000000 / 2;
+            }
 
         }
 
         protected virtual void OnTimerEnded(TimerEndEventArgs e)
         {
             TimerEnd?.Invoke(this, e);
+            UpdateTimer();
         }
 
         private async void Timer_Tick(object? sender, MicroTimerEventArgs e)
         {
             if (Timer.TotalMilliseconds > 0)
             {
-                Timer = Timer.Subtract(TimeSpan.FromMilliseconds(10));
+                Timer = Timer.Subtract(_timeInterval);
             }
             else
             {
@@ -77,6 +91,26 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
             if (!_microTimer.StopAndWait(1000))
             {
                 _microTimer.Abort();
+            }
+        }
+
+        public void UpdateTimer()
+        {
+            if (_countdownByMilliseconds != StaticSettings.CountdownByMilliseconds)
+            {
+                _countdownByMilliseconds = StaticSettings.CountdownByMilliseconds;
+                if (StaticSettings.CountdownByMilliseconds)
+                {
+                    _timeInterval = TimeSpan.FromMilliseconds(10);
+                    _microTimer.Interval = 10000;
+                    _microTimer.IgnoreEventIfLateBy = 10000 / 2;
+                }
+                else
+                {
+                    _timeInterval = TimeSpan.FromSeconds(1);
+                    _microTimer.Interval = 1000000;
+                    _microTimer.IgnoreEventIfLateBy = 1000000 / 2;
+                }
             }
         }
     }

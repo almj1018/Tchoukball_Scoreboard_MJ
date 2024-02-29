@@ -154,6 +154,12 @@
     <None Update="Resources\Template.xlsx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="TeamLogos\Johor 1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TeamLogos\Johor 2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TeamLogos\Johor.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -14,7 +14,7 @@ public class OtherSettings
     public bool AutoIncrementPeriod { get; set; }
     public bool AutoSetBreakTimer { get; set; }
     public bool AutoStartBreakTimer { get; set; }
-
+    public bool CountdownByMilliseconds { get; set; }
 
     public TimeSpan PeriodTime { get; set; }
     public TimeSpan BreakTime { get; set; }

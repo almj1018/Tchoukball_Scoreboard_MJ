@@ -28,6 +28,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
     private string? previousDefaultAwayName;
     private TimeSpan previousBreakTime;
     private TimeSpan previousPeriodTime;
+    private bool previousCountdownByMilliseconds;
 
     public OtherSettingsItemViewModel(SettingsHelper settings)
     {
@@ -44,6 +45,9 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         previousDefaultAwayName = _model.DefaultAwayName;
         previousBreakTime = _model.BreakTime;
         previousPeriodTime = _model.PeriodTime;
+        previousCountdownByMilliseconds = _model.CountdownByMilliseconds;
+
+        StaticSettings.CountdownByMilliseconds = _model.CountdownByMilliseconds;
 
         HasUnsavedChanges = false;
     }
@@ -148,6 +152,17 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
             RaisePropertyChanged();
         }
     }
+
+    public bool CountdownByMilliseconds
+    {
+        get => _model.CountdownByMilliseconds;
+        set
+        {
+            _model.CountdownByMilliseconds = value;
+            StaticSettings.CountdownByMilliseconds = value;
+            RaisePropertyChanged();
+        }
+    }
     #endregion
 
     private bool _hasUnsavedChanges;
@@ -207,6 +222,10 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         {
             result = true;
         }
+        else if (_model.CountdownByMilliseconds != previousCountdownByMilliseconds)
+        {
+            result = true;
+        }
 
         return result;
     }
@@ -223,6 +242,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         previousDefaultAwayName = _model.DefaultAwayName;
         previousBreakTime = _model.BreakTime;
         previousPeriodTime = _model.PeriodTime;
+        previousCountdownByMilliseconds = _model.CountdownByMilliseconds;
 
         _settings.SaveToFile(otherSettings: _model);
 
@@ -241,6 +261,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         DefaultAwayName = DefaultSettings.DefaultAwayName;
         BreakTime = DefaultSettings.BreakTime;
         PeriodTime = DefaultSettings.PeriodTime;
+        CountdownByMilliseconds = DefaultSettings.CountdownByMilliseconds;
         Save();
     }
 
@@ -256,6 +277,7 @@ public class OtherSettingsItemViewModel : ValidationViewModelBase
         _model.DefaultAwayName = previousDefaultAwayName;
         _model.BreakTime = previousBreakTime;
         _model.PeriodTime = previousPeriodTime;
+        _model.CountdownByMilliseconds = previousCountdownByMilliseconds;
 
         HasUnsavedChanges = false;
     }

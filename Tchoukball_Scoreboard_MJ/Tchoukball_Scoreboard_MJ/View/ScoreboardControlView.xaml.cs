@@ -40,13 +40,24 @@ namespace Tchoukball_Scoreboard_MJ.View
             string cleanedInput = Regex.Replace(textBox.Text, @"[^0-9]", "");
 
             // Ensure the input doesn't exceed 4 characters
-            cleanedInput = cleanedInput.Length > 6 ? cleanedInput.Substring(0, 6) : cleanedInput;
+            if (StaticSettings.CountdownByMilliseconds)
+                cleanedInput = cleanedInput.Length > 6 ? cleanedInput.Substring(0, 6) : cleanedInput;
+            else
+                cleanedInput = cleanedInput.Length > 4 ? cleanedInput.Substring(0, 4) : cleanedInput;
 
-            // Add colons to format as mm:ss.ff
-            if (cleanedInput.Length >= 2)
+            try
             {
-                cleanedInput = cleanedInput.Insert(2, ":");
-                cleanedInput = cleanedInput.Insert(5, ".");
+                // Add colons to format as mm:ss.ff
+                if (cleanedInput.Length >= 2)
+                {
+                    cleanedInput = cleanedInput.Insert(2, ":");
+                    if (StaticSettings.CountdownByMilliseconds)
+                        cleanedInput = cleanedInput.Insert(5, ".");
+                }
+            }
+            catch (Exception)
+            {
+                cleanedInput = StaticSettings.CountdownByMilliseconds ? "00:00.00" : "00:00";
             }
 
             // Update the TextBox text

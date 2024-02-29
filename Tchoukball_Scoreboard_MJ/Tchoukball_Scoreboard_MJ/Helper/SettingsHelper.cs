@@ -58,6 +58,7 @@ namespace Tchoukball_Scoreboard_MJ.Helper
                 AutoIncrementPeriod = GetBooleanValue("AutoIncrementPeriod", SettingsEnum.OtherSettings) ?? DefaultSettings.AutoIncrementPeriod,
                 AutoSetBreakTimer = GetBooleanValue("AutoSetBreakTimer", SettingsEnum.OtherSettings) ?? DefaultSettings.AutoSetBreakTimer,
                 AutoStartBreakTimer = GetBooleanValue("AutoStartBreakTimer", SettingsEnum.OtherSettings) ?? DefaultSettings.AutoStartBreakTimer,
+                CountdownByMilliseconds = GetBooleanValue("CountdownByMilliseconds", SettingsEnum.OtherSettings) ?? DefaultSettings.CountdownByMilliseconds,
 
                 DefaultHomeName = GetStringValue("DefaultHomeName", SettingsEnum.OtherSettings) ?? DefaultSettings.DefaultHomeName,
                 DefaultAwayName = GetStringValue("DefaultAwayName", SettingsEnum.OtherSettings) ?? DefaultSettings.DefaultAwayName,

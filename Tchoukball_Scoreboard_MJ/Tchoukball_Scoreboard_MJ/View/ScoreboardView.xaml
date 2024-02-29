@@ -30,23 +30,12 @@
             <Viewbox Margin="20,0" Grid.Column="0" HorizontalAlignment="Center">
                 <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}"/>
             </Viewbox>
-            <Viewbox Grid.Column="1">
-                <ContentControl Content="{Binding Timer}"/>
+            <Viewbox Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ContentControl Content="{Binding Timer}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </Viewbox>
             <Viewbox Margin="20,0" Grid.Column="2" HorizontalAlignment="Center">
                 <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}"/>
             </Viewbox>
-            <!--<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Viewbox Margin="50">
-                    <Image Source="{Binding Scoreboard.HomeLogo, Mode=OneWay}" Margin="50"/>
-                </Viewbox>
-                <Viewbox>
-                    <ContentControl Content="{Binding Timer}"/>
-                </Viewbox>
-                <Viewbox Margin="50">
-                    <Image Source="{Binding Scoreboard.AwayLogo, Mode=OneWay}" Margin="50"/>
-                </Viewbox>
-            </StackPanel>-->
         </Grid>
 
         <!--team names and possession-->

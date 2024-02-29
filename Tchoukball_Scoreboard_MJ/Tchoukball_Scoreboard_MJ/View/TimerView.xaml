@@ -15,7 +15,7 @@
            FontFamily="{StaticResource NumberFont}" 
            HorizontalAlignment="Center" 
            VerticalAlignment="Center" Padding="0"
-                    BorderBrush="LightGray" BorderThickness="0.1"/>
+                    BorderBrush="LightGray" BorderThickness="0"/>
         </Viewbox>
     </Grid>
 </UserControl>
