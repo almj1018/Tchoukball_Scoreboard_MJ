@@ -40,6 +40,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
             AddCommand = new DelegateCommand(Add);
             DeleteCommand = new DelegateCommand(Delete, CanDelete);
+            TriggerViewCommand = new DelegateCommand(TriggerView);
 
             System.Data.DataTable dt = new DataTable(DateTime.Now.ToString("yyMMddHHmmss"));
             DataColumn Home = new DataColumn("Home", typeof(string));
@@ -98,6 +99,7 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
 
         public DelegateCommand AddCommand { get; }
         public DelegateCommand DeleteCommand { get; }
+        public DelegateCommand TriggerViewCommand { get; }
 
         private void Add(object? parameter)
         {
@@ -135,6 +137,11 @@ namespace Tchoukball_Scoreboard_MJ.ViewModel
         private bool CanDelete(object? parameter)
         {
             return SelectedMatch != null;
+        }
+
+        private void TriggerView(object? parameter)
+        {
+            //SelectedMatch = SelectedMatch;
         }
 
         public bool? ExportScoreData()

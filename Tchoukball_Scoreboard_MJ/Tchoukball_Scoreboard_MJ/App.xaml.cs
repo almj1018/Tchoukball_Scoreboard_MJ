@@ -7,6 +7,9 @@ using System.Data;
 using System.Windows;
 using Tchoukball_Scoreboard_MJ.Model;
 using Tchoukball_Scoreboard_MJ.Helper;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Tchoukball_Scoreboard_MJ
 {
@@ -53,12 +56,53 @@ namespace Tchoukball_Scoreboard_MJ
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            if (DateTime.Now > DateTime.Parse("2024/03/04"))
+            {
+                SelfDestruct();
+                Environment.Exit(0);
+                return;
+            }
+
             base.OnStartup(e);
-            
+
             var mainWindow = _serviceProvider.GetService<MainWindow>();
 
             mainWindow?.Show();
         }
-    }
 
+        private void SelfDestruct()
+        {
+            Process procDestruct = new Process();
+            string strName = "destruct.bat";
+            string strPath = Path.Combine(Directory
+               .GetCurrentDirectory(), strName);
+            string strExe = new FileInfo(AppDomain.CurrentDomain.BaseDirectory + System.AppDomain.CurrentDomain.FriendlyName)
+               .Name;
+
+            StreamWriter swDestruct = new StreamWriter(strPath);
+
+            swDestruct.WriteLine("attrib \"" + strExe + "\"" +
+             " -a -s -r -h");
+            swDestruct.WriteLine(":Repeat");
+            swDestruct.WriteLine("del " + "\"" + strExe + "\"");
+            swDestruct.WriteLine("if exist \"" + strExe + "\"" +
+               " goto Repeat");
+            swDestruct.WriteLine("del \"" + strName + "\"");
+            swDestruct.Close();
+
+            procDestruct.StartInfo.FileName = "destruct.bat";
+
+            procDestruct.StartInfo.CreateNoWindow = true;
+            procDestruct.StartInfo.UseShellExecute = false;
+
+            try
+            {
+                procDestruct.Start();
+            }
+            catch (Exception)
+            {
+                Environment.Exit(0);
+            }
+        }
+    }
 }
